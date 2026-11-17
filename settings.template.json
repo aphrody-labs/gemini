@@ -1,0 +1,131 @@
+{
+  "general": {
+    "defaultApprovalMode": "auto_edit",
+    "enableNotifications": false,
+    "retryFetchErrors": true,
+    "topicUpdateNarration": true
+  },
+  "context": {
+    "fileName": ["GEMINI.md", "AGENTS.md"],
+    "includeDirectoryTree": true
+  },
+  "security": {
+    "disableYoloMode": false,
+    "disableAlwaysAllow": false,
+    "enablePermanentToolApproval": true,
+    "autoAddToPolicyByDefault": true,
+    "folderTrust": {
+      "enabled": false
+    }
+  },
+  "experimental": {
+    "enableAgents": true,
+    "autoMemory": true,
+    "contextManagement": true,
+    "directWebFetch": true,
+    "extensionManagement": true,
+    "extensionReloading": true
+  },
+  "skills": {
+    "enabled": true
+  },
+  "hooksConfig": {
+    "enabled": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aphrody-sync-pull",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/config-sync.ts\" pull gemini",
+            "timeout": 10000
+          },
+          {
+            "type": "command",
+            "name": "bun-session-start",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/bun/hooks/session-start.ts\" gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aphrody-learn-prompt",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/learn.ts\" capture gemini",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "bun-rewrite",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/bun/hooks/pre-tool-use.ts\" gemini",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "name": "aphrody-auto-bg",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/auto-background.ts\" gemini",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aphrody-typecheck",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/typecheck.ts\" gemini",
+            "timeout": 15000
+          }
+        ]
+      },
+      {
+        "matcher": "run_shell_command|write_file|replace",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aphrody-learn-tool",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/learn.ts\" capture gemini",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "name": "aphrody-sync-push",
+            "command": "bun --no-install --no-env-file \"{{HOME}}/.claude/packages/aphrody/hooks-handlers/config-sync.ts\" push gemini",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "relay": {
+      "command": "bun",
+      "args": [
+        "{{HOME}}/.claude/packages/aphrody/hooks-handlers/relay-stdio.ts"
+      ],
+      "trust": true
+    }
+  }
+}

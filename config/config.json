@@ -1,0 +1,45 @@
+{
+  "plugins": {},
+  "sidecars": {
+    "gemini-live-voice": {
+      "enabled": true,
+      "schemaVersion": 1
+    },
+    "swarm/swarm_board": {
+      "projectId": "c543d113-b2cd-49f8-ac1c-d0b3afcc7bed",
+      "resolvedPermissions": {},
+      "schemaVersion": 1
+    }
+  },
+  "userSettings": {
+    "agentSoundVolume": 54,
+    "artifactReviewMode": "ARTIFACT_REVIEW_MODE_TURBO",
+    "autoExecutionPolicy": "CASCADE_COMMANDS_AUTO_EXECUTION_EAGER",
+    "browserJsExecutionPolicy": "BROWSER_JS_EXECUTION_POLICY_TURBO",
+    "customThemeSeedsDark": {
+      "background": "#282C34",
+      "foregroundOverride": "#ABB2BF",
+      "primary": "#61AFEF"
+    },
+    "customThemeSeedsLight": {
+      "background": "#FAF4E5",
+      "foregroundOverride": "#435155",
+      "primary": "#CB4B16"
+    },
+    "enableSoundsForSpecialEvents": true,
+    "enableTerminalSandbox": false,
+    "nonWorkspaceFileAccessPolicy": "AGENT_SETTING_POLICY_ALLOW",
+    "permissionGrantsV2Migrated": true,
+    "permissionPreset": "AGENT_PERMISSION_PRESET_TURBO",
+    "queuedMessageDeliveryStrategy": "MESSAGE_DELIVERY_STRATEGY_NEXT_INVOCATION",
+    "remoteControlEnabled": true,
+    "remoteControlHostname": "aphrody",
+    "sandboxEnabledAtV2Migration": false,
+    "themeMode": "THEME_MODE_LIGHT",
+    "useAiCredits": true,
+    "verboseConversationSteps": false,
+    "voiceInputDeviceId": "communications",
+    "voiceName": "Tari",
+    "voiceSpeed": 1.25
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "aphrody-skills": {
+    "overrides": [
+      "/C:/Users/aphro/*"
+    ]
+  },
+  "aphrody": {
+    "overrides": [
+      "/C:/Users/aphro/*"
+    ]
+  },
+  "bun": {
+    "overrides": [
+      "/C:/Users/aphro/*"
+    ]
+  }
+}

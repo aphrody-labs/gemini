@@ -1,0 +1,16 @@
+# Whitelist: portable Gemini configuration only. Runtime state, caches, history, trust lists and anything machine-specific stay out.
+/*
+!/.gitignore
+!/README.md
+!/GEMINI.md
+!/settings.template.json
+!/scripts/
+!/config/
+/config/*
+!/config/hooks.json
+!/config/config.json
+!/config/mcp_config.template.json
+!/extensions/
+/extensions/*
+!/extensions/extension-enablement.json
+node_modules/
