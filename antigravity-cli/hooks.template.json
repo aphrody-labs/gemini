@@ -1,0 +1,17 @@
+{
+  "binary-read-guard": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "read_file|view_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file {{HOME}}/.gemini/scripts/binary-read.ts agy",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
