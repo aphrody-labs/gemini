@@ -1,0 +1,15 @@
+{
+  "name": "memorystore-for-redis",
+  "version": "1.0.0",
+  "description": "Manage Memorystore for Redis instances using natural language.",
+  "mcpServers": {
+    "memorystore-for-redis": {
+      "httpUrl": "https://redis.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/redis.read-write"]
+      },
+      "timeout": 30000
+    }
+  }
+}

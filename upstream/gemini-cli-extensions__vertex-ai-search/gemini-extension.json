@@ -1,0 +1,15 @@
+{
+  "name": "vertex-ai-search",
+  "version": "1.0.0",
+  "description": "Interact with the Vertex AI Search API via natural language commands",
+  "mcpServers": {
+    "vertex-ai-search": {
+      "httpUrl": "https://discoveryengine.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/discoveryengine.readwrite"]
+      },
+      "timeout": 30000
+    }
+  }
+}

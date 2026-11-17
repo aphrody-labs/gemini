@@ -1,0 +1,249 @@
+# Official Google sources of Gemini and Antigravity skills, extensions, MCP servers, SDKs and docs.
+# Apache-2.0 or BSD-3-Clause only (checked live: the license file travels with every source).
+# google-antigravity/antigravity-cli has no license file, so it is listed in INDEX.md as a pointer and never copied.
+# take = regexes a path must match, skip = regexes that remove a path, max_kb = largest file kept (default 200).
+
+[[source]]
+repo = "google-gemini/gemini-cli"
+kind = "cli"
+take = ["^docs/", "SKILL\\.md$", "^README\\.md$", "gemini-extension\\.json$", "^(packages/[^/]+/)?src/.*/skills/"]
+
+[[source]]
+repo = "google-gemini/gemini-skills"
+kind = "skills"
+
+[[source]]
+repo = "google-gemini/gemini-api-cli"
+kind = "cli"
+
+[[source]]
+repo = "google-gemini/demolab"
+kind = "skills"
+
+[[source]]
+repo = "google-gemini/gemini-managed-agents-templates"
+kind = "templates"
+
+[[source]]
+repo = "google-antigravity/antigravity-sdk-python"
+kind = "sdk"
+
+[[source]]
+repo = "google-labs-code/stitch-skills"
+kind = "skills"
+
+[[source]]
+repo = "google-labs-code/jules-skills"
+kind = "skills"
+
+[[source]]
+repo = "google-labs-code/design.md"
+kind = "docs"
+
+[[source]]
+repo = "google-labs-code/stitch-sdk"
+kind = "sdk"
+
+[[source]]
+repo = "google-labs-code/jules-sdk"
+kind = "sdk"
+
+[[source]]
+repo = "googleapis/mcp-toolbox"
+kind = "mcp"
+take = ["^docs/", "^README\\.md$", "^(server\\.json|tools\\.yaml)$", "SKILL\\.md$", "gemini-extension\\.json$"]
+
+[[source]]
+repo = "google/mcp"
+kind = "mcp"
+
+[[source]]
+repo = "gemini-cli-extensions/alloydb-observability"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/android-management-api"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/angular"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/bigquery-data-transfer-service"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/bigquery-migration-service"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cicd"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-composer"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-logging"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-monitoring"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-resource-manager"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-run"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-sql-mysql-observability"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-sql-postgresql-observability"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/cloud-sql-sqlserver-observability"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/code-review"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/compute-engine"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/conductor"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/customer-experience-agent-studio"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/database-migration-service"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/datacommons"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/datastream"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/developer-knowledge"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/firebase"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/firestore"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/flutter"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/gcloud"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/genkit"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/gke-mcp-remote"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/google-secops"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/jules"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/managed-kafka"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/maps-grounding-lite"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/memorystore-for-redis"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/memorystore-for-valkey"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/nanobanana"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/observability"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/pay-and-wallet-developer"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/pubsub"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/ralph"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/security"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/sre"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/stitch"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/vertex"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/vertex-ai-search"
+kind = "extension"
+
+[[source]]
+repo = "gemini-cli-extensions/workspace"
+kind = "extension"
+
+# Single documents served as plain text by Google (not repositories). Each is kept with its license and URL.
+[[page]]
+url = "https://ai.google.dev/gemini-api/docs/llms.txt"
+path = "ai.google.dev/llms.txt"
+license = "CC BY 4.0 (content), Apache-2.0 (code samples), as stated on ai.google.dev"
+
+# Listed in INDEX.md as a pointer only: no license file, so nothing is copied.
+[[pointer]]
+repo = "google-antigravity/antigravity-cli"
+note = "Antigravity CLI (agy): README, examples and release notes. No license file."

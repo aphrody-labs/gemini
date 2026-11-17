@@ -1,0 +1,15 @@
+{
+  "name": "cloud-logging",
+  "version": "1.0.0",
+  "description": "Access resources in the Cloud Logging platform using natural language.",
+  "mcpServers": {
+    "cloud-logging": {
+      "httpUrl": "https://logging.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/logging.admin"]
+      },
+      "timeout": 30000
+    }
+  }
+}

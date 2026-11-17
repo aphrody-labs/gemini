@@ -1,0 +1,15 @@
+{
+  "name": "managed-kafka",
+  "version": "1.0.0",
+  "description": "Manage clusters for Managed Service for Apache Kafka and Kafka Connect using natural language.",
+  "mcpServers": {
+    "managed-kafka": {
+      "httpUrl": "https://managedkafka.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/managedkafka"]
+      },
+      "timeout": 30000
+    }
+  }
+}

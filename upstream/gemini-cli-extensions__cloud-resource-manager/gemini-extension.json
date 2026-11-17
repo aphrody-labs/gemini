@@ -1,0 +1,17 @@
+{
+  "name": "cloud-resource-manager",
+  "version": "1.0.0",
+  "description": "Search your Google Cloud projects using natural language.",
+  "mcpServers": {
+    "cloud-resource-manager": {
+      "httpUrl": "https://cloudresourcemanager.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": [
+          "https://www.googleapis.com/auth/cloudplatformprojects.readonly"
+        ]
+      },
+      "timeout": 30000
+    }
+  }
+}

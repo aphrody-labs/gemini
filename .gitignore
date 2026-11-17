@@ -4,6 +4,7 @@
 !/README.md
 !/settings.template.json
 !/scripts/
+!/upstream/
 !/config/
 /config/*
 !/config/hooks.json

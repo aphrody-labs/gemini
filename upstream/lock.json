@@ -1,0 +1,292 @@
+{
+  "gemini-cli-extensions/alloydb-observability": {
+    "commit": "1b5115664c9d02ddd06c1882d800d8501b45d414",
+    "files": 9,
+    "bytes": 24114
+  },
+  "gemini-cli-extensions/android-management-api": {
+    "commit": "a6e5d4f92297a5585b9924ad6e7c90fa2481fda0",
+    "files": 3,
+    "bytes": 16600
+  },
+  "gemini-cli-extensions/angular": {
+    "commit": "6be2eeba3f14ab664b2aa81f935b65a72857225a",
+    "files": 5,
+    "bytes": 18797
+  },
+  "gemini-cli-extensions/bigquery-data-transfer-service": {
+    "commit": "7e33d534fd5a92c46fd1c3a8859449d0b5605bdf",
+    "files": 3,
+    "bytes": 15799
+  },
+  "gemini-cli-extensions/bigquery-migration-service": {
+    "commit": "9146ef4648b1e8157e4dd72772b9cc56621f2b5e",
+    "files": 3,
+    "bytes": 19765
+  },
+  "gemini-cli-extensions/cicd": {
+    "commit": "38bd3d974b1641b1702de1dd2c115737efd56257",
+    "files": 104,
+    "bytes": 786737
+  },
+  "gemini-cli-extensions/cloud-composer": {
+    "commit": "abfb6900d4ccd4ed3dfb6027d8d3b5ee002f724f",
+    "files": 3,
+    "bytes": 18348
+  },
+  "gemini-cli-extensions/cloud-logging": {
+    "commit": "38e2ae372aad339c587f0246890fa0ed243064e3",
+    "files": 3,
+    "bytes": 15084
+  },
+  "gemini-cli-extensions/cloud-monitoring": {
+    "commit": "aae9c0f36a9ac5581b5b1ab0296816349f84dd03",
+    "files": 3,
+    "bytes": 15127
+  },
+  "gemini-cli-extensions/cloud-resource-manager": {
+    "commit": "62614492024c058d3d3f91b2802a86eca9a45dc0",
+    "files": 3,
+    "bytes": 17322
+  },
+  "gemini-cli-extensions/cloud-run": {
+    "commit": "6989cbcd39f26c80088aa6ffe1f9b12cb7a243c3",
+    "files": 3,
+    "bytes": 14952
+  },
+  "gemini-cli-extensions/cloud-sql-mysql-observability": {
+    "commit": "52290870a9e8c8b8dbea4503848c26274273fa76",
+    "files": 9,
+    "bytes": 24143
+  },
+  "gemini-cli-extensions/cloud-sql-postgresql-observability": {
+    "commit": "4b3a3a340fa4030301f3148f28b1f581a02e7bb6",
+    "files": 9,
+    "bytes": 24313
+  },
+  "gemini-cli-extensions/cloud-sql-sqlserver-observability": {
+    "commit": "d9e226a6193a24c160a84e9e008291361e7653d1",
+    "files": 9,
+    "bytes": 24299
+  },
+  "gemini-cli-extensions/code-review": {
+    "commit": "dd1a10d2c9d07b2ebade866590fdfa59cd8f9d04",
+    "files": 8,
+    "bytes": 28012
+  },
+  "gemini-cli-extensions/compute-engine": {
+    "commit": "844bd637928f27e2663b1b1011b23ae1dfd9280d",
+    "files": 3,
+    "bytes": 17871
+  },
+  "gemini-cli-extensions/conductor": {
+    "commit": "6e8f9a860bcdd6a2c423473c12e745200688c633",
+    "files": 11,
+    "bytes": 95962
+  },
+  "gemini-cli-extensions/customer-experience-agent-studio": {
+    "commit": "4f147d218ce61f9c98f2ddb3ca154ebe4f059389",
+    "files": 3,
+    "bytes": 17466
+  },
+  "gemini-cli-extensions/database-migration-service": {
+    "commit": "8c6de4bd6c6634936081ee47c8e717cb58f74ca6",
+    "files": 3,
+    "bytes": 16823
+  },
+  "gemini-cli-extensions/datacommons": {
+    "commit": "fa5f699883a0d9ec183fb2e139f7ac19d6e1a988",
+    "files": 4,
+    "bytes": 17488
+  },
+  "gemini-cli-extensions/datastream": {
+    "commit": "e00d0492cf0072f980a148d6712d0e99309f1e25",
+    "files": 3,
+    "bytes": 16785
+  },
+  "gemini-cli-extensions/developer-knowledge": {
+    "commit": "3f8b3834dd52de535c2e1a13bbd22039a8e63ecd",
+    "files": 4,
+    "bytes": 15630
+  },
+  "gemini-cli-extensions/firebase": {
+    "commit": "c9f5226e7af57cdfe32d7215351a9dbef6f517a4",
+    "files": 2,
+    "bytes": 11783
+  },
+  "gemini-cli-extensions/firestore": {
+    "commit": "f6803c9b1615c358db91d4f1895d5d3922c6ba99",
+    "files": 3,
+    "bytes": 16343
+  },
+  "gemini-cli-extensions/flutter": {
+    "commit": "c7a84f28e2570a27f22aaf817d3406ae26178822",
+    "files": 12,
+    "bytes": 77347
+  },
+  "gemini-cli-extensions/gcloud": {
+    "commit": "ec545cd8252d33c83f02b97939690b8ae16888ef",
+    "files": 5,
+    "bytes": 18198
+  },
+  "gemini-cli-extensions/genkit": {
+    "commit": "052c587c539dc81f71f9388d085988256344a800",
+    "files": 5,
+    "bytes": 21268
+  },
+  "gemini-cli-extensions/gke-mcp-remote": {
+    "commit": "84fb6486adb32c832c95815ac3bc162116390738",
+    "files": 3,
+    "bytes": 15743
+  },
+  "gemini-cli-extensions/google-secops": {
+    "commit": "c3758f0dc379018891c10d1b009f80f4dcc0e2b4",
+    "files": 15,
+    "bytes": 42862
+  },
+  "gemini-cli-extensions/jules": {
+    "commit": "9f2fc14a41e8b604bdaf2d50ae6041cdc5507175",
+    "files": 5,
+    "bytes": 21310
+  },
+  "gemini-cli-extensions/managed-kafka": {
+    "commit": "d155026cf3c9e468546b05fd5a05a8d8abb47132",
+    "files": 3,
+    "bytes": 16735
+  },
+  "gemini-cli-extensions/maps-grounding-lite": {
+    "commit": "14e5e6ba2fceab6b78c395697756cf532a7c364d",
+    "files": 3,
+    "bytes": 14767
+  },
+  "gemini-cli-extensions/memorystore-for-redis": {
+    "commit": "e4afa0710631270403ace919d82abf8c7616eea3",
+    "files": 3,
+    "bytes": 17472
+  },
+  "gemini-cli-extensions/memorystore-for-valkey": {
+    "commit": "5a24e4fa2adfe4e91da4edc858b705113fd7ee4a",
+    "files": 3,
+    "bytes": 17419
+  },
+  "gemini-cli-extensions/nanobanana": {
+    "commit": "5badc5aafea8751fe059a054b629cf2d989bceb1",
+    "files": 13,
+    "bytes": 46961
+  },
+  "gemini-cli-extensions/observability": {
+    "commit": "1718a1ac20c507e871be9a8d01141ac596e7cc65",
+    "files": 5,
+    "bytes": 20119
+  },
+  "gemini-cli-extensions/pay-and-wallet-developer": {
+    "commit": "ab42895bf070dd2ae9d3fb5a74e1a2ec6b3d6018",
+    "files": 3,
+    "bytes": 16878
+  },
+  "gemini-cli-extensions/pubsub": {
+    "commit": "883f793f7d2b78819eef862a874606ad758c104e",
+    "files": 3,
+    "bytes": 15853
+  },
+  "gemini-cli-extensions/ralph": {
+    "commit": "5d0247dc7809a053c5ef48d6caa114f6bdca6821",
+    "files": 7,
+    "bytes": 21365
+  },
+  "gemini-cli-extensions/security": {
+    "commit": "2227f3cf7150972baac695b8233abc2186408538",
+    "files": 14,
+    "bytes": 83751
+  },
+  "gemini-cli-extensions/sre": {
+    "commit": "4130b149c0b069ef2028e42b3b9f3f84cce935e6",
+    "files": 58,
+    "bytes": 155149
+  },
+  "gemini-cli-extensions/stitch": {
+    "commit": "e22b3aac9a43bce2d740c5172844e9a2eebba37f",
+    "files": 6,
+    "bytes": 21465
+  },
+  "gemini-cli-extensions/vertex": {
+    "commit": "637a5ed8945cb8710fd2e07bfcdd91a817330b0b",
+    "files": 21,
+    "bytes": 87013
+  },
+  "gemini-cli-extensions/vertex-ai-search": {
+    "commit": "e756a87fda91be26a830536bfe4cba463364f0f3",
+    "files": 3,
+    "bytes": 15186
+  },
+  "gemini-cli-extensions/workspace": {
+    "commit": "089927ead01433f38c65c12cdcd2ed9a18165277",
+    "files": 22,
+    "bytes": 104613
+  },
+  "google-antigravity/antigravity-sdk-python": {
+    "commit": "75ba22bd00afae2f46393ff31f30c3f0df52982f",
+    "files": 44,
+    "bytes": 294069
+  },
+  "google-gemini/demolab": {
+    "commit": "cd0c1f8540c0186ec9592af972a0700fa20909d4",
+    "files": 9,
+    "bytes": 32936
+  },
+  "google-gemini/gemini-api-cli": {
+    "commit": "fa3396e9d458b2cc82252c7bec21488627d11889",
+    "files": 22,
+    "bytes": 147755
+  },
+  "google-gemini/gemini-cli": {
+    "commit": "4fa64e71b9b4e1bb65a86cc2863574f561b82340",
+    "files": 133,
+    "bytes": 1124409
+  },
+  "google-gemini/gemini-managed-agents-templates": {
+    "commit": "3cbcc8d051563d6ea5e3ba4da6c6138eb76be290",
+    "files": 51,
+    "bytes": 160148
+  },
+  "google-gemini/gemini-skills": {
+    "commit": "87fb0173d36fea4f87de4c3fbd0678cf929c0588",
+    "files": 14,
+    "bytes": 128164
+  },
+  "google-labs-code/design.md": {
+    "commit": "1ed38aa9dd4451b9039f9aeb9ed1d2579edafddf",
+    "files": 21,
+    "bytes": 175865
+  },
+  "google-labs-code/jules-sdk": {
+    "commit": "19fc117ac5cb961f393257b99d0b939848e75b52",
+    "files": 60,
+    "bytes": 335223
+  },
+  "google-labs-code/jules-skills": {
+    "commit": "7a76d3bfcf4258ee437d65b5d12e54b51c395de5",
+    "files": 8,
+    "bytes": 35329
+  },
+  "google-labs-code/stitch-sdk": {
+    "commit": "f6aa86cde10c3f490acf09a63cc044582a50821d",
+    "files": 21,
+    "bytes": 167334
+  },
+  "google-labs-code/stitch-skills": {
+    "commit": "0337446dadde6f8c94210444e2aa9d546126480f",
+    "files": 61,
+    "bytes": 312383
+  },
+  "google/mcp": {
+    "commit": "9ebafd607afdc06245323756a07221df23790a93",
+    "files": 9,
+    "bytes": 47688
+  },
+  "googleapis/mcp-toolbox": {
+    "commit": "2253fe76f09d93a293f6d84539799dd4610c1f54",
+    "files": 692,
+    "bytes": 2236537
+  }
+}

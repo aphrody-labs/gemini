@@ -1,0 +1,15 @@
+{
+  "name": "datastream",
+  "version": "1.0.0",
+  "description": "Manage and monitor your Datastream resources, such as streams, connection profiles, and stream objects.",
+  "mcpServers": {
+    "datastream": {
+      "httpUrl": "https://datastream.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/cloud-datastream"]
+      },
+      "timeout": 30000
+    }
+  }
+}

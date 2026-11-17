@@ -1,0 +1,22 @@
+{
+  "name": "maps-grounding-lite",
+  "version": "1.0.0",
+  "description": "Ground Gemini CLI with trusted geospatial data from Google Maps.",
+  "settings": [
+    {
+      "name": "API Key",
+      "description": "Google Maps API key",
+      "envVar": "GOOGLE_MAPS_API_KEY",
+      "sensitive": true
+    }
+  ],
+  "mcpServers": {
+    "maps-grounding-lite": {
+      "httpUrl": "https://mapstools.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "$GOOGLE_MAPS_API_KEY"
+      },
+      "timeout": 30000
+    }
+  }
+}

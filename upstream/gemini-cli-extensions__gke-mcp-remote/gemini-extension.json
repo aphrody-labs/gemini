@@ -1,0 +1,15 @@
+{
+  "name": "gke-mcp-remote",
+  "version": "1.0.0",
+  "description": "Gemini CLI extension for the Google-managed GKE remote MCP server.",
+  "mcpServers": {
+    "gke-mcp-remote": {
+      "httpUrl": "https://container.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/container"]
+      },
+      "timeout": 30000
+    }
+  }
+}

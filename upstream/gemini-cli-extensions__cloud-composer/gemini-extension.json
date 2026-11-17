@@ -1,0 +1,15 @@
+{
+  "name": "cloud-composer",
+  "version": "1.0.0",
+  "description": "Manage your Managed Airflow environments and get details about executed DAG runs and Airflow tasks.",
+  "mcpServers": {
+    "cloud-composer": {
+      "httpUrl": "https://composer.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/cloudcomposer"]
+      },
+      "timeout": 30000
+    }
+  }
+}

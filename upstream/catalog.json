@@ -1,0 +1,1782 @@
+{
+  "sources": [
+    {
+      "source": "google-gemini/gemini-cli",
+      "files": 133,
+      "kb": 1099
+    },
+    {
+      "source": "google-gemini/gemini-skills",
+      "files": 14,
+      "kb": 125
+    },
+    {
+      "source": "google-gemini/gemini-api-cli",
+      "files": 22,
+      "kb": 144
+    },
+    {
+      "source": "google-gemini/demolab",
+      "files": 9,
+      "kb": 32
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "files": 51,
+      "kb": 159
+    },
+    {
+      "source": "google-antigravity/antigravity-sdk-python",
+      "files": 44,
+      "kb": 288
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "files": 61,
+      "kb": 307
+    },
+    {
+      "source": "google-labs-code/jules-skills",
+      "files": 8,
+      "kb": 35
+    },
+    {
+      "source": "google-labs-code/design.md",
+      "files": 21,
+      "kb": 172
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "files": 21,
+      "kb": 165
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "files": 60,
+      "kb": 328
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "files": 692,
+      "kb": 2185
+    },
+    {
+      "source": "google/mcp",
+      "files": 9,
+      "kb": 47
+    },
+    {
+      "source": "gemini-cli-extensions/alloydb-observability",
+      "files": 9,
+      "kb": 24
+    },
+    {
+      "source": "gemini-cli-extensions/android-management-api",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/angular",
+      "files": 5,
+      "kb": 18
+    },
+    {
+      "source": "gemini-cli-extensions/bigquery-data-transfer-service",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/bigquery-migration-service",
+      "files": 3,
+      "kb": 19
+    },
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "files": 104,
+      "kb": 771
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-composer",
+      "files": 3,
+      "kb": 18
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-logging",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-monitoring",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-resource-manager",
+      "files": 3,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-run",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-mysql-observability",
+      "files": 9,
+      "kb": 24
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-postgresql-observability",
+      "files": 9,
+      "kb": 24
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-sqlserver-observability",
+      "files": 9,
+      "kb": 24
+    },
+    {
+      "source": "gemini-cli-extensions/code-review",
+      "files": 8,
+      "kb": 27
+    },
+    {
+      "source": "gemini-cli-extensions/compute-engine",
+      "files": 3,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "files": 11,
+      "kb": 94
+    },
+    {
+      "source": "gemini-cli-extensions/customer-experience-agent-studio",
+      "files": 3,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/database-migration-service",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/datacommons",
+      "files": 4,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/datastream",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/developer-knowledge",
+      "files": 4,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/firebase",
+      "files": 2,
+      "kb": 12
+    },
+    {
+      "source": "gemini-cli-extensions/firestore",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/flutter",
+      "files": 12,
+      "kb": 76
+    },
+    {
+      "source": "gemini-cli-extensions/gcloud",
+      "files": 5,
+      "kb": 18
+    },
+    {
+      "source": "gemini-cli-extensions/genkit",
+      "files": 5,
+      "kb": 21
+    },
+    {
+      "source": "gemini-cli-extensions/gke-mcp-remote",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "files": 15,
+      "kb": 42
+    },
+    {
+      "source": "gemini-cli-extensions/jules",
+      "files": 5,
+      "kb": 21
+    },
+    {
+      "source": "gemini-cli-extensions/managed-kafka",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/maps-grounding-lite",
+      "files": 3,
+      "kb": 14
+    },
+    {
+      "source": "gemini-cli-extensions/memorystore-for-redis",
+      "files": 3,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/memorystore-for-valkey",
+      "files": 3,
+      "kb": 17
+    },
+    {
+      "source": "gemini-cli-extensions/nanobanana",
+      "files": 13,
+      "kb": 46
+    },
+    {
+      "source": "gemini-cli-extensions/observability",
+      "files": 5,
+      "kb": 20
+    },
+    {
+      "source": "gemini-cli-extensions/pay-and-wallet-developer",
+      "files": 3,
+      "kb": 16
+    },
+    {
+      "source": "gemini-cli-extensions/pubsub",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/ralph",
+      "files": 7,
+      "kb": 21
+    },
+    {
+      "source": "gemini-cli-extensions/security",
+      "files": 14,
+      "kb": 82
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "files": 58,
+      "kb": 152
+    },
+    {
+      "source": "gemini-cli-extensions/stitch",
+      "files": 6,
+      "kb": 21
+    },
+    {
+      "source": "gemini-cli-extensions/vertex",
+      "files": 21,
+      "kb": 85
+    },
+    {
+      "source": "gemini-cli-extensions/vertex-ai-search",
+      "files": 3,
+      "kb": 15
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "files": 22,
+      "kb": 102
+    }
+  ],
+  "extensions": [
+    {
+      "source": "gemini-cli-extensions/alloydb-observability",
+      "name": "alloydb-observability",
+      "version": "0.1.3",
+      "description": "Manage and monitor database performance and health for AlloyDB for PostgreSQL databases.",
+      "mcp": [
+        "alloydb_observability"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/android-management-api",
+      "name": "android-management-api",
+      "version": "1.0.0",
+      "description": "Access enterprise mobility data using natural language queries about device fleets, automated auditing of policy compliance, and the integration of de",
+      "mcp": [
+        "android-management-api"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/angular",
+      "name": "angular",
+      "version": "0.1.0",
+      "description": "",
+      "mcp": [
+        "angular-cli"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/bigquery-data-transfer-service",
+      "name": "bigquery-data-transfer-service",
+      "version": "1.0.0",
+      "description": "Manage BQTS resources such as data sources, transfer configs and transfer runs via natural language commands.",
+      "mcp": [
+        "bigquery-data-transfer-service"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/bigquery-migration-service",
+      "name": "bigquery-migration-service",
+      "version": "1.0.0",
+      "description": "Perform tasks such as translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL",
+      "mcp": [
+        "bigquery-migration-service"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "name": "cicd",
+      "version": "0.2.2",
+      "description": "The CI/CD extension provides Gemini powered AI assisted CI/CD. It supports deployment to Cloud Run and Cloud Storage as well as creation of a robust C",
+      "mcp": [
+        "cicd-mcp"
+      ],
+      "commands": 0,
+      "skills": 4
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-composer",
+      "name": "cloud-composer",
+      "version": "1.0.0",
+      "description": "Manage your Managed Airflow environments and get details about executed DAG runs and Airflow tasks.",
+      "mcp": [
+        "cloud-composer"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-logging",
+      "name": "cloud-logging",
+      "version": "1.0.0",
+      "description": "Access resources in the Cloud Logging platform using natural language.",
+      "mcp": [
+        "cloud-logging"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-monitoring",
+      "name": "cloud-monitoring",
+      "version": "1.0.0",
+      "description": "Access resources in the Cloud Monitoring platform using natural language.",
+      "mcp": [
+        "cloud-monitoring"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-resource-manager",
+      "name": "cloud-resource-manager",
+      "version": "1.0.0",
+      "description": "Search your Google Cloud projects using natural language.",
+      "mcp": [
+        "cloud-resource-manager"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-run",
+      "name": "cloud-run",
+      "version": "1.0.0",
+      "description": "Deploy apps to Cloud Run using natural language.",
+      "mcp": [
+        "cloud-run"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-mysql-observability",
+      "name": "cloud-sql-mysql-observability",
+      "version": "0.1.3",
+      "description": "Manage and monitor database performance and health for Cloud SQL for MySQL databases.",
+      "mcp": [
+        "cloud_sql_mysql_observability"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-postgresql-observability",
+      "name": "cloud-sql-postgresql-observability",
+      "version": "0.1.3",
+      "description": "Manage and monitor database performance and health for Cloud SQL for PostgreSQL databases.",
+      "mcp": [
+        "cloud_sql_postgresql_observability"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/cloud-sql-sqlserver-observability",
+      "name": "cloud-sql-sqlserver-observability",
+      "version": "0.1.3",
+      "description": "Manage and monitor database performance and health for Cloud SQL for SQL Server.",
+      "mcp": [
+        "cloud_sql_sqlserver_observability"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/code-review",
+      "name": "code-review",
+      "version": "0.1.0",
+      "description": "",
+      "mcp": [],
+      "commands": 2,
+      "skills": 1
+    },
+    {
+      "source": "gemini-cli-extensions/compute-engine",
+      "name": "compute-engine",
+      "version": "1.0.0",
+      "description": "Perform a range of infrastructure management tasks, including: manage virtual machine (VM) instances, manage instance group managers and instance temp",
+      "mcp": [
+        "compute-engine"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "custom-commands",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/customer-experience-agent-studio",
+      "name": "customer-experience-agent-studio",
+      "version": "1.0.0",
+      "description": "Create AI-assisted development workflows which drastically reduce the friction of building and maintaining agent applications.",
+      "mcp": [
+        "customer-experience-agent-studio"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/database-migration-service",
+      "name": "database-migration-service",
+      "version": "1.0.0",
+      "description": "Manage database migration jobs using natural language.",
+      "mcp": [
+        "database-migration-service"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/datacommons",
+      "name": "datacommons",
+      "version": "1.1.6",
+      "description": "Query public datasets from Data Commons using natural language, and ground AI responses from any tools using authoritative data.",
+      "mcp": [
+        "datacommons-mcp"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/datastream",
+      "name": "datastream",
+      "version": "1.0.0",
+      "description": "Manage and monitor your Datastream resources, such as streams, connection profiles, and stream objects.",
+      "mcp": [
+        "datastream"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/developer-knowledge",
+      "name": "developer-knowledge",
+      "version": "0.1.0",
+      "description": "Search and retrieve documentation for Google developer products.",
+      "mcp": [
+        "developer-knowledge"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "excludeTools",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/firestore",
+      "name": "firestore",
+      "version": "1.0.0",
+      "description": "Interact with documents stored in a Firestore database using natural language.",
+      "mcp": [
+        "firestore"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/flutter",
+      "name": "flutter",
+      "version": "0.4.1",
+      "description": "Enables several Flutter and Dart-related commands and context.",
+      "mcp": [
+        "dart"
+      ],
+      "commands": 5,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/gcloud",
+      "name": "gcloud",
+      "version": "0.1.0",
+      "description": "Enable MCP-compatible AI agents to interact with Google Cloud.",
+      "mcp": [
+        "gcloud"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/jules",
+      "name": "gemini-cli-jules",
+      "version": "0.1.0",
+      "description": "",
+      "mcp": [
+        "julesServer"
+      ],
+      "commands": 1,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/security",
+      "name": "gemini-cli-security",
+      "version": "0.5.0",
+      "description": "",
+      "mcp": [
+        "securityServer",
+        "osvScanner"
+      ],
+      "commands": 3,
+      "skills": 3
+    },
+    {
+      "source": "gemini-cli-extensions/genkit",
+      "name": "genkit",
+      "version": "2.0.0",
+      "description": "Build full-stack AI-powered apps using Genkit.",
+      "mcp": [
+        "genkit"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/gke-mcp-remote",
+      "name": "gke-mcp-remote",
+      "version": "1.0.0",
+      "description": "Gemini CLI extension for the Google-managed GKE remote MCP server.",
+      "mcp": [
+        "gke-mcp-remote"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "name": "google-secops",
+      "version": "1.1.0",
+      "description": "Essential Security Operations skills for Triage, Investigation, and Hunting.",
+      "mcp": [
+        "remote-mcp-secops"
+      ],
+      "commands": 4,
+      "skills": 5
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "name": "google-workspace",
+      "version": "0.0.8",
+      "description": "",
+      "mcp": [
+        "google-workspace"
+      ],
+      "commands": 4,
+      "skills": 7
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "hooks-example",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/managed-kafka",
+      "name": "managed-kafka",
+      "version": "1.0.0",
+      "description": "Manage clusters for Managed Service for Apache Kafka and Kafka Connect using natural language.",
+      "mcp": [
+        "managed-kafka"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/maps-grounding-lite",
+      "name": "maps-grounding-lite",
+      "version": "1.0.0",
+      "description": "Ground Gemini CLI with trusted geospatial data from Google Maps.",
+      "mcp": [
+        "maps-grounding-lite"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "mcp-server-example",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [
+        "nodeServer"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "name": "mcp-toolbox-for-databases",
+      "version": "1.17.0",
+      "description": "MCP Toolbox for Databases is an open-source MCP server for more than 30 different datasources.",
+      "mcp": [],
+      "commands": 0,
+      "skills": 6
+    },
+    {
+      "source": "gemini-cli-extensions/memorystore-for-redis",
+      "name": "memorystore-for-redis",
+      "version": "1.0.0",
+      "description": "Manage Memorystore for Redis instances using natural language.",
+      "mcp": [
+        "memorystore-for-redis"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/memorystore-for-valkey",
+      "name": "memorystore-for-valkey",
+      "version": "1.0.0",
+      "description": "Manage Memorystore for Valkey instances and backups using natural language.",
+      "mcp": [
+        "memorystore-for-valkey"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/nanobanana",
+      "name": "nanobanana",
+      "version": "1.0.12",
+      "description": "Gemini CLI extension for Nano Banana models - generate and manipulate images with text prompts",
+      "mcp": [
+        "nanobanana"
+      ],
+      "commands": 8,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/observability",
+      "name": "observability",
+      "version": "0.1.0",
+      "description": "Enable MCP-compatible AI agents to interact with Google Cloud.",
+      "mcp": [
+        "observability"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/pay-and-wallet-developer",
+      "name": "pay-and-wallet-developer",
+      "version": "1.0.0",
+      "description": "Access your Google Pay and Google Wallet developer data, search official documentation, and manage your integrations.",
+      "mcp": [
+        "pay-wallet-dev-mcp-server"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "policy-example",
+      "version": "1.0.0",
+      "description": "An example extension demonstrating Policy Engine support.",
+      "mcp": [],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/pubsub",
+      "name": "pubsub",
+      "version": "1.0.0",
+      "description": "Manage Pub/Sub resources and publish messages. Create, list, get, update, and delete Pub/Sub topics, subscriptions, and snapshots, as well as publish ",
+      "mcp": [
+        "pubsub"
+      ],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/ralph",
+      "name": "ralph",
+      "version": "1.0.1",
+      "description": "",
+      "mcp": [],
+      "commands": 3,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "skills-example",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 1
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "name": "sre-extension",
+      "version": "0.1.23",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 16
+    },
+    {
+      "source": "gemini-cli-extensions/stitch",
+      "name": "Stitch",
+      "version": "0.1.4",
+      "description": "Integrate Stitch into your workflow: Generate UI from Text, Image.",
+      "mcp": [
+        "stitch"
+      ],
+      "commands": 1,
+      "skills": 0
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "name": "themes-example",
+      "version": "1.0.0",
+      "description": "",
+      "mcp": [],
+      "commands": 0,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/vertex",
+      "name": "vertex",
+      "version": "0.2.0",
+      "description": "",
+      "mcp": [
+        "VertexMcpServer"
+      ],
+      "commands": 10,
+      "skills": 0
+    },
+    {
+      "source": "gemini-cli-extensions/vertex-ai-search",
+      "name": "vertex-ai-search",
+      "version": "1.0.0",
+      "description": "Interact with the Vertex AI Search API via natural language commands",
+      "mcp": [
+        "vertex-ai-search"
+      ],
+      "commands": 0,
+      "skills": 0
+    }
+  ],
+  "skills": [
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "path": "skills/google-cicd-deploy/SKILL.md",
+      "name": "google-cicd-deploy",
+      "description": "Use this skill when requested to deploy an application to Google Cloud (GCS, Cloud Run, GKE) or when analyzing an application to determine the best de"
+    },
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "path": "skills/google-cicd-pipeline-design/SKILL.md",
+      "name": "google-cicd-pipeline-design",
+      "description": "Use this skill to design and implement a Google Cloud based CI/CD pipeline. This skill encodes best practices for pipeline design, ensuring proper pat"
+    },
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "path": "skills/google-cicd-release-orchestration/SKILL.md",
+      "name": "google-cicd-release-orchestration",
+      "description": "Use this skill when you need to design Cloud Deploy delivery pipelines or manage releases for applications deploying to Cloud Run or Google Kubernetes"
+    },
+    {
+      "source": "gemini-cli-extensions/cicd",
+      "path": "skills/google-cicd-terraform/SKILL.md",
+      "name": "google-cicd-terraform",
+      "description": "Architect, provision, and troubleshoot infrastructure on Google Cloud using Terraform. This skill ensures best practices like GCS backend usage and le"
+    },
+    {
+      "source": "gemini-cli-extensions/code-review",
+      "path": "skills/code-review-commons/SKILL.md",
+      "name": "code-review-commons",
+      "description": "Common guidelines, persona and critical constraints for performing high-quality code reviews. Use this skill when performing a /code-review or /pr-cod"
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-implement/SKILL.md",
+      "name": "conductor-implement",
+      "description": "Executes the tasks defined in the specified track's plan. Use this to start or continue working on a feature, bug fix, or chore."
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-new-track/SKILL.md",
+      "name": "conductor-new-track",
+      "description": "Plans a new track (feature or bug fix), generates spec/plan documents, and updates the registry."
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-revert/SKILL.md",
+      "name": "conductor-revert",
+      "description": "Reverts previous work (tracks, phases, or tasks) by identifying associated commits and performing Git reverts."
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-review/SKILL.md",
+      "name": "conductor-review",
+      "description": "Reviews the completed track work against guidelines and the plan. Acts as a Principal Software Engineer to ensure quality and compliance."
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-setup/SKILL.md",
+      "name": "conductor-setup",
+      "description": "Scaffolds the project and sets up the Conductor environment. Use this whenever a project needs to be initialized or if the Conductor configuration is "
+    },
+    {
+      "source": "gemini-cli-extensions/conductor",
+      "path": "skills/conductor-status/SKILL.md",
+      "name": "conductor-status",
+      "description": "Displays the current progress of the project by parsing the Tracks Registry and individual track plans."
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "path": "skills/cases/SKILL.md",
+      "name": "secops-cases",
+      "description": "List recent SOAR cases. Use this for \"list cases\" or \"show cases\"."
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "path": "skills/hunt/SKILL.md",
+      "name": "secops-hunt",
+      "description": "Expert guidance for proactive threat hunting. Use this when the user asks to \"hunt\" for threads, IOCs, or specific TTPs."
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "path": "skills/investigate/SKILL.md",
+      "name": "secops-investigate",
+      "description": "Expert guidance for deep security investigations. Use this when the user asks to \"investigate\" a case, entity, or incident."
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "path": "skills/setup-antigravity/SKILL.md",
+      "name": "secops-setup-antigravity",
+      "description": "Helps the user configure the Google SecOps Remote MCP Server for Antigravity. Use this when the user asks to \"set up\" or \"configure\" the security tool"
+    },
+    {
+      "source": "gemini-cli-extensions/google-secops",
+      "path": "skills/triage/SKILL.md",
+      "name": "secops-triage",
+      "description": "Expert guidance for security alert triage. Use this when the user asks to \"triage\" an alert or case."
+    },
+    {
+      "source": "gemini-cli-extensions/security",
+      "path": "skills/dependency-manager/SKILL.md",
+      "name": "dependency-manager",
+      "description": "Safely resolve and install isolated dependencies for isolated sandboxes (PoC execution)."
+    },
+    {
+      "source": "gemini-cli-extensions/security",
+      "path": "skills/poc/SKILL.md",
+      "name": "poc",
+      "description": "Sets up the necessary workspace, directories, and dependencies to test a vulnerability and generates a Proof-of-Concept."
+    },
+    {
+      "source": "gemini-cli-extensions/security",
+      "path": "skills/security-patcher/SKILL.md",
+      "name": "security-patcher",
+      "description": "Invoke this as your absolute first action before using any other tools whenever a user requests to fix, patch, or remediate a vulnerability. Do not pe"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/anomaly-detection/SKILL.md",
+      "name": "anomaly-detection",
+      "description": "🐉 Detects anomalies in time-series data from various sources."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/cloud-logging/SKILL.md",
+      "name": "cloud-logging",
+      "description": "🐉 Skill for interacting with and analyzing Google Cloud Logging and Error Reporting. Use this when you need to process large JSON logs from GCP or co"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/cloud-monitoring/SKILL.md",
+      "name": "cloud-monitoring",
+      "description": "🐉 Skill for interacting with Google Cloud Monitoring (CM) via APIs to avoid large context bloat. Produces nice short synoptic \"gists\" of graphs"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/data-ingestion/SKILL.md",
+      "name": "data-ingestion",
+      "description": "🐉 Fetches and parses time-series data from various sources."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/gcp-architecture-discovery/SKILL.md",
+      "name": "gcp-architecture-discovery",
+      "description": "🐉 Discover and map GCP infrastructure architecture including compute, networking, storage, and service dependencies."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/gcp-mcp-setup/SKILL.md",
+      "name": "gcp-mcp-setup",
+      "description": "🐉 Use when the user wants to set up Google Managed MCP (OneMCP) servers for their CLI environment. Automates enabling services, MCP servers, generati"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/gcp-playbooks/SKILL.md",
+      "name": "gcp-playbooks",
+      "description": "🐉 Use when you need to follow established SRE playbooks for GCP/GKE investigations, including infrastructure discovery and common mitigation steps."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/gcp-setup/SKILL.md",
+      "name": "gcp-setup",
+      "description": "🐉 Initial Google Cloud environment verification and authentication setup. Use when starting a new session to ensure correct identities across gcloud,"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/gcp-slo-management/SKILL.md",
+      "name": "gcp-slo-management",
+      "description": "🐉 Manage Service Level Objectives (SLOs) on Google Cloud. Use when you need to discover Monitoring Services, list existing SLOs, or create new SLOs ("
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/generic-mitigations/SKILL.md",
+      "name": "generic-mitigations",
+      "description": "🐉 Guidance on utilizing generic mitigations for rapid incident response."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/investigation-entrypoint/SKILL.md",
+      "name": "investigation-entrypoint",
+      "description": "🐉 The primary entrypoint for investigating production outages, orchestrating SRE response, and mitigating incidents on Google Cloud Platform (GKE, Cl"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/monitoring-graphs/SKILL.md",
+      "name": "monitoring-graphs",
+      "description": "🐉 Skill for generating high-quality, annotated incident graphs for post-mortems using Python. Use this when the user needs to visualize an outage, sh"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/postmortem-aggregator/SKILL.md",
+      "name": "postmortem-aggregator",
+      "description": "🐉 To be used when you have a folder containing N Post Mortem files. This will help crunch data and maintain/update a POMO_AGGREGATED.md file."
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/postmortem-generator/SKILL.md",
+      "name": "postmortem-generator",
+      "description": "🐉 Creates a PostMortem given enough context about an incident/outage. Will guide user to timeline, action items/bugs, and finally draft a Google Doc "
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/pre-publish-checker/SKILL.md",
+      "name": "pre-publish-checker",
+      "description": "🐉 Thoroughly checks files for profanity, internal links, sensitive paths, and professionalism before publication. Use when preparing a codebase or ex"
+    },
+    {
+      "source": "gemini-cli-extensions/sre",
+      "path": "skills/safe-sre-investigator/SKILL.md",
+      "name": "safe-sre-investigator",
+      "description": "🐉 Sets up and uses read-only Service Accounts for GCP and Kubernetes investigations using the principle of least privilege, and provides risk assessm"
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": ".gemini/skills/code-reviewer/SKILL.md",
+      "name": "code-reviewer",
+      "description": "Use this skill to review code. It supports both local changes (staged or working tree) and remote Pull Requests (by ID or URL). It focuses on correctn"
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/gmail/SKILL.md",
+      "name": "gmail",
+      "description": "CRITICAL: You MUST activate this skill BEFORE composing, sending, drafting, or searching emails. Always trigger this skill as the first step when the "
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/google-calendar/SKILL.md",
+      "name": "google-calendar",
+      "description": "CRITICAL: You MUST activate this skill BEFORE creating, querying, or managing calendar events. Always trigger this skill as the first step when the us"
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/google-chat/SKILL.md",
+      "name": "google-chat",
+      "description": "CRITICAL: You MUST activate this skill BEFORE sending, reading, or managing Google Chat messages. Always trigger this skill as the first step when the"
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/google-docs/SKILL.md",
+      "name": "google-docs",
+      "description": "CRITICAL: You MUST activate this skill BEFORE creating, editing, or managing Google Docs. Always trigger this skill as the first step when the user me"
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/google-sheets/SKILL.md",
+      "name": "google-sheets",
+      "description": "Activate this skill when the user wants to find, read, or analyze Google Sheets spreadsheets. Contains guidance on searching for spreadsheets, output "
+    },
+    {
+      "source": "gemini-cli-extensions/workspace",
+      "path": "skills/google-slides/SKILL.md",
+      "name": "google-slides",
+      "description": "Activate this skill when the user wants to find, read, or extract content from Google Slides presentations. Contains guidance on searching for present"
+    },
+    {
+      "source": "google-antigravity/antigravity-sdk-python",
+      "path": "skills/google-antigravity-sdk/SKILL.md",
+      "name": "google-antigravity-sdk",
+      "description": "Design, implement, and debug autonomous AI agents and multi-agent systems using the Google Antigravity (AGY) SDK. ACTIVATE this skill when the user wa"
+    },
+    {
+      "source": "google-gemini/demolab",
+      "path": "skills/gemini-frontend-design/SKILL.md",
+      "name": "gemini-frontend-design",
+      "description": "Design and build polished websites and web apps tailored to the brief. Use when creating or redesigning web interfaces, covering layout, color, typogr"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/agent-tui/SKILL.md",
+      "name": "agent-tui",
+      "description": "Main Agents: Do NOT use this skill directly. If you need to test the TUI, invoke the `tui_tester` subagent. Drive terminal UI (TUI) applications progr"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/async-pr-review/SKILL.md",
+      "name": "async-pr-review",
+      "description": "Trigger this skill when the user wants to start an asynchronous PR review, run background checks on a PR, or check the status of a previously started "
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/behavioral-evals/SKILL.md",
+      "name": "behavioral-evals",
+      "description": "Guidance for creating, running, fixing, and promoting behavioral evaluations. Use when verifying agent decision logic, debugging failures, debugging p"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/ci/SKILL.md",
+      "name": "ci",
+      "description": "A specialized skill for Gemini CLI that provides high-performance, fail-fast monitoring of GitHub Actions workflows and automated local verification o"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/code-reviewer/SKILL.md",
+      "name": "code-reviewer",
+      "description": "Use this skill to review code. It supports both local changes (staged or working tree) and remote Pull Requests (by ID or URL). It focuses on correctn"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/docs-changelog/SKILL.md",
+      "name": "docs-changelog",
+      "description": "Generates and formats changelog files for a new release based on provided version and raw changelog data."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/docs-writer/SKILL.md",
+      "name": "docs-writer",
+      "description": "Always use this skill when the task involves writing, reviewing, or editing files in the `/docs` directory or any `.md` files in the repository."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/github-issue-creator/SKILL.md",
+      "name": "github-issue-creator",
+      "description": "Use this skill when asked to create a GitHub issue. It handles different issue types (bug, feature, etc.) using repository templates and ensures prope"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/pr-address-comments/SKILL.md",
+      "name": "pr-address-comments",
+      "description": "Use this skill if the user asks you to help them address GitHub PR comments for their current branch of the Gemini CLI. Requires `gh` CLI tool."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/pr-creator/SKILL.md",
+      "name": "pr-creator",
+      "description": "Use this skill when asked to create a pull request (PR). It ensures all PRs follow the repository's established templates and standards."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/review-duplication/SKILL.md",
+      "name": "review-duplication",
+      "description": "Use this skill during code reviews to proactively investigate the codebase for duplicated functionality, reinvented wheels, or failure to reuse existi"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/string-reviewer/SKILL.md",
+      "name": "string-reviewer",
+      "description": "Use this skill when asked to review text and user-facing strings within the codebase. It ensures that these strings follow rules on clarity, usefulnes"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": ".gemini/skills/tui-tester/SKILL.md",
+      "name": "tui-tester",
+      "description": "Expert guidance for testing Gemini CLI behavior and visual output using terminal automation."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "packages/cli/src/commands/extensions/examples/skills/skills/greeter/SKILL.md",
+      "name": "greeter",
+      "description": "A friendly greeter skill"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "packages/core/src/skills/builtin/antigravity-support/SKILL.md",
+      "name": "antigravity-support",
+      "description": "Use when the user asks questions, seeks help, or requests instructions related to installing, setting up, or migrating to Antigravity CLI. This skill "
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "packages/core/src/skills/builtin/skill-creator/SKILL.md",
+      "name": "skill-creator",
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Gemini"
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "packages/sdk/test-data/skills/pirate-skill/SKILL.md",
+      "name": "pirate-skill",
+      "description": "Speak like a pirate."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/caretaker-agent/cloudrun/triage-worker/.gemini/skills/code_explorer/SKILL.md",
+      "name": "code_explorer",
+      "description": "Explores the repository to locate primary source files, coupled UI components, and test files for bug reports or feature requests."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/caretaker-agent/cloudrun/triage-worker/.gemini/skills/effort/SKILL.md",
+      "name": "effort",
+      "description": "Estimates the implementation effort required to address the given issue."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/caretaker-agent/cloudrun/triage-worker/.gemini/skills/quality/SKILL.md",
+      "name": "quality",
+      "description": "Evaluates whether a GitHub issue is spam, empty, needs more information, or is OK to proceed."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/caretaker-agent/cloudrun/triage-worker/.gemini/skills/spec_generator/SKILL.md",
+      "name": "spec_generator",
+      "description": "Generates a structured Workable Spec JSON to guide a Developer Worker."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/gemini-cli-bot/.gemini/skills/critique/SKILL.md",
+      "name": "critique",
+      "description": "Expertise in auditing and fixing repository scripts and GitHub Actions workflows to ensure technical robustness and security."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/gemini-cli-bot/.gemini/skills/memory/SKILL.md",
+      "name": "memory",
+      "description": "Expertise in maintaining persistent bot memory, synchronizing with previous sessions via the Task Ledger, and preserving decision logs."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/gemini-cli-bot/.gemini/skills/metrics/SKILL.md",
+      "name": "metrics",
+      "description": "Expertise in analyzing time-series repository health metrics, investigating root causes, and proposing proactive workflow improvements."
+    },
+    {
+      "source": "google-gemini/gemini-cli",
+      "path": "tools/gemini-cli-bot/.gemini/skills/prs/SKILL.md",
+      "name": "prs",
+      "description": "Expertise in managing the Git and GitHub Pull Request lifecycle, including staging changes, generating PR descriptions, and branch management."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/audio-mixing/SKILL.md",
+      "name": "audio-mixing",
+      "description": "Mix speech audio and background music into a polished radio show file."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/cover-image-generation/SKILL.md",
+      "name": "cover-image-generation",
+      "description": "Generate cover images for the radio show using Gemini 3 Flash Image (with fallback to Pro)."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/metadata-generation/SKILL.md",
+      "name": "metadata-generation",
+      "description": "Generate show metadata (JSON) containing timecoded transcript, title, duration, summary, and date by sending audio and transcript to Gemini."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/music-generation/SKILL.md",
+      "name": "music-generation",
+      "description": "Generate ambient background music using Lyria via the Interactions API."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/research/SKILL.md",
+      "name": "research",
+      "description": "Gather source material for the radio show from any content source — web, HN, GitHub, papers, or general topics."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/script-writing/SKILL.md",
+      "name": "script-writing",
+      "description": "Generate the AI Talk Radio show script from research using the Interactions API."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "ai-radio/skills/tts-generation/SKILL.md",
+      "name": "tts-generation",
+      "description": "Convert radio show script to speech audio with telephone effect on correspondent voices using the Interactions API."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "customer-support/skills/memory/SKILL.md",
+      "name": "memory",
+      "description": "Records and appends every user-agent customer support interaction to the memory.md log in the workspace."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "customer-support/skills/scanner/SKILL.md",
+      "name": "scanner",
+      "description": "Scans a website deeply, converting HTML pages to markdown, respecting robots.txt, and updating the snapshots log."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "data-analyst/skills/data-explorer/SKILL.md",
+      "name": "data-explorer",
+      "description": "General-purpose data profiling and exploration. Use when first encountering any dataset to understand its structure, quality, and analysis potential."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "data-analyst/skills/python-data/SKILL.md",
+      "name": "python-data",
+      "description": "Performs heavy numerical compute and statistical analysis inside the sandbox."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "document-processor/skills/pdf-parsing/SKILL.md",
+      "name": "pdf-parsing",
+      "description": "Exposes a 100% local, offline PDF batch extraction utility (extract_to_markdown.py) that isolates invoices under invoices/ and translates PDFs into cl"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "document-processor/skills/reconciliation/SKILL.md",
+      "name": "reconciliation",
+      "description": "Reconcile loaded expenses against the pre-parsed invoice database, flagging discrepancies like amount mismatches, missing invoices, and merchant misma"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "document-processor/skills/slide-maker/SKILL.md",
+      "name": "slide-creator",
+      "description": "Create Google-style presentation slides as standalone HTML files. Use when the user wants to (1) create presentation slides from notes or bullet point"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "document-processor/skills/vendor-verification/SKILL.md",
+      "name": "vendor-verification",
+      "description": "Verify whether vendors/merchants from expense records are real, registered business entities by querying the free Wikidata open API."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "news-curator/skills/briefing/SKILL.md",
+      "name": "briefing",
+      "description": "Formats the standalone daily briefing — curated picks with why-it-matters lines, community buzz, the trend read across runs, and the taste note that k"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "news-curator/skills/curation/SKILL.md",
+      "name": "curation",
+      "description": "Selection and ranking rules — how to turn the raw fetched pool into the handful of items the reader actually wants, guided by the taste profile in int"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "news-curator/skills/deliver/SKILL.md",
+      "name": "deliver",
+      "description": "Posts a condensed version of the briefing to a Google Chat or Slack incoming webhook, so the daily run delivers itself — skips silently when no webhoo"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "news-curator/skills/fetch-news/SKILL.md",
+      "name": "fetch-news",
+      "description": "Pulls the latest Google News and Hacker News items for every topic and genre in the reader's interests, deduped against every item shown in previous r"
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "repo-maintainer/skills/git-workflow/SKILL.md",
+      "name": "git-workflow",
+      "description": "Guides the agent on how to handle git operations and generate .patch files instead of submitting PRs."
+    },
+    {
+      "source": "google-gemini/gemini-managed-agents-templates",
+      "path": "repo-maintainer/skills/github-researcher/SKILL.md",
+      "name": "github-researcher",
+      "description": "Guides the agent on how to read and search GitHub issues to understand the repository's problems."
+    },
+    {
+      "source": "google-gemini/gemini-skills",
+      "path": "skills/gemini-api-cli/SKILL.md",
+      "name": "gemini-api-cli",
+      "description": "Call the Gemini API from the shell with gemini-api. Use for media generation (images, TTS, music, video), file and YouTube analysis, audio/video trans"
+    },
+    {
+      "source": "google-gemini/gemini-skills",
+      "path": "skills/gemini-api-dev/SKILL.md",
+      "name": "gemini-api-dev",
+      "description": "Use this skill when writing code that calls the Gemini API for text generation, multi-turn chat, multimodal understanding, image generation, video gen"
+    },
+    {
+      "source": "google-gemini/gemini-skills",
+      "path": "skills/gemini-live-api-dev/SKILL.md",
+      "name": "gemini-live-api-dev",
+      "description": "Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API, or migrating legacy Live models (2.0/2.5/3.1) t"
+    },
+    {
+      "source": "google-gemini/gemini-skills",
+      "path": "skills/gemini-omni-flash-api/SKILL.md",
+      "name": "gemini-omni-flash-api",
+      "description": "Use this skill for generative video editing, text-to-video, image- and video-referenced video generation, first-frame-to-video, first-and-last-frame t"
+    },
+    {
+      "source": "google-labs-code/design.md",
+      "path": ".agents/skills/agent-dx-cli-scale/SKILL.md",
+      "name": "agent-dx-cli-scale",
+      "description": "A scoring scale for evaluating how well a CLI is designed for AI agents, based on the \"Rewrite Your CLI for AI Agents\" principles."
+    },
+    {
+      "source": "google-labs-code/design.md",
+      "path": ".agents/skills/ink/SKILL.md",
+      "name": "ink",
+      "description": "Ink terminal renderer for json-render that turns JSON specs into interactive terminal UIs. Use when working with @json-render/ink, building terminal U"
+    },
+    {
+      "source": "google-labs-code/design.md",
+      "path": ".agents/skills/tdd/SKILL.md",
+      "name": "tdd-red-green-refactor",
+      "description": "Enforces a disciplined Red-Green-Refactor (TDD) workflow in TypeScript/Node.js. Use this whenever creating new features, fixing bugs, or migrating log"
+    },
+    {
+      "source": "google-labs-code/design.md",
+      "path": ".agents/skills/typed-service-contracts/SKILL.md",
+      "name": "typed-service-contracts",
+      "description": "Architecture standard for building robust, type-safe TypeScript services using the \"Spec and Handler\" pattern. Use when building CLIs, libraries, or c"
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": ".agents/skills/agent-cli-best-practices/SKILL.md",
+      "name": "gws-agent-cli-operations",
+      "description": "Comprehensive instructions for executing tasks using the gws (Google Workspace) CLI or similar agent-first command-line tools. Use this skill when int"
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": ".agents/skills/fleet-triage/SKILL.md",
+      "name": "fleet-triage",
+      "description": "Cognitive triage of fleet audit findings. Read issue content, evaluate labeling accuracy, and determine open/close/dispatch/relabel actions for fleet-"
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": ".agents/skills/tdd/SKILL.md",
+      "name": "tdd-red-green-refactor",
+      "description": "Enforces a disciplined Red-Green-Refactor (TDD) workflow in TypeScript/Node.js. Use this whenever creating new features, fixing bugs, or migrating log"
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": "packages/core/examples/gitpatch-goals/SKILL.md",
+      "name": "gitpatch-goals-cli",
+      "description": "Evaluates generated code via GitPatch against original goals and coding standards."
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": "packages/core/examples/gitpatch-local/SKILL.md",
+      "name": "jules-gitpatch-local",
+      "description": "A CLI tool to securely download and apply a git patch from a Jules session."
+    },
+    {
+      "source": "google-labs-code/jules-sdk",
+      "path": "packages/merge/SKILL.md",
+      "name": "jules-merge",
+      "description": ""
+    },
+    {
+      "source": "google-labs-code/jules-skills",
+      "path": "skills/automate-github-issues/SKILL.md",
+      "name": "automate-github-issues",
+      "description": "Set up automated GitHub issue triage and resolution using parallel Jules coding agents"
+    },
+    {
+      "source": "google-labs-code/jules-skills",
+      "path": "skills/local-action-verification/SKILL.md",
+      "name": "local-action-verification",
+      "description": "Set up a repository for local GitHub Actions verification using act, so Jules can validate CI before pushing"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/repo-review/SKILL.md",
+      "name": "github-codebase-briefing",
+      "description": "Generates a deeply contextual, progressive-disclosure briefing for any GitHub repository. It builds a mental model of the code before analyzing issues"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-bug-bash/SKILL.md",
+      "name": "stitch-sdk-bug-bash",
+      "description": "Find bugs in the Stitch SDK using a real API key. Covers standard functional edges and tricky situations."
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-development/SKILL.md",
+      "name": "stitch-sdk-development",
+      "description": "Develop the Stitch SDK. Covers the generation pipeline, dual modality (agent vs SDK), error handling, and Traffic Light (Red-Green-Yellow) implementat"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-domain-design/SKILL.md",
+      "name": "stitch-sdk-domain-design",
+      "description": "Design the domain model for the Stitch SDK. Use when mapping MCP tools to domain classes and bindings in domain-map.json. This is Stage 2 of the gener"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-pipeline/SKILL.md",
+      "name": "stitch-sdk-pipeline",
+      "description": "Run the full Stitch SDK generation pipeline. Use when a new tool is added, or the SDK needs to be regenerated end-to-end."
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-readme/SKILL.md",
+      "name": "stitch-sdk-readme",
+      "description": "Generate or update the README for the Stitch SDK. Use the Bookstore Test structure and source the current API from the codebase. Use when the README n"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/stitch-sdk-usage/SKILL.md",
+      "name": "stitch-sdk-usage",
+      "description": "Use the Stitch SDK to generate, edit, and iterate on UI screens from text prompts, manage projects, and retrieve screen HTML/images. Use when the user"
+    },
+    {
+      "source": "google-labs-code/stitch-sdk",
+      "path": ".agents/skills/tdd/SKILL.md",
+      "name": "tdd-red-green-refactor",
+      "description": "Enforces a disciplined Red-Green-Refactor (TDD) workflow in TypeScript/Node.js. Use this whenever creating new features, fixing bugs, or migrating log"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-build/skills/react-components/SKILL.md",
+      "name": "stitch::react-components",
+      "description": "Converts Stitch designs into modular Vite and React components, or syncs/updates existing React components to align with the latest Stitch designs, us"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-build/skills/react-native/SKILL.md",
+      "name": "stitch::react-native",
+      "description": "Convert Stitch HTML designs to React Native components, or syncs/updates existing native components to align with the latest Stitch designs, using Sty"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-build/skills/react-vite-dashboard/SKILL.md",
+      "name": "react-vite-dashboard",
+      "description": "Convert Stitch designs into production React + Vite dashboards with TanStack Query, accessible tokens from DESIGN.md, and Web3-ready patterns (ethers/"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-build/skills/remotion/SKILL.md",
+      "name": "remotion",
+      "description": "Generate walkthrough videos from Stitch projects using Remotion with smooth transitions, zooming, and text overlays"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-build/skills/shadcn-ui/SKILL.md",
+      "name": "shadcn-ui",
+      "description": "Expert guidance for integrating and building applications with shadcn/ui components, including component discovery, installation, customization, and b"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/code-to-design/SKILL.md",
+      "name": "stitch::code-to-design",
+      "description": "Convert frontend code (Vite, React, Angular, Vue, etc.) to a Stitch Design by chaining static HTML extraction, design system extraction, and file uplo"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/extract-design-md/SKILL.md",
+      "name": "stitch::extract-design-md",
+      "description": "Extract a comprehensive design system (DESIGN.md) directly from frontend source code — React, Vue, Svelte, Angular, plain HTML/CSS, or any web framewo"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/extract-static-html/SKILL.md",
+      "name": "stitch::extract-static-html",
+      "description": "Extract self-contained static HTML from a built web application or React components by inlining CSS and images. Use this skill whenever you need to ca"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/generate-design/SKILL.md",
+      "name": "stitch::generate-design",
+      "description": "Generate new screens from text prompts or images, edit existing screens with prompts and design system tokens, and generate design variants using Stit"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/manage-design-system/SKILL.md",
+      "name": "stitch::manage-design-system",
+      "description": "Manage design systems in Stitch using MCP tools. Includes retrieval of assets, creating/updating design systems in Stitch, and applying them to screen"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-design/skills/upload-to-stitch/SKILL.md",
+      "name": "stitch::upload-to-stitch",
+      "description": "Upload local assets (images, mockups, extracted HTML, design markdown) to a Stitch project. ALWAYS use this skill when you need to upload visual asset"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-utilities/skills/design-md/SKILL.md",
+      "name": "design-md",
+      "description": "Analyze Stitch projects and synthesize a semantic design system into DESIGN.md files"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-utilities/skills/enhance-prompt/SKILL.md",
+      "name": "enhance-prompt",
+      "description": "Transforms vague UI ideas into polished, Stitch-optimized prompts. Enhances specificity, adds UI/UX keywords, injects design system context, and struc"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-utilities/skills/site-md/SKILL.md",
+      "name": "site-md",
+      "description": "Analyze a project description or site requirements and synthesize a project constitution into SITE.md for the Stitch Build Loop"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-utilities/skills/stitch-loop/SKILL.md",
+      "name": "stitch-loop",
+      "description": "Teaches agents to iteratively build websites using Stitch with an autonomous baton-passing loop pattern"
+    },
+    {
+      "source": "google-labs-code/stitch-skills",
+      "path": "plugins/stitch-utilities/skills/taste-design/SKILL.md",
+      "name": "taste-design",
+      "description": "Semantic Design System Skill for Google Stitch. Generates agent-friendly DESIGN.md files that enforce premium, anti-generic UI standards — strict typo"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/docsite-link-sweep/SKILL.md",
+      "name": "docsite-link-sweep",
+      "description": "Sweep the googleapis/mcp-toolbox docs for broken and non-canonical links, report each finding with its cause, and apply the safe class of internal lin"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/fix-failing-tests/SKILL.md",
+      "name": "fix-failing-tests",
+      "description": "Diagnose a failing test in the googleapis/mcp-toolbox repo and land a fix by reasoning from the actual error: read the failure, reproduce it, shrink i"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/reproduce-bug/SKILL.md",
+      "name": "reproduce-bug",
+      "description": "Reproduce a reported bug in googleapis/mcp-toolbox and decide whether it is real, delivering an evidence-backed verdict: confirmed, already fixed, mis"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/review-prs/SKILL.md",
+      "name": "review-prs",
+      "description": "Review a GitHub pull request in the googleapis/mcp-toolbox repo against the team's reviewer checklist: PR title/description conventions, linked issue,"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/stale-sweep/SKILL.md",
+      "name": "stale-sweep",
+      "description": "Sweep the googleapis/mcp-toolbox repo for issues and PRs with no real activity in N days (default 60), sort each by whose silence it is (the author's,"
+    },
+    {
+      "source": "googleapis/mcp-toolbox",
+      "path": "skills/maintainer/triage-issues/SKILL.md",
+      "name": "triage-issues",
+      "description": "Triage GitHub issues in the googleapis/mcp-toolbox repo: propose the correct labels (type / priority / product / status), check for duplicates, verify"
+    }
+  ],
+  "mcp": {
+    "google-gemini/gemini-cli:packages/cli/src/commands/extensions/examples/mcp-server/": [
+      "nodeServer"
+    ],
+    "gemini-cli-extensions/alloydb-observability": [
+      "alloydb_observability"
+    ],
+    "gemini-cli-extensions/android-management-api": [
+      "android-management-api"
+    ],
+    "gemini-cli-extensions/angular": [
+      "angular-cli"
+    ],
+    "gemini-cli-extensions/bigquery-data-transfer-service": [
+      "bigquery-data-transfer-service"
+    ],
+    "gemini-cli-extensions/bigquery-migration-service": [
+      "bigquery-migration-service"
+    ],
+    "gemini-cli-extensions/cicd": [
+      "cicd-mcp"
+    ],
+    "gemini-cli-extensions/cloud-composer": [
+      "cloud-composer"
+    ],
+    "gemini-cli-extensions/cloud-logging": [
+      "cloud-logging"
+    ],
+    "gemini-cli-extensions/cloud-monitoring": [
+      "cloud-monitoring"
+    ],
+    "gemini-cli-extensions/cloud-resource-manager": [
+      "cloud-resource-manager"
+    ],
+    "gemini-cli-extensions/cloud-run": [
+      "cloud-run"
+    ],
+    "gemini-cli-extensions/cloud-sql-mysql-observability": [
+      "cloud_sql_mysql_observability"
+    ],
+    "gemini-cli-extensions/cloud-sql-postgresql-observability": [
+      "cloud_sql_postgresql_observability"
+    ],
+    "gemini-cli-extensions/cloud-sql-sqlserver-observability": [
+      "cloud_sql_sqlserver_observability"
+    ],
+    "gemini-cli-extensions/compute-engine": [
+      "compute-engine"
+    ],
+    "gemini-cli-extensions/customer-experience-agent-studio": [
+      "customer-experience-agent-studio"
+    ],
+    "gemini-cli-extensions/database-migration-service": [
+      "database-migration-service"
+    ],
+    "gemini-cli-extensions/datacommons": [
+      "datacommons-mcp"
+    ],
+    "gemini-cli-extensions/datastream": [
+      "datastream"
+    ],
+    "gemini-cli-extensions/developer-knowledge": [
+      "developer-knowledge"
+    ],
+    "gemini-cli-extensions/firestore": [
+      "firestore"
+    ],
+    "gemini-cli-extensions/flutter": [
+      "dart"
+    ],
+    "gemini-cli-extensions/gcloud": [
+      "gcloud"
+    ],
+    "gemini-cli-extensions/genkit": [
+      "genkit"
+    ],
+    "gemini-cli-extensions/gke-mcp-remote": [
+      "gke-mcp-remote"
+    ],
+    "gemini-cli-extensions/google-secops": [
+      "remote-mcp-secops"
+    ],
+    "gemini-cli-extensions/jules": [
+      "julesServer"
+    ],
+    "gemini-cli-extensions/managed-kafka": [
+      "managed-kafka"
+    ],
+    "gemini-cli-extensions/maps-grounding-lite": [
+      "maps-grounding-lite"
+    ],
+    "gemini-cli-extensions/memorystore-for-redis": [
+      "memorystore-for-redis"
+    ],
+    "gemini-cli-extensions/memorystore-for-valkey": [
+      "memorystore-for-valkey"
+    ],
+    "gemini-cli-extensions/nanobanana": [
+      "nanobanana"
+    ],
+    "gemini-cli-extensions/observability": [
+      "observability"
+    ],
+    "gemini-cli-extensions/pay-and-wallet-developer": [
+      "pay-wallet-dev-mcp-server"
+    ],
+    "gemini-cli-extensions/pubsub": [
+      "pubsub"
+    ],
+    "gemini-cli-extensions/security": [
+      "securityServer",
+      "osvScanner"
+    ],
+    "gemini-cli-extensions/stitch": [
+      "stitch"
+    ],
+    "gemini-cli-extensions/vertex": [
+      "VertexMcpServer"
+    ],
+    "gemini-cli-extensions/vertex-ai-search": [
+      "vertex-ai-search"
+    ],
+    "gemini-cli-extensions/workspace": [
+      "google-workspace"
+    ]
+  }
+}

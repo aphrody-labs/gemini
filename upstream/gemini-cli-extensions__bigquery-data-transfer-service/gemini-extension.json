@@ -1,0 +1,15 @@
+{
+  "name": "bigquery-data-transfer-service",
+  "version": "1.0.0",
+  "description": "Manage BQTS resources such as data sources, transfer configs and transfer runs via natural language commands.",
+  "mcpServers": {
+    "bigquery-data-transfer-service": {
+      "httpUrl": "https://bigquerydatatransfer.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/bigquery"]
+      },
+      "timeout": 30000
+    }
+  }
+}

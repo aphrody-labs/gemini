@@ -1,0 +1,15 @@
+{
+  "name": "database-migration-service",
+  "version": "1.0.0",
+  "description": "Manage database migration jobs using natural language.",
+  "mcpServers": {
+    "database-migration-service": {
+      "httpUrl": "https://datamigration.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/cloud-datamigration"]
+      },
+      "timeout": 30000
+    }
+  }
+}

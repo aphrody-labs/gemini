@@ -1,0 +1,15 @@
+{
+  "name": "compute-engine",
+  "version": "1.0.0",
+  "description": "Perform a range of infrastructure management tasks, including: manage virtual machine (VM) instances, manage instance group managers and instance templates, manage disks and snapshots, retrieve information about reservations and commitments.",
+  "mcpServers": {
+    "compute-engine": {
+      "httpUrl": "https://compute.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/compute"]
+      },
+      "timeout": 30000
+    }
+  }
+}

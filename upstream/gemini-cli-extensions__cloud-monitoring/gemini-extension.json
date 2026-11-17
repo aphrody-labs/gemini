@@ -1,0 +1,15 @@
+{
+  "name": "cloud-monitoring",
+  "version": "1.0.0",
+  "description": "Access resources in the Cloud Monitoring platform using natural language.",
+  "mcpServers": {
+    "cloud-monitoring": {
+      "httpUrl": "https://monitoring.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/monitoring.write"]
+      },
+      "timeout": 30000
+    }
+  }
+}

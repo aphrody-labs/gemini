@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "cicd-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=@google-cloud/cicd-mcp",
+        "cicd-mcp-server"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "bigquery-migration-service",
+  "version": "1.0.0",
+  "description": "Perform tasks such as translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations.",
+  "mcpServers": {
+    "bigquery-migration-service": {
+      "httpUrl": "https://bigquerymigration.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": [
+          "https://www.googleapis.com/auth/bigquerymigration",
+          "https://www.googleapis.com/auth/devstorage.read_only"
+        ]
+      },
+      "timeout": 30000
+    }
+  }
+}

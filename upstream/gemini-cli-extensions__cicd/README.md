@@ -1,0 +1,200 @@
+# Gemini CLI Extension for CI/CD
+
+The CI/CD extension for Gemini CLI automates Continuous Integration and Continuous Delivery (CI/CD) workflows using AI. It simplifies deployment to Google Cloud services, such as Cloud Run and Cloud Storage, and generates secure CI/CD pipelines compliant with testing and security best practices.
+
+
+> [!CAUTION]    
+>
+> *   **EXPERIMENTAL PROJECT - Use with extreme care:**
+>     This project is currently experimental. Features, commands, and functionality are subject to change and may contain bugs.
+>
+> *   **Do not use this extension in production environments or with business-critical Google Cloud projects:** You are responsible for any changes made to your cloud resources. Always carefully review and validate any generated configurations or commands before execution.
+>
+> *   **Review all outputs and understand the [Security Considerations](#security-considerations) below before use:** as this extension can modify your Google Cloud (GCP) resources.
+
+## 📋 Key Features
+
+-   **Intelligent Code Deployment**: Use the `google-cicd-deploy` skill to deploy your codebase. The extension leverages Gemini to analyze your project and deploy to Google Cloud services like Cloud Run for dynamic applications or Cloud Storage for static websites. Includes pre-deployment secret scanning.
+-   **AI-Powered CI/CD Pipeline Design**: Generate secure and robust CI/CD pipelines with `google-cicd-pipeline-design`. Collaborate with Gemini to tailor the pipeline and generate a YAML configuration.
+-   **Terraform GCP Infrastructure**: Provision and troubleshoot production-grade Google Cloud infrastructure using the `google-cicd-terraform` skill, enforcing Google’s Cloud Foundation Fabric patterns.
+-   **Interactive GCP Management**: The extension provides tools to interact directly with Google Cloud's CI/CD services (Cloud Build, Artifact Registry, Cloud Deploy, Developer Connect) from within Gemini CLI.
+-   **Simplified Complex Release Flows**: Build sophisticated Cloud Deploy release pipelines with the `google-cicd-release-orchestration` skill, setting up deployment strategies like canary and automatic rollbacks.
+-   **Integrated CI/CD MCP Server**: The extension includes a local Model Context Protocol (MCP) server, seamlessly integrating Gemini CLI with Google Cloud CI/CD services.
+
+## ⚙️ Installation
+
+### ✅ Prerequisites
+
+*   `gcloud` CLI: The Google Cloud CLI must be [installed](https://cloud.google.com/sdk/docs/install) and available in your system's PATH.
+*   Google Cloud Project: You need a Google Cloud project with the necessary APIs enabled. Depending on your usage, the extension may require:
+    *   Cloud Build API
+    *   Artifact Registry API
+    *   Artifact Analysis API
+    *   Developer Connect API
+    *   Cloud Resource Manager API
+    *   Cloud Storage API
+    *   Cloud Run API
+    *   Google Kubernetes Engine API
+*   Application Default Credentials (ADC): Ensure [Application Default Credentials](https://cloud.google.com/docs/authentication/gcloud) are configured in your environment. You can set this up by running:
+    ```bash
+    gcloud auth login
+    gcloud auth application-default login
+    ```
+
+### For Gemini CLI
+To install the CI/CD extension, run the following command in your terminal:
+
+```bash
+gemini extensions install https://github.com/gemini-cli-extensions/cicd
+```
+
+*To install development build add `--ref=nightly --pre-release` flags.*
+
+*   [Gemini CLI](https://github.com/google-gemini/gemini-cli): Version **v0.15.0 or newer** must be installed.
+*   Gemini CLI Authentication: Ensure you have configured [Authentication Options](https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#-authentication-options).
+
+
+### For Claude Code
+To install the CI/CD extension, run the following command in your terminal:
+
+1. Add the Marketplace.
+
+```bash
+claude plugin marketplace add https://github.com/gemini-cli-extensions/cicd.git#v0.2.2
+```
+
+2. Install the Plugin.
+```bash
+claude plugin install cicd
+```
+
+### For Antigravity
+To install the CI/CD plugin (which bundles both the `cicd-mcp` MCP server and all four CI/CD skills) in Antigravity:
+
+*   Ensure either **Go** (1.24+, to build `./bin/cicd-mcp-server` locally) or **Node.js** (v18+ with `npx` on your `PATH`) is installed. When launching `cicd-mcp`, the plugin runs `./bin/cicd-mcp-server` (or `./cicd-mcp-server` in release archives) relative to the plugin directory, auto-builds it if `./cicd-mcp-server` source and `go` are present, or falls back to `npx -y --package=@google-cloud/cicd-mcp cicd-mcp-server`.
+
+#### Option 1: Install from the Antigravity Plugins Marketplace (UI or CLI)
+*   **Antigravity IDE / Web UI**: Open **Settings → Customizations → Plugins** (or **Build with Google**), find **Google Cloud CI/CD**, and click **Install**.
+*   **Antigravity CLI**:
+    ```bash
+    agy plugin install cicd@antigravity-plugins-official
+    ```
+
+#### Option 2: Install Directly from GitHub via Antigravity CLI
+Run the following command in your terminal:
+```bash
+agy plugin install https://github.com/gemini-cli-extensions/cicd
+```
+Or from inside an active Antigravity CLI interactive session:
+```text
+/plugin install https://github.com/gemini-cli-extensions/cicd
+```
+
+#### Option 3: Install from a Local Clone
+```bash
+git clone https://github.com/gemini-cli-extensions/cicd.git
+cd cicd && ./build.sh
+agy plugin install .
+```
+
+#### Option 4: Manual MCP & Skills Setup
+If you prefer to configure the MCP server and skills separately without installing the plugin bundle:
+1. Follow [Connecting Custom MCP Servers](https://antigravity.google/docs/mcp#connecting-custom-mcp-servers) using the provided [.mcp.json](.mcp.json) file.
+2. Add the skills using [Skills](https://github.com/vercel-labs/skills):
+   ```bash
+   npx skills add https://github.com/gemini-cli-extensions/cicd --global --all --agent antigravity
+   ```
+
+### For Other Agents
+To install our CI/CD extension in other agents, you can manually set up our MCP server and skills.
+
+1. Set up MCP server
+Each agent will have their own process to set up an MCP server, but you can use the provided [.mcp.json](.mcp.json) file which contains our MCP server config.
+
+2. Add Skills
+You can use [Skills](https://github.com/vercel-labs/skills) to add skills to your agent. Replace `<agent_name>` with your specific agent name.
+```bash
+ npx skills add https://github.com/gemini-cli-extensions/cicd --global --all --agent <agent_name>
+```
+## 🔒 Security Considerations
+
+> [!WARNING]
+> **Important Security Information:**
+>
+> This CI/CD extension connects Gemini CLI to a local MCP server, granting it the ability to access and modify your Google Cloud data based on your Application Default Credentials.
+>
+> *   **LLM Hallucinations & Unintended Actions:** LLMs can produce incorrect or unexpected outputs ("hallucinate"). Since this extension allows Gemini to call tools that modify cloud resources, hallucinations can lead to unintended actions on your GCP project. **Always meticulously verify all generated configurations and commands before execution.**
+> *   **Authentication and Permissions:** The extension uses your local Application Default Credentials ([ADC](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment)), inheriting its permissions. Be aware of the scope of these permissions, as Gemini CLI can potentially read, modify, and delete GCP resources.
+> *   **Pipeline Service Account Permissions:** CI/CD pipelines generated by the `google-cicd-pipeline-design` skill run using a GCP service account. Carefully vet the IAM roles and permissions assigned to this service account to prevent overly broad access.
+> *   **Indirect Prompt Injection Risk:** Be cautious when providing input to the language model, especially from untrusted sources, due to the risk of indirect prompt injection.
+> *   **Untrusted Inputs:** Never include untrusted inputs (e.g., files, documents, emails from unverified sources) in the model's context. Such inputs could contain hidden instructions to hijack your session.
+> *   **Untrusted Tools:** Only use this extension with the official tools it provides.
+> *   **Review Actions:** Always carefully review any actions proposed or taken by Gemini CLI on your behalf.
+> *   **Least Privilege:** We strongly recommend adhering to the principle of least privilege for both your ADC and any service accounts used by pipelines. Learn more about [setting up ADC for local development](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) and [service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation).
+
+## ☕ Usage
+
+Activate the specialized skills using the `activate_skill` tool or by asking Gemini to use them.
+
+#### `google-cicd-deploy`
+Deploys your application to Google Cloud. Analyzes your workspace and deploys to Cloud Storage for static websites or Cloud Run for container-based applications (either via Buildpacks or by building an image). Includes a pre-deployment scan for secrets to help prevent leaks.
+
+#### `google-cicd-pipeline-design`
+Designs and implements a Google Cloud-based CI/CD pipeline. Operates in two stages:
+1.  **Architectural Design**: Gathers context, proposes deployment patterns, and drafts a YAML action plan collaboratively.
+2.  **Plan Implementation**: Translates the approved plan into Terraform HCL or implements it directly using specialized tools and `gcloud`.
+
+**Design Process:**
+
+1.  **Requirement Gathering:** Gemini inspects your current workspace and asks clarifying questions to understand your application type, build process, testing strategies, and deployment objectives.
+2.  **Infrastructure Setup:** Based on the requirements, Gemini guides you through setting up the required GCP resources. The skill offers setting up infrastructure using Terraform or directly updating your Google Cloud resources. This may include:
+    *   Creating or configuring Artifact Registry repositories.
+    *   Establishing connections to your Git repository (e.g., GitHub) using Developer Connect.
+    *   Setting up or advising on necessary IAM service accounts and permissions for the Cloud Build service.
+
+3.  **Pipeline Configuration Generation:** Gemini generates a `cloudbuild.yaml` file defining the pipeline stages (e.g., source checkout, build, test, artifact push). The configuration uses Cloud Build's script mode for clarity and ease of editing.
+4.  **Validation & Testing:** The extension will attempt to validate the generated pipeline configuration, potentially by submitting an initial test build using `gcloud builds submit`.
+5.  **Review & Refinement:** You can review the generated configuration and infrastructure setup and provide feedback to Gemini for adjustments.
+
+The goal is to produce a functional, production-ready CI/CD pipeline configuration with all the necessary GCP prerequisites in place.
+
+#### `google-cicd-release-orchestration`
+Designs Cloud Deploy delivery pipelines and manages releases. Guides you through designing `clouddeploy.yaml` for targets, pipelines, and automations (including observability alert policies). Also assists with release management and generating runtime manifests.
+
+#### `google-cicd-terraform`
+Architects, provisions, and troubleshoots CI/CD related resources in Google Cloud infrastructure using Terraform. Provides expert guidance on designing and deploying core services (Cloud Build, Cloud Deploy, Artifact Registry), implementing IAM least-privilege, and managing GCS-backed state.
+
+### 🛠️ Supported MCP Tools
+
+The extension exposes the following tools to Gemini CLI, enabling interaction with Google Cloud services:
+
+#### CI/CD Service Tools
+*   `create_artifact_repository`: Creates a new Artifact Registry repository. Optionally grants Artifact Registry Writer permissions to a specified service account.
+*   `create_build_trigger`: Creates a new Cloud Build trigger.
+*   `list_build_triggers`: Lists all Cloud Build triggers in a given project and location.
+*   `run_build_trigger`: Manually runs an existing Cloud Build trigger.
+*   `create_git_repository_link`: Creates a Developer Connect Git repository link under an existing connection.
+*   `create_git_connection`: Sets up a new Developer Connect connection (e.g., to GitHub).
+
+#### Deployment Tools
+*   `deploy_cloudrun_service_from_image`: Deploys a container image to Cloud Run, creating a new service or updating an existing one.
+*   `deploy_cloudrun_service_from_source`: Deploys to Cloud Run directly from source code, typically using Cloud Build and BuildPacks.
+*   `list_cloudrun_services`: Lists Cloud Run services in a specified project and location.
+*   `scan_code_for_secrets`: Scans a specified directory for potential secrets and keys using OSV-Scanner.
+
+#### Knowledge Retrieval Tools
+*   `search_knowledge_base`: Retrieves relevant snippets from the extension's knowledge base to answer questions.
+*   `search_cicd_patterns`: Finds common CI/CD pipeline patterns and best practices.
+
+## 📚 Resources
+
+-   [Gemini CLI Extensions Documentation](https://geminicli.com/extensions/about/): Learn more about how extensions work in Gemini CLI.
+-   [GitHub Issues](https://github.com/gemini-cli-extensions/cicd/issues): Report bugs, request features, or provide feedback.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](./docs/CONTRIBUTING.md) and [Code of Conduct](./docs/CODE_OF_CONDUCT.md) for details on how to get started.
+
+## 📝 License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](./LICENSE) file for details.

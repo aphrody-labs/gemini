@@ -1,0 +1,15 @@
+{
+  "name": "customer-experience-agent-studio",
+  "version": "1.0.0",
+  "description": "Create AI-assisted development workflows which drastically reduce the friction of building and maintaining agent applications.",
+  "mcpServers": {
+    "customer-experience-agent-studio": {
+      "httpUrl": "https://ces.googleapis.com/mcp",
+      "authProviderType": "google_credentials",
+      "oauth": {
+        "scopes": ["https://www.googleapis.com/auth/ces"]
+      },
+      "timeout": 30000
+    }
+  }
+}
