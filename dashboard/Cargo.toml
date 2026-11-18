@@ -1,0 +1,18 @@
+[workspace]
+
+[package]
+name = "gemini-dashboard"
+version = "0.1.0"
+edition = "2024"
+description = "Fused GPUI + WebView2 desktop shell unifying Google Gemini Desktop and Antigravity 2.0 Hub inside ~/.gemini"
+
+[dependencies]
+anyhow = "1.0.86"
+gpui = { git = "https://github.com/aphrody-dev/aphrody.git" }
+gpui_platform = { git = "https://github.com/aphrody-dev/aphrody.git" }
+raw-window-handle = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.144"
+ureq = { version = "3.1", features = ["platform-verifier"] }
+uuid = { version = "1", features = ["v4"] }
+wry = { git = "https://github.com/aphrody-labs/wry.git", branch = "dev", features = ["devtools"] }

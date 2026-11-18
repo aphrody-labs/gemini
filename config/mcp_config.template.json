@@ -2,7 +2,7 @@
   "mcpServers": {
     "relay": {
       "command": "bun",
-      "args": ["{{HOME}}/.claude/packages/aphrody/hooks-handlers/relay-stdio.ts"],
+      "args": ["{{HOME}}/.gemini/scripts/relay-stdio.ts"],
       "disabled": false
     }
   }

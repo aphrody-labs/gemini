@@ -1,16 +1,31 @@
-# Whitelist: portable Gemini configuration only. Runtime state, caches, history, trust lists and anything machine-specific stay out.
+# Whitelist: portable Gemini / Antigravity configuration, autonomous learning, plugins, scripts, and fused GPUI dashboard.
+# Machine-specific generated files, runtime state, caches, history, and build targets stay untracked.
 /*
 !/.gitignore
 !/README.md
+!/package.json
+!/tsconfig.json
+!/bunfig.toml
 !/settings.template.json
-!/scripts/
-!/upstream/
+!/antigravity-cli/
+/antigravity-cli/*
+!/antigravity-cli/settings.template.json
+!/antigravity-cli/hooks.template.json
 !/config/
 /config/*
-!/config/hooks.json
 !/config/config.json
+!/config/hooks.template.json
 !/config/mcp_config.template.json
 !/extensions/
 /extensions/*
 !/extensions/extension-enablement.json
+!/rules/
+!/memory/
+!/brain/
+!/plugins/
+!/scripts/
+!/upstream/
+!/dashboard/
+/dashboard/target/
+/dashboard/.cargo/
 node_modules/

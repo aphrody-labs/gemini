@@ -1,0 +1,19 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "aphrody",
+  "displayName": "Aphrody",
+  "version": "1.0.0",
+  "description": "Autonomous generalist engineering skills, fleet orchestration, Rust/Cargo workflows, and self-learning for Antigravity.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Audit workspace conformance, toolchain health, and open blockers cleanly",
+    "Run parallel verification across Rust, TypeScript, and browser checks",
+    "Distill pending learning digests into durable Gemini memory"
+  ],
+  "author": {
+    "name": "aphrody-labs",
+    "url": "https://github.com/aphrody-labs"
+  },
+  "homepage": "https://github.com/aphrody-labs/gemini",
+  "repository": "https://github.com/aphrody-labs/gemini"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "gemini-config",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:env": "bun --no-install --no-env-file scripts/install.ts",
+    "sync": "bun --no-install --no-env-file scripts/sync.ts",
+    "check": "bun --no-install --no-env-file scripts/check.ts",
+    "test": "bun test scripts",
+    "learn": "bun --no-install --no-env-file scripts/learn.ts status"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.10"
+  }
+}

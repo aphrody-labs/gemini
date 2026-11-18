@@ -1,0 +1,6 @@
+- [windows-cmd-quoting](windows-cmd-quoting.md) — Never embed escaped `\"...\"` inside Antigravity `statusLine`, `title`, or `hooks.json` `command` strings on Windows (`cmd /c` passes literal quotes to `bun`).
+- [modern-shell-windows](modern-shell-windows.md) — Use Nushell (`nu` 0.117+), `pwsh` 7.7+, or `bun -` stdin instead of legacy PowerShell 5.1; keep global `PATH` tiered via `bun tooling/bun/shell-path-doctor.ts`.
+- [antigravity-plugins](antigravity-plugins.md) — Materialize `~/.gemini/config/plugins/<name>` as real directories (Go `os.ReadDir` skips NTFS junctions) and obey strict `plugin.json` schema.
+- [gemini-isolation](gemini-isolation.md) — `~/.gemini` owns its own templates, hooks, scripts, plugins, autonomous learning, and GPUI dashboard (`bun ~/.gemini/scripts/install.ts` + `check.ts`).
+- [bun-brain](~/.gemini/brain/bun/INDEX.md) — Compacted Bun 1.4+ APIs, types, CLI, guides, and legacy replacement matrix (indexed in `learning/memory.db`; query via `bun ~/.gemini/scripts/learn.ts search` or `bun-brain` MCP).
+- [edit-and-sqlite-hygiene](edit-and-sqlite-hygiene.md) — Read exact lines before `edit_file`, finalize `bun:sqlite` statements before `db.close()` on Windows, and guard `SRC_ROOT` with per-repo marker files.

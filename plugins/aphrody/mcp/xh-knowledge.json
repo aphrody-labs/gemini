@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "name": "xh",
+    "version": "0.26.3",
+    "edition": "2024",
+    "rustVersion": "1.85.0",
+    "license": "MIT",
+    "upstream": "https://github.com/ducaale/xh",
+    "fork": "https://github.com/aphrody-labs/xh",
+    "description": "Friendly and fast tool for sending HTTP requests, mostly compatible with HTTPie with --curl translation and RFC 9421 message signatures."
+  },
+  "codeGraph": {
+    "engine": "ay graph build (Tree-sitter AST)",
+    "summary": {
+      "nodes": 3826,
+      "edges": 6714,
+      "communities": 169,
+      "relations": {
+        "defines": 745,
+        "imports": 174,
+        "calls": 5795
+      }
+    },
+    "godNodes": [
+      { "symbol": "run", "kind": "function", "file": "src/main.rs", "lines": "L99-L782", "connections": 216 },
+      { "symbol": "tests/cli.rs", "kind": "file", "file": "tests/cli.rs", "lines": "L1-L3982", "connections": 192 },
+      { "symbol": "server::http", "kind": "function", "file": "tests/server/mod.rs", "lines": "L1", "connections": 166 },
+      { "symbol": "get_command", "kind": "function", "file": "tests/cli.rs", "lines": "L101-L106", "connections": 153 },
+      { "symbol": "src/cli.rs", "kind": "file", "file": "src/cli.rs", "lines": "L1-L1941", "connections": 107 }
+    ],
+    "pipeline": [
+      "Cli::parse() [src/cli.rs] merges config.json default_options + argv, resolves binary mode (xh/xhs/http/https), parses RequestItems, and normalizes URL",
+      "run() [src/main.rs] builds Body (stdin | --raw | RequestItems + nested_json) and picks default Method (GET if empty body, else POST)",
+      "Client::builder() configures TLS (rustls | native-tls, --verify CA bundle, --cert/--cert-key, --ssl), HTTP version (1.0/1.1/2/3), proxies, --resolve, --interface, --ipv4/--ipv6, --unix-socket",
+      "Session::load_session() [src/session.rs] restores saved auth, headers, and CookieStore cookies",
+      "Auth resolution [src/auth.rs, src/netrc.rs] applies --auth/-A or .netrc/_netrc fallback; optionally signs via RFC 9421 [src/message_signature.rs] + Content-Digest (RFC 9530)",
+      "ClientWithMiddleware [src/middleware.rs] chains RedirectFollower [src/redirect.rs] (301/302/303/307/308 + cross-domain header stripping + redirect signature re-signing) and DigestAuthMiddleware [src/auth.rs]",
+      "Output handling routes through Buffer [src/buffer.rs] + Printer [src/printer.rs] + Decoder [src/decoder.rs] (gzip/deflate/br/zstd) + Highlighter [src/formatting/mod.rs] or download_file [src/download.rs] (RFC 5987 Content-Disposition + Range resume)",
+      "Session::persist() writes updated cookies/headers/auth back to disk unless --session-read-only"
+    ],
+    "modules": [
+      {
+        "file": "build.rs",
+        "nodeCount": 28,
+        "imports": ["std", "syntect"],
+        "symbols": ["build_syntax", "feature_status", "features", "main"],
+        "role": "Compiles basic.packdump (JSON), large.packdump (XML/JS/HTML/CSS), and themepack.themedump via syntect; exports XH_FEATURES."
+      },
+      {
+        "file": "src/main.rs",
+        "nodeCount": 236,
+        "imports": ["anyhow", "cookie_store", "flate2", "hyper", "network_interface", "redirect", "reqwest", "std", "url", "utils"],
+        "symbols": ["get_user_agent", "main", "run", "setup_backtraces"],
+        "role": "Entry point, reqwest client construction, request assembly, middleware wiring, status checking, printer/downloader dispatch, and session persistence."
+      },
+      {
+        "file": "src/cli.rs",
+        "nodeCount": 354,
+        "imports": ["anyhow", "clap", "encoding_rs", "regex_lite", "reqwest", "serde", "std"],
+        "symbols": ["Cli", "AuthType", "MessageSignature", "MessageSignatureComponents", "MessageSignatureAlgorithm", "TlsVersion", "Pretty", "FormatOptions", "Theme", "Print", "Timeout", "Proxy", "Resolve", "Verify", "VerifyParser", "BodyType", "HttpVersion", "Generate"],
+        "role": "Clap CLI definition, --no-OPTION negation generation, config.json default_options loader, URL shorthand normalization (:8000, ://), and xhs/httpie compat detection."
+      },
+      {
+        "file": "src/request_items.rs",
+        "nodeCount": 114,
+        "imports": ["anyhow", "reqwest", "serde_json", "std"],
+        "symbols": ["RequestItem", "RequestItems", "Body", "file_to_part", "FORM_CONTENT_TYPE", "JSON_CONTENT_TYPE", "JSON_ACCEPT"],
+        "role": "Parses ==, =, :=, @, :, ==@, =@, :=@, :@, and header; items into query params, headers, JSON objects (via nested_json), form fields, multipart parts, or file bodies."
+      },
+      {
+        "file": "src/nested_json.rs",
+        "nodeCount": 78,
+        "imports": ["anyhow", "serde_json", "std", "unicode_width"],
+        "symbols": ["PathAction", "parse_path", "insert", "TypeError"],
+        "role": "Tokenizer and recursive JSON path builder for HTTPie nested JSON syntax (key[sub][0][]=val) with backslash escaping."
+      },
+      {
+        "file": "src/auth.rs",
+        "nodeCount": 59,
+        "imports": ["anyhow", "regex_lite", "reqwest", "std"],
+        "symbols": ["Auth", "parse_auth", "DigestAuthMiddleware"],
+        "role": "Basic, Bearer, and Digest auth parsing, interactive password prompt via rpassword, .netrc conversion, and 401 WWW-Authenticate Digest challenge retry middleware."
+      },
+      {
+        "file": "src/netrc.rs",
+        "nodeCount": 56,
+        "imports": ["encoding_rs", "encoding_rs_io", "std"],
+        "symbols": ["Entry", "find_entry"],
+        "role": "Permissive .netrc / _netrc / $NETRC parser with UTF-16 BOM support and password-only bearer entry support."
+      },
+      {
+        "file": "src/message_signature.rs",
+        "nodeCount": 160,
+        "imports": ["anyhow", "base64", "httpsig_hyper", "hyper", "reqwest", "sha2", "std"],
+        "symbols": ["sign_request", "resolve_components", "ensure_content_digest", "build_signature_params"],
+        "role": "Optional feature http-message-signatures: RFC 9421 signing (hmac-sha256, ed25519, ecdsa-p256/p384, rsa-v1_5/pss), @query-params expansion, and RFC 9530 SHA-256 Content-Digest."
+      },
+      {
+        "file": "src/session.rs",
+        "nodeCount": 128,
+        "imports": ["anyhow", "reqwest", "serde", "std", "url"],
+        "symbols": ["Session"],
+        "role": "Loads, migrates (legacy HTTPie map format to list format), updates, and persists named/path JSON sessions (headers, auth, cookie jar)."
+      },
+      {
+        "file": "src/middleware.rs",
+        "nodeCount": 31,
+        "imports": ["anyhow", "reqwest", "std"],
+        "symbols": ["ResponseMeta", "ResponseExt", "Context", "Middleware", "ClientWithMiddleware"],
+        "role": "Composable synchronous middleware chain recording request_duration and content_download_duration and printing intermediary hops."
+      },
+      {
+        "file": "src/redirect.rs",
+        "nodeCount": 35,
+        "imports": ["anyhow", "reqwest"],
+        "symbols": ["RedirectFollower", "TooManyRedirects"],
+        "role": "Follows 301/302/303/307/308 redirects up to --max-redirects (default 10), strips sensitive headers cross-domain, strips/re-signs RFC 9421 headers."
+      },
+      {
+        "file": "src/decoder.rs",
+        "nodeCount": 114,
+        "imports": ["brotli", "flate2", "reqwest", "ruzstd", "std"],
+        "symbols": ["CompressionType", "get_compression_type", "decompress"],
+        "role": "Streaming decompression for gzip, x-gzip, deflate, br (Brotli), and zstd; suppresses empty-body decode errors (e.g. HEAD)."
+      },
+      {
+        "file": "src/download.rs",
+        "nodeCount": 108,
+        "imports": ["anyhow", "indicatif", "mime2ext", "regex_lite", "reqwest", "std"],
+        "symbols": ["get_file_size", "download_file", "total_for_content_range"],
+        "role": "Safe file downloads with Content-Disposition / URL / mime2ext filename selection, collision suffixing (-1, -2), Range/Content-Range resume (-c), and indicatif progress."
+      },
+      {
+        "file": "src/content_disposition.rs",
+        "nodeCount": 35,
+        "imports": ["percent_encoding"],
+        "symbols": ["parse_filename_from_content_disposition"],
+        "role": "Parses RFC 5987 filename* (UTF-8 / ISO-8859-1->Windows-1252) and quoted/unquoted filename= parameters."
+      },
+      {
+        "file": "src/printer.rs",
+        "nodeCount": 173,
+        "imports": ["encoding_rs", "encoding_rs_io", "mime", "reqwest", "std", "url"],
+        "symbols": ["Printer", "BinaryGuard"],
+        "role": "Renders request/response headers, formatted/highlighted JSON/XML/HTML/CSS/JS bodies, response metadata, binary null-byte suppression in terminals, and ISO-8859-1/UTF-8 header inspection."
+      },
+      {
+        "file": "src/buffer.rs",
+        "nodeCount": 68,
+        "imports": ["imp", "std", "termcolor"],
+        "symbols": ["Buffer"],
+        "role": "Cross-platform terminal/redirect/file buffered writer using termcolor (ANSI on Unix, Windows console API via Buffer on Windows)."
+      },
+      {
+        "file": "src/formatting/mod.rs",
+        "nodeCount": 56,
+        "imports": ["quick_xml", "std", "syntect", "termcolor"],
+        "symbols": ["get_json_formatter", "format_xml", "serde_json_format", "Highlighter"],
+        "role": "Loads embedded syntect syntax/theme dumps; provides jsonxf, serde_json Unicode formatting, quick-xml re-indentation, and ANSI syntax highlighting."
+      },
+      {
+        "file": "src/formatting/headers.rs",
+        "nodeCount": 56,
+        "imports": ["reqwest", "std", "syntect", "termcolor", "url"],
+        "symbols": ["HeaderFormatter"],
+        "role": "Formats and optionally sorts HTTP request/response start lines and headers with theme-derived palette colors."
+      },
+      {
+        "file": "src/formatting/palette.rs",
+        "nodeCount": 16,
+        "imports": ["syntect", "termcolor"],
+        "symbols": ["palette!"],
+        "role": "Macro mapping syntect theme scopes to termcolor ColorSpec entries."
+      },
+      {
+        "file": "src/to_curl.rs",
+        "nodeCount": 64,
+        "imports": ["anyhow", "os_display", "reqwest", "std"],
+        "symbols": ["print_curl_translation", "Command", "translate"],
+        "role": "Translates parsed Cli options and RequestItems into equivalent short or --curl-long curl commands with warnings for unsupported flags."
+      },
+      {
+        "file": "src/generation.rs",
+        "nodeCount": 97,
+        "imports": ["clap_complete", "clap_complete_nushell", "roff", "std", "time"],
+        "symbols": ["generate"],
+        "role": "Generates bash, elvish, fish, nushell, powershell, and zsh completions plus roff (man) and Markdown (man-markdown) pages from clap metadata."
+      },
+      {
+        "file": "src/error_reporting.rs",
+        "nodeCount": 29,
+        "imports": ["humantime", "rustls", "std", "time"],
+        "symbols": ["additional_messages", "exit_code"],
+        "role": "Formats human-readable rustls certificate expiration/not-valid-yet hints and maps timeout (2) and TooManyRedirects (6) exit codes."
+      },
+      {
+        "file": "src/redacted.rs",
+        "nodeCount": 9,
+        "imports": ["std"],
+        "symbols": ["SecretString"],
+        "role": "Debug-redacting wrapper printing <redacted> in --debug logs for --auth and --bearer."
+      },
+      {
+        "file": "src/utils.rs",
+        "nodeCount": 79,
+        "imports": ["anyhow", "rand", "reqwest", "std", "url"],
+        "symbols": ["unescape", "clone_request", "test_mode", "config_dir", "get_home_dir", "expand_tilde", "url_with_query", "copy_largebuf"],
+        "role": "Shared helpers: backslash unescaping, request cloning, XH_CONFIG_DIR resolution, tilde expansion, query merging, and UTF-8/ISO-8859-1 HeaderValue display."
+      }
+    ],
+    "features": [
+      { "name": "default", "deps": ["online-tests", "rustls", "network-interface"] },
+      { "name": "rustls", "deps": ["reqwest/rustls", "dep:rustls"] },
+      { "name": "native-tls", "deps": ["reqwest/native-tls"] },
+      { "name": "http3", "deps": ["reqwest/http3"] },
+      { "name": "http-message-signatures", "deps": ["dep:httpsig-hyper", "dep:sha2"] },
+      { "name": "network-interface", "deps": ["dep:network-interface"] },
+      { "name": "online-tests", "deps": [] },
+      { "name": "ipv6-tests", "deps": [] }
+    ]
+  },
+  "cli": {
+    "usage": "xh [OPTIONS] <[METHOD] URL> [REQUEST_ITEM]...",
+    "negationRule": "Every --OPTION can be reset with a --no-OPTION argument; options are applied in order so the last flag wins.",
+    "binaryModes": [
+      { "names": ["xh"], "behavior": "Default HTTP scheme (http://), --check-status enabled by default." },
+      { "names": ["xhs", "https", "xhttps"], "behavior": "Default scheme becomes https:// (equivalent to --https)." },
+      { "names": ["http", "https"], "behavior": "Enables HTTPie compatibility mode (also via XH_HTTPIE_COMPAT_MODE): --check-status is NOT enabled by default." }
+    ],
+    "urlShorthands": [
+      { "input": ":8000", "resolved": "http://localhost:8000/" },
+      { "input": ":/users", "resolved": "http://localhost/users" },
+      { "input": "://example.org", "resolved": "http://example.org/ (or https:// with xhs)" },
+      { "input": "example.org", "resolved": "http://example.org/ (or https:// with xhs)" }
+    ],
+    "requestItems": [
+      { "syntax": "key==value", "kind": "UrlParam", "description": "Append query parameter to URL." },
+      { "syntax": "key==@file", "kind": "UrlParamFromFile", "description": "Append query parameter with value read from file." },
+      { "syntax": "key=value", "kind": "DataField", "description": "Add JSON string property (--json) or form field (--form/--multipart)." },
+      { "syntax": "key=@file", "kind": "DataFieldFromFile", "description": "Add JSON string or form field with value read from file." },
+      { "syntax": "key:=value", "kind": "JsonField", "description": "Add raw JSON literal value (numbers, booleans, arrays, objects, null)." },
+      { "syntax": "key:=@file", "kind": "JsonFieldFromFile", "description": "Parse file contents as JSON literal value for field." },
+      { "syntax": "key@filename[;type=MIME][;filename=NAME]", "kind": "FormFile", "description": "Upload file in multipart request (requires -f or --multipart); or single-file raw body if key is empty (@filename)." },
+      { "syntax": "@filename", "kind": "Body::File", "description": "Stream entire file as request body (default Content-Type application/json unless overridden or multipart)." },
+      { "syntax": "header:value", "kind": "HttpHeader", "description": "Set HTTP request header." },
+      { "syntax": "header:@file", "kind": "HttpHeaderFromFile", "description": "Set HTTP request header value read from file." },
+      { "syntax": "header:", "kind": "HttpHeaderToUnset", "description": "Remove default or session header." },
+      { "syntax": "header;", "kind": "HttpHeader (empty)", "description": "Send HTTP header with empty value." }
+    ],
+    "options": [
+      { "short": "-j", "long": "--json", "category": "serialization", "summary": "(default) Serialize data items as a JSON object; overrides --form and --multipart." },
+      { "short": "-f", "long": "--form", "category": "serialization", "summary": "Serialize data items as form fields (application/x-www-form-urlencoded or multipart if files present)." },
+      { "long": "--multipart", "category": "serialization", "summary": "Force multipart/form-data request even without file items." },
+      { "long": "--raw", "valueName": "RAW", "category": "serialization", "summary": "Pass raw request body string without extra processing." },
+      { "long": "--pretty", "valueName": "STYLE", "possibleValues": ["all", "colors", "format", "none"], "category": "output", "summary": "Control coloring and formatting (defaults to format with NO_COLOR, none when stdout is not a TTY)." },
+      { "long": "--format-options", "valueName": "FORMAT_OPTIONS", "category": "output", "summary": "Comma-separated options: json.indent:<N>, json.format:<bool>, xml.indent:<N>, xml.format:<bool>, headers.sort:<bool>." },
+      { "short": "-s", "long": "--style", "valueName": "THEME", "possibleValues": ["auto", "solarized", "monokai", "fruity"], "category": "output", "summary": "Output syntax coloring theme." },
+      { "long": "--response-charset", "valueName": "ENCODING", "category": "output", "summary": "Override response character encoding for terminal display." },
+      { "long": "--response-mime", "valueName": "MIME_TYPE", "category": "output", "summary": "Override response MIME type for syntax highlighting and formatting." },
+      { "short": "-p", "long": "--print", "valueName": "FORMAT", "category": "output", "summary": "Select output sections: H (req headers), B (req body), h (resp headers), b (resp body), m (resp metadata)." },
+      { "short": "-h", "long": "--headers", "category": "output", "summary": "Print only response headers (--print=h)." },
+      { "short": "-b", "long": "--body", "category": "output", "summary": "Print only response body (--print=b)." },
+      { "short": "-m", "long": "--meta", "category": "output", "summary": "Print only response metadata (--print=m)." },
+      { "short": "-v", "long": "--verbose", "category": "output", "summary": "Print request and response (-v => HhBb + --all; -vv adds metadata m)." },
+      { "long": "--debug", "category": "diagnostics", "summary": "Print full error stack traces and debug logs (respects RUST_LOG)." },
+      { "long": "--all", "category": "output", "summary": "Show intermediary requests and responses while following redirects." },
+      { "short": "-P", "long": "--history-print", "valueName": "FORMAT", "category": "output", "summary": "Same as --print but for intermediary redirect/auth hops." },
+      { "short": "-q", "long": "--quiet", "category": "output", "summary": "Suppress stdout/stderr (-qq also suppresses warnings)." },
+      { "short": "-S", "long": "--stream", "category": "output", "summary": "Always stream response body line by line." },
+      { "short": "-x", "long": "--compress", "category": "request", "summary": "Deflate-compress request body if smaller (-xx forces compression even if larger)." },
+      { "short": "-o", "long": "--output", "valueName": "FILE", "category": "download", "summary": "Save output to FILE instead of stdout." },
+      { "short": "-d", "long": "--download", "category": "download", "summary": "Download body to file (sets Accept-Encoding: identity, enables --follow and --check-status)." },
+      { "short": "-c", "long": "--continue", "category": "download", "summary": "Resume partial download using Range: bytes=<size>- (requires --download and --output)." },
+      { "long": "--session", "valueName": "FILE", "category": "session", "summary": "Create, reuse, and update a named or file-path session (headers, auth, cookies)." },
+      { "long": "--session-read-only", "valueName": "FILE", "category": "session", "summary": "Load session without writing changes back to disk." },
+      { "short": "-A", "long": "--auth-type", "valueName": "AUTH_TYPE", "possibleValues": ["basic", "bearer", "digest"], "category": "auth", "summary": "Authentication mechanism." },
+      { "short": "-a", "long": "--auth", "valueName": "USER[:PASS] | TOKEN", "category": "auth", "summary": "Credentials for basic/digest or bearer token." },
+      { "long": "--ignore-netrc", "category": "auth", "summary": "Ignore credentials in .netrc / _netrc / $NETRC." },
+      { "long": "--unstable-m-sig-id", "valueName": "KEY_ID", "category": "signature", "summary": "RFC 9421 message signature keyid (requires feature http-message-signatures)." },
+      { "long": "--unstable-m-sig-key", "valueName": "KEY", "category": "signature", "summary": "RFC 9421 key material string or @path (requires feature http-message-signatures)." },
+      { "long": "--unstable-m-sig-alg", "valueName": "ALG", "possibleValues": ["hmac-sha256", "ed25519", "ecdsa-p256-sha256", "ecdsa-p384-sha384", "rsa-v1_5-sha256", "rsa-pss-sha512"], "category": "signature", "summary": "RFC 9421 signing algorithm override." },
+      { "long": "--unstable-m-sig-comp", "valueName": "COMPONENTS", "category": "signature", "summary": "Comma-separated covered components (default @method,@authority,@target-uri; supports @query-params and content-digest)." },
+      { "long": "--offline", "category": "diagnostics", "summary": "Construct and print the request without sending it over the network." },
+      { "long": "--check-status", "category": "behavior", "summary": "(default in xh) Exit non-zero on 3xx (without --follow), 4xx, or 5xx responses." },
+      { "short": "-F", "long": "--follow", "category": "network", "summary": "Follow HTTP redirects." },
+      { "long": "--max-redirects", "valueName": "NUM", "category": "network", "summary": "Max redirect hops when --follow is set (default 10)." },
+      { "long": "--timeout", "valueName": "SEC", "category": "network", "summary": "Connection/request timeout in seconds (0 = unlimited)." },
+      { "long": "--proxy", "valueName": "PROTOCOL:URL", "category": "network", "summary": "Proxy for all, http, or https (supports socks5://user:pass@host:port); overrides env vars." },
+      { "long": "--verify", "valueName": "VERIFY", "category": "tls", "summary": "yes/true (default), no/false (skip TLS verify), or path to custom PEM CA bundle." },
+      { "long": "--cert", "valueName": "FILE", "category": "tls", "summary": "Client-side TLS PEM certificate (rustls only)." },
+      { "long": "--cert-key", "valueName": "FILE", "category": "tls", "summary": "Private key file for --cert when not embedded in cert." },
+      { "long": "--ssl", "valueName": "VERSION", "possibleValues": ["auto", "tls1", "tls1.1", "tls1.2", "tls1.3"], "category": "tls", "summary": "Force specific TLS version." },
+      { "long": "--native-tls", "category": "tls", "summary": "Use OS native TLS instead of rustls." },
+      { "long": "--https", "category": "network", "summary": "Default to https:// when scheme is omitted." },
+      { "long": "--http-version", "valueName": "VERSION", "possibleValues": ["1.0", "1.1", "2", "2-prior-knowledge", "3-prior-knowledge"], "category": "network", "summary": "Force HTTP protocol version." },
+      { "long": "--resolve", "valueName": "HOST:ADDRESS", "category": "network", "summary": "Override DNS resolution for HOST to IP (supports IPv6 in [brackets])." },
+      { "long": "--interface", "valueName": "NAME", "category": "network", "summary": "Bind to network interface name or local IP address." },
+      { "short": "-4", "long": "--ipv4", "category": "network", "summary": "Resolve hostname to IPv4 addresses only." },
+      { "short": "-6", "long": "--ipv6", "category": "network", "summary": "Resolve hostname to IPv6 addresses only." },
+      { "long": "--unix-socket", "valueName": "FILE", "category": "network", "summary": "Connect via Unix domain socket (Unix platforms only)." },
+      { "short": "-I", "long": "--ignore-stdin", "category": "behavior", "summary": "Do not read request body from stdin (recommended in scripts and automation)." },
+      { "long": "--curl", "category": "meta", "summary": "Print equivalent curl command instead of executing request." },
+      { "long": "--curl-long", "category": "meta", "summary": "Like --curl, using long curl flag names." },
+      { "long": "--generate", "valueName": "KIND", "possibleValues": ["complete-bash", "complete-elvish", "complete-fish", "complete-nushell", "complete-powershell", "complete-zsh", "man", "man-markdown"], "category": "meta", "summary": "Generate shell completions or man page." },
+      { "long": "--help", "category": "meta", "summary": "Print short help (use `xh help` for long help)." },
+      { "short": "-V", "long": "--version", "category": "meta", "summary": "Print version and compiled TLS features." }
+    ],
+    "exitCodes": [
+      { "code": 0, "meaning": "Successful program execution (or HTTP 416 when resuming an already-complete download)." },
+      { "code": 1, "meaning": "Usage, syntax, I/O, or network error." },
+      { "code": 2, "meaning": "Request timeout." },
+      { "code": 3, "meaning": "Unexpected HTTP 3xx Redirection when --check-status is active and --follow is not set." },
+      { "code": 4, "meaning": "HTTP 4xx Client Error when --check-status is active." },
+      { "code": 5, "meaning": "HTTP 5xx Server Error when --check-status is active." },
+      { "code": 6, "meaning": "Too many redirects (--max-redirects exceeded)." }
+    ],
+    "envVars": [
+      { "name": "XH_CONFIG_DIR", "description": "Directory for config.json and named session files (default ~/.config/xh on Linux/macOS, %APPDATA%\\xh on Windows)." },
+      { "name": "XH_HTTPIE_COMPAT_MODE", "description": "Enable HTTPie compatibility mode (disables default --check-status)." },
+      { "name": "REQUESTS_CA_BUNDLE", "description": "Custom PEM CA bundle path (checked before CURL_CA_BUNDLE)." },
+      { "name": "CURL_CA_BUNDLE", "description": "Fallback custom PEM CA bundle path." },
+      { "name": "ALL_PROXY", "description": "Proxy URL for all schemes unless overridden by --proxy." },
+      { "name": "HTTP_PROXY", "description": "Proxy URL for HTTP requests." },
+      { "name": "HTTPS_PROXY", "description": "Proxy URL for HTTPS requests." },
+      { "name": "NO_PROXY", "description": "Comma-separated host bypass list (* matches all hosts)." },
+      { "name": "NETRC", "description": "Explicit path to .netrc credentials file." },
+      { "name": "NO_COLOR", "description": "Disable ANSI output coloring (defaults --pretty to format on TTY)." },
+      { "name": "RUST_LOG", "description": "env_logger filter for --debug / diagnostic traces (e.g. RUST_LOG=trace)." }
+    ],
+    "files": [
+      { "path": "~/.config/xh/config.json (Windows: %APPDATA%\\xh\\config.json)", "description": "JSON config supporting { \"default_options\": [...] } prepended to CLI args." },
+      { "path": "~/.netrc or ~/_netrc", "description": "Auto-login credentials for Basic, Digest, and password-only Bearer auth." },
+      { "path": "~/.config/xh/sessions/<host_port>/<name>.json", "description": "Persisted named session storing __meta__, auth, cookies, and headers." }
+    ]
+  },
+  "faq": [
+    {
+      "id": "header-value-encoding",
+      "question": "Why do some HTTP headers show up mangled?",
+      "answer": "Per RFC 7230, HTTP header values are officially US-ASCII with obs-text opaque bytes. Since v0.23.0, xh displays ISO-8859-1 decoding by default (matching browser fetch/DevTools) and appends `(UTF-8: ...)` if the bytes also form valid UTF-8."
+    }
+  ],
+  "useCases": [
+    {
+      "id": "rest-get-query",
+      "category": "rest-api",
+      "title": "GET request with query parameters and headers",
+      "summary": "Send a non-interactive GET request with URL query parameters (==) and custom headers (:).",
+      "command": "xh -I get https://api.example.com/search q==rust page==1 accept:application/json",
+      "flags": ["-I"],
+      "requestItems": ["q==rust", "page==1", "accept:application/json"],
+      "notes": "Use == for query string parameters; = sets JSON body fields and changes implicit method to POST. Always pass -I in scripts/CI to avoid hanging on empty/redirected stdin.",
+      "curlEquivalent": "curl -G https://api.example.com/search --data-urlencode q=rust --data-urlencode page=1 -H 'accept: application/json'"
+    },
+    {
+      "id": "json-post-typed",
+      "category": "rest-api",
+      "title": "POST JSON with typed literals and nested JSON paths",
+      "summary": "Construct complex nested JSON payloads using = (string), := (JSON literal), and bracket path syntax.",
+      "command": "xh -I post https://api.example.com/apps name=xh active:=true tags:='[\"http\",\"cli\"]' meta[env]=prod meta[ports][]:=8080",
+      "flags": ["-I"],
+      "requestItems": ["name=xh", "active:=true", "tags:=[\"http\",\"cli\"]", "meta[env]=prod", "meta[ports][]:=8080"],
+      "notes": "Because request body items are present, `post` can even be omitted; xh sets Content-Type: application/json and Accept: application/json, */*;q=0.5 automatically.",
+      "curlEquivalent": "curl -X POST https://api.example.com/apps -H 'content-type: application/json' -d '{\"name\":\"xh\",\"active\":true,\"tags\":[\"http\",\"cli\"],\"meta\":{\"env\":\"prod\",\"ports\":[8080]}}'"
+    },
+    {
+      "id": "json-stdin-or-file",
+      "category": "rest-api",
+      "title": "Send raw JSON from stdin or @file",
+      "summary": "Pipe JSON directly to xh or stream a JSON file as the request body without re-encoding.",
+      "command": "xh -I post https://api.example.com/batch @payload.json",
+      "flags": ["-I"],
+      "requestItems": ["@payload.json"],
+      "notes": "When piping via stdin (`echo '{\"ok\":true}' | xh post ...`), omit -I and do not mix key=value body items. Use `@file` with `-I` in scripts for clean file streaming.",
+      "curlEquivalent": "curl -X POST https://api.example.com/batch -H 'content-type: application/json' --data-binary @payload.json"
+    },
+    {
+      "id": "form-urlencoded",
+      "category": "forms",
+      "title": "Submit URL-encoded HTML/OAuth form",
+      "summary": "Serialize key=value items as application/x-www-form-urlencoded using -f / --form.",
+      "command": "xh -I -f post https://auth.example.com/oauth/token grant_type=client_credentials scope=read",
+      "flags": ["-I", "-f"],
+      "requestItems": ["grant_type=client_credentials", "scope=read"],
+      "notes": "Use `key=@secret.txt` to read a form value from a file without exposing it directly in argv history.",
+      "curlEquivalent": "curl -X POST https://auth.example.com/oauth/token -d grant_type=client_credentials -d scope=read"
+    },
+    {
+      "id": "multipart-upload",
+      "category": "forms",
+      "title": "Multipart file upload with explicit MIME and filename",
+      "summary": "Upload files with ;type= and ;filename= overrides, or force multipart without files via --multipart.",
+      "command": "xh -I -f post https://api.example.com/upload title=avatar file@./photo.png;type=image/png;filename=avatar.png",
+      "flags": ["-I", "-f"],
+      "requestItems": ["title=avatar", "file@./photo.png;type=image/png;filename=avatar.png"],
+      "notes": "Use `--multipart` if the endpoint requires multipart/form-data even when no file item is present.",
+      "curlEquivalent": "curl -X POST https://api.example.com/upload -F title=avatar -F 'file=@./photo.png;type=image/png;filename=avatar.png'"
+    },
+    {
+      "id": "auth-basic-bearer-digest",
+      "category": "auth",
+      "title": "Authenticate with Basic, Bearer, Digest, or .netrc",
+      "summary": "Send Authorization headers or perform 401 Digest challenge-response automatically.",
+      "command": "xh -I -A bearer -a \"@token.txt\" https://api.example.com/me",
+      "flags": ["-I", "-A", "-a"],
+      "requestItems": [],
+      "notes": "In scripts, prefer reading secrets from files/env (`authorization:@token.txt` or `.netrc`) rather than literal tokens on command lines. Use `-A digest -a user:pass` for Digest auth (`DigestAuthMiddleware` retries 401 automatically). Pass `--ignore-netrc` to skip `~/.netrc`.",
+      "curlEquivalent": "curl -H 'authorization: Bearer <token>' https://api.example.com/me"
+    },
+    {
+      "id": "session-persistence",
+      "category": "auth",
+      "title": "Persist cookies, headers, and auth across calls",
+      "summary": "Save login cookies and custom headers in a named or file-backed session.",
+      "command": "xh -I --session=./api-session.json post https://api.example.com/login user=alice password=secret",
+      "flags": ["-I", "--session"],
+      "requestItems": ["user=alice", "password=secret"],
+      "notes": "Subsequent calls reuse cookies/headers/auth automatically; use `--session-read-only=./api-session.json` to read without mutating the session file.",
+      "curlEquivalent": "curl -c ./cookies.txt -b ./cookies.txt -X POST https://api.example.com/login -H 'content-type: application/json' -d '{\"user\":\"alice\",\"password\":\"secret\"}'"
+    },
+    {
+      "id": "download-resume",
+      "category": "files",
+      "title": "Download and resume large files safely",
+      "summary": "Download with progress bar, automatic Content-Disposition filename or -o target, and byte-range resume (-c).",
+      "command": "xh -I -d -c -o ./archive.tar.gz https://releases.example.com/archive.tar.gz",
+      "flags": ["-I", "-d", "-c", "-o"],
+      "requestItems": [],
+      "notes": "`-d` sets `Accept-Encoding: identity`, enables `--follow` and `--check-status`, and avoids overwriting existing files (appends `-1`, `-2`) unless `-o` is combined with `-c`. HTTP 416 on resume exits 0 with completion notice.",
+      "curlEquivalent": "curl -L -f -C - -o ./archive.tar.gz https://releases.example.com/archive.tar.gz"
+    },
+    {
+      "id": "offline-and-curl-translation",
+      "category": "diagnostics",
+      "title": "Preview request offline and translate to curl",
+      "summary": "Inspect exact serialized headers/body without network traffic or emit a reproducible curl command.",
+      "command": "xh --offline -I -v post https://api.example.com/items name=widget count:=3",
+      "flags": ["--offline", "-I", "-v"],
+      "requestItems": ["name=widget", "count:=3"],
+      "notes": "Use `xh --curl ...` or `xh --curl-long ...` to generate a curl command; unsupported xh-only flags emit explicit stderr warnings.",
+      "curlEquivalent": "curl -X POST https://api.example.com/items -H 'content-type: application/json' -H 'accept: application/json, */*;q=0.5' -d '{\"name\":\"widget\",\"count\":3}'"
+    },
+    {
+      "id": "scripting-ci-check-status",
+      "category": "automation",
+      "title": "Non-interactive CI health checks and JSON piping",
+      "summary": "Emit clean body-only JSON to stdout and fail CI with semantic exit codes (3/4/5/2/6).",
+      "command": "xh -I -b --check-status --timeout=10 https://api.example.com/health",
+      "flags": ["-I", "-b", "--check-status", "--timeout"],
+      "requestItems": [],
+      "notes": "When stdout is redirected, xh defaults to `--print=b` and `--pretty=none` automatically; `--check-status` is default in `xh` (exit 4 on 4xx, 5 on 5xx, 3 on 3xx without `-F`). Pass `--no-check-status` when inspecting error bodies with exit 0.",
+      "curlEquivalent": "curl -sS -f --max-time 10 https://api.example.com/health"
+    },
+    {
+      "id": "tls-mtls-custom-ca",
+      "category": "security",
+      "title": "Custom CA bundle, mTLS client cert, and TLS version pinning",
+      "summary": "Authenticate with client PEM certificates and custom root CAs under rustls.",
+      "command": "xh -I --verify=./ca-bundle.pem --cert=./client.pem --cert-key=./client.key --ssl=tls1.3 https://mtls.internal.example/status",
+      "flags": ["-I", "--verify", "--cert", "--cert-key", "--ssl"],
+      "requestItems": [],
+      "notes": "`--cert` requires rustls (not supported with `--native-tls`). `REQUESTS_CA_BUNDLE` / `CURL_CA_BUNDLE` are also honored when `--verify` is omitted. For TLS < 1.2, `native-tls` is required.",
+      "curlEquivalent": "curl --cacert ./ca-bundle.pem --cert ./client.pem --key ./client.key --tlsv1.3 https://mtls.internal.example/status"
+    },
+    {
+      "id": "proxy-dns-interface",
+      "category": "network",
+      "title": "SOCKS5/HTTP proxy, DNS override, IP family, and Unix sockets",
+      "summary": "Route traffic via proxies, pin host resolution (--resolve), bind interfaces, or query local Unix sockets.",
+      "command": "xh -I --resolve=api.example.com:127.0.0.1 --proxy=https:socks5://127.0.0.1:1080 -4 https://api.example.com/v1/ping",
+      "flags": ["-I", "--resolve", "--proxy", "-4"],
+      "requestItems": [],
+      "notes": "`--proxy` ignores `HTTP_PROXY`/`HTTPS_PROXY`/`ALL_PROXY`. `--unix-socket=/var/run/docker.sock` works on Unix hosts (returns explicit unsupported error on Windows). Use `:8080/health` as shorthand for `localhost:8080/health`.",
+      "curlEquivalent": "curl --resolve api.example.com:443:127.0.0.1 --proxy socks5://127.0.0.1:1080 -4 https://api.example.com/v1/ping"
+    },
+    {
+      "id": "http-versions",
+      "category": "network",
+      "title": "Pin HTTP/1.1, HTTP/2 prior knowledge, or HTTP/3",
+      "summary": "Test ALPN/h2c/QUIC endpoints by selecting exact HTTP protocol versions.",
+      "command": "xh -I --http-version=2-prior-knowledge -m http://127.0.0.1:8080/grpc.health.v1.Health/Check",
+      "flags": ["-I", "--http-version", "-m"],
+      "requestItems": [],
+      "notes": "Values: `1.0`, `1.1`, `2`, `2-prior-knowledge`, `3-prior-knowledge` (`3-prior-knowledge` requires Cargo feature `http3` and rustls).",
+      "curlEquivalent": "curl --http2-prior-knowledge -I http://127.0.0.1:8080/grpc.health.v1.Health/Check"
+    },
+    {
+      "id": "redirects-and-trace",
+      "category": "diagnostics",
+      "title": "Follow redirects and trace every intermediate hop",
+      "summary": "Inspect redirect chains, timings, and headers across every hop with -v/-vv/--all/-P.",
+      "command": "xh -I -F --max-redirects=5 --all -P Hh -vv https://example.org/shortlink",
+      "flags": ["-I", "-F", "--max-redirects", "--all", "-P", "-vv"],
+      "requestItems": [],
+      "notes": "`-v` implies `--all` and `--print=HhBb`; `-vv` adds `m` (elapsed time + download duration). Cross-domain redirects automatically strip `Authorization`, `Cookie`, `Proxy-Authorization`, and `WWW-Authenticate`.",
+      "curlEquivalent": "curl -L --max-redirs 5 -v https://example.org/shortlink"
+    },
+    {
+      "id": "formatting-and-encoding",
+      "category": "output",
+      "title": "Custom JSON/XML indentation, header sorting, charset, and MIME",
+      "summary": "Control pretty-printing, syntax themes, charset decoding, and MIME detection.",
+      "command": "xh -I --pretty=all -s monokai --format-options=json.indent:2,headers.sort:false --response-mime=application/json https://api.example.com/raw",
+      "flags": ["-I", "--pretty", "-s", "--format-options", "--response-mime"],
+      "requestItems": [],
+      "notes": "Valid `format-options`: `json.indent`, `json.format`, `xml.indent`, `xml.format`, `headers.sort`. Themes: `auto`, `solarized`, `monokai`, `fruity`.",
+      "curlEquivalent": "curl -s https://api.example.com/raw"
+    },
+    {
+      "id": "rfc9421-message-signatures",
+      "category": "security",
+      "title": "Sign HTTP requests with RFC 9421 Message Signatures + Content-Digest",
+      "summary": "Attach Signature and Signature-Input headers (and auto-computed RFC 9530 SHA-256 Content-Digest) when built with http-message-signatures.",
+      "command": "xh -I --unstable-m-sig-id=key-1 --unstable-m-sig-key=@ed25519.pem --unstable-m-sig-alg=ed25519 --unstable-m-sig-comp=@method,@authority,@target-uri,content-digest post https://api.example.com/webhooks event=paid",
+      "flags": ["-I", "--unstable-m-sig-id", "--unstable-m-sig-key", "--unstable-m-sig-alg", "--unstable-m-sig-comp"],
+      "requestItems": ["event=paid"],
+      "notes": "Requires Cargo feature `http-message-signatures`. Algorithms: `hmac-sha256`, `ed25519`, `ecdsa-p256-sha256`, `ecdsa-p384-sha384`, `rsa-v1_5-sha256`, `rsa-pss-sha512`. Supports `@query-params` expansion and re-signs on redirects.",
+      "curlEquivalent": "No native curl equivalent (xh emits Signature and Signature-Input headers directly)."
+    }
+  ]
+}

@@ -1,1 +1,43 @@
-{}
+{
+  "gemini-fast-loop": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "bun --no-install --no-env-file C:/Users/aphro/.gemini/scripts/learn.ts nudge agy",
+        "timeout": 5
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file C:/Users/aphro/.gemini/scripts/fast-exec.ts agy",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "run_command|write_file|edit_file|replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file C:/Users/aphro/.gemini/scripts/post-tool.ts agy",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "bun --no-install --no-env-file C:/Users/aphro/.gemini/scripts/learn.ts distill-quiet",
+        "timeout": 5
+      }
+    ]
+  }
+}
