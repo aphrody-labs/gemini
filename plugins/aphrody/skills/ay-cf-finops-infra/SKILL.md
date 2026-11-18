@@ -1,9 +1,9 @@
 ---
 name: ay-cf-finops-infra
-description: Sovereign FinOps and hybrid infrastructure runbook for Cloudflare Workers Paid, R2 Paid, HA cloudflared tunnels, OVH Pingora proxy VPS, Hostinger origin firewalling, and Mullvad UID policy routing in ay-cf.
+description: FinOps and hybrid infrastructure runbook for Cloudflare Workers Paid, R2 Paid, HA cloudflared tunnels, OVH Pingora proxy VPS, Hostinger origin firewalling, and Mullvad UID policy routing in ay-cf.
 ---
 
-# Sovereign FinOps, Hybrid Cluster Proxy & Mullvad VPN Runbook
+# FinOps, Hybrid Cluster Proxy & Mullvad VPN Runbook
 
 Use this skill when optimizing Cloudflare Paid billing, consolidating Workers/R2/Cache rulesets, hardening `cloudflared` tunnels, generating OVH/Hostinger WireGuard proxy configs, or managing pure-Rust reusable R2 media/3D catalogs in `aphrody-dev/ay-cf`.
 
