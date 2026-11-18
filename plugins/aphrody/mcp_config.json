@@ -23,7 +23,6 @@
       ]
     },
     "docker-docs": {
-      "type": "http",
       "url": "https://ai-backend-service.docker.com/mcp"
     }
   }
