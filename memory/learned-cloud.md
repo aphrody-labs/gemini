@@ -103,7 +103,6 @@ Autonomous learnings for Git & Submodule Hygiene.
 - [recovery] Recovered from [cd /c/src/aphrody-labs-github && sed -i 's#/c/src/aphrody-labs-github/tools/check-commit.ts#C:/src/aphrody-labs-github/tools/check-commit.ts#; s#loadConfig("/c/src/aphrody-labs-git] via [cd /c/src/aphrody
 - [recovery] Recovered from [git fetch -q origin && git rev-parse --short HEAD origin/main && git log --oneline -1 origin/main] via [git rev-parse --short HEAD; git rev-parse --short origin/main; git status -sb | head -2]
 - [recovery] Recovered from [cd C:/src/shenron; tail -3 "C:/Users/aphro/AppData/Local/Temp/claude/24efa98171efcd26/aae12588-4a11-4aae-b28f-f3d886683cbb/tasks/bjjsz9fy6.output"; for i in 1 2 3 4 5 6 7; do echo ] via [cd /c/src/rosegri
-- [recovery] Recovered from [cd /c/src/aysh 2>/dev/null && pwd && ls -la && git log --oneline -15 2>/dev/null && git status --short | head -30 && cat .gitmodules 2>/dev/null] via [ls -la /c/Users/aphro/.claude/projects/C--src-aysh/me
 - [recovery] Recovered from [for b in master devel bash-5.3-testing; do gh api repos/aphrody-labs/bash/commits/$b --jq '"'$b' \(.sha[:10]) \(.commit.committer.date) \(.commit.message|split("\n")[0]|.[:70])"'; ] via [echo "--- psmux";
 - [correction] <cross-session-message from-name="anu-monorepo-plan"> Sync from session anu-monorepo-plan (2026-11-17), owner decisions now in force: 1. Rust is allowed everywhere again, ay included (ay commit de35a84 withdrew the no-Ru
 
@@ -124,5 +123,3 @@ Autonomous learnings for Cloudflare Workers & Wrangler Edge.
 
 ## Cross-Session & Relay Coordination
 Autonomous learnings for Cross-Session & Relay Coordination.
-- [recovery] Recovered from [cd ~/.claude; bun fmt scripts/lib.ts packages/aphrody/hooks-handlers/relay-stdio.ts scripts/check.ts 2>&1 | tail -2; d=$(mktemp -d); mkdir -p $d/ai-os/frameworks/ai-os/src/relay; e] via [cd /c/src/rosegri
-- [recovery] Recovered from [cd /c/Users/aphro/.claude/projects/C--src/memory/; cat MEMORY.md git-and-workspace-map.md repo-ownership-2026-11-16.md assemble-and-reuse.md; ls ../../C--src-aysh/memory; ls -d /c/] via [cd /c/Users/aphro

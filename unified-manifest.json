@@ -29,12 +29,13 @@
     "relay",
     "os-craft",
     "bun-brain",
-    "nextjs-brain"
+    "nextjs-brain",
+    "docker-brain"
   ],
   "lspServers": [
     "bun-lsp"
   ],
-  "skillCount": 189,
+  "skillCount": 200,
   "skills": [
     "3ds-reverse",
     "agent-browser",
@@ -101,6 +102,17 @@
     "design-system",
     "directx",
     "disks",
+    "docker-agent-config",
+    "docker-agent-deploy",
+    "docker-agent-run",
+    "docker-build-strategies",
+    "docker-compose-patterns",
+    "docker-destructive-guardrails",
+    "docker-docs",
+    "docker-project-foundations",
+    "docker-sandboxes-kits",
+    "docker-sandboxes-lifecycle",
+    "docker-sandboxes-network-credentials",
     "ds-reverse",
     "durable-objects",
     "email-and-password-best-practices",

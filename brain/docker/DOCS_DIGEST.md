@@ -1,0 +1,609 @@
+# Docker Official Documentation Digest (`docker/docs`)
+
+Extracted 387 official manual pages across BuildKit/Bake, Compose, Security, Scout, Engine, and AI.
+
+## Core Architecture & Commands
+
+- `docker buildx bake -f docker-bake.hcl`: declarative multi-target, cache-aware builds (BuildKit secrets, platforms, OCI annotations, groups).
+- `docker buildx build --secret id=...,src=... --cache-from ... --cache-to ...`: zero-secret-in-layer container builds.
+- `docker compose -f compose.yaml up -d --wait`: canonical Compose v2 workflow (`compose.yaml`, `condition: service_healthy`, profiles, secrets).
+- `docker scout quickview|cves|sbom`: supply-chain visibility, CVE analysis, and provenance attestations.
+
+## Section `ai` (160 pages)
+
+- `ai/docker-agent/_index.md`: **Docker Agent** — Docker Agent lets you build, orchestrate, and share AI agents that work together as a team. [Why agent teams; Installation; Get started; How it works]
+  - **Homebrew**: `brew install docker-agent`
+  - **Winget**: `winget install Docker.Agent`
+- `ai/gordon/_index.md`: **Gordon** — AI assistant for Docker workflows - execute tasks, debug issues, and [What Gordon does; Where to use Gordon; Get started; Prerequisites]
+  - Explains Docker concepts and commands
+  - Searches Docker documentation and web resources for solutions
+- `ai/gordon/concepts/_index.md`: **Concepts**
+- `ai/gordon/concepts/capabilities.md`: **Gordon's capabilities** — Understand what Gordon can do and the tools it has access to [Core capabilities; Internal architecture; Shell access; Filesystem access]
+  - Specialized sub-agents for specific Docker tasks
+  - Shell access to run commands
+- `ai/gordon/concepts/data-privacy.md`: **Data privacy and Gordon** — How Gordon handles your data and what information is collected [What data Gordon accesses; Local files; Local images; Docker environment]
+  - Running and stopped containers
+  - Container logs and configuration
+- `ai/gordon/how-to/_index.md`: **How-to guides**
+- `ai/gordon/how-to/cli.md`: **Using Gordon via CLI** — Access and use Gordon through the docker ai command [Basic usage; Working directory; Disabling Gordon; Commands]
+- `ai/gordon/how-to/configure-tools.md`: **Configure Gordon's tools** — Enable and disable Gordon's built-in tools based on your needs [Accessing tool settings; Basic tool settings; Advanced tool settings; Organizational controls]
+  - Enabled tools: Gordon can propose actions using these tools (subject to
+  - Disabled tools: Gordon cannot use these tools, and will not request
+- `ai/gordon/how-to/docker-desktop.md`: **Using Gordon in Docker Desktop** — Access and use Gordon through the Docker Desktop graphical interface [Basic usage; Working directory; Contextual help; Usage indicator]
+- `ai/gordon/how-to/permissions.md`: **Gordon's permission model** — How Gordon's ask-first approach keeps you in control [What requires approval; What doesn't require approval; Configuring permission settings; Session-level permissions]
+  - Commands executed in your shell
+  - Writing or changing files
+- `ai/gordon/usage-limits.md`: **Gordon usage limits and tiers** — Gordon subscription tiers and usage limits for Docker Desktop and the CLI [Tiers; Usage limits; View your usage]
+- `ai/gordon/use-cases.md`: **Gordon use cases and examples** — Example prompts for common Docker workflows [Debug a failing container; Debug a failed build; Inspect an image; Manage volumes and resources]
+  - "Why did this container exit?"
+  - "What environment variables are set in this container?"
+- `ai/governance/_index.md`: **AI governance** — Control what sandboxes can access, from local developer rules to org-wide enforcement. [Where the rules come from; Local policy and kits; Organization governance; Get started]
+- `ai/governance/local/_index.md`: **Local policy** — Configure local network access rules for sandboxes on your machine. [How local policy works; Start from a preset; Add your own rules; Use kits that add rules]
+- `ai/governance/local/approvals.md`: **Respond to approval requests** — Approve or dismiss sandbox network requests that need your confirmation, under local policy or an organization policy. [List pending approval requests; Approve or dismiss a request; Review and remove approved destinations]
+  - Local policy: under the Balanced or Locked Down
+  - Organization policy: a network access policy allows the destination
+- `ai/governance/local/inspect.md`: **Inspect policy status and rules** — List the policies and rules that apply to your sandboxes, see where they come from, and check organization governance status with sbx policy ls. [List the policies that apply; List the policies for one sandbox; Show rule details; Filter the listing]
+  - `POLICY`: the policy name.
+  - `SOURCE`: where the policy came from. `local` means your local policy, which
+- `ai/governance/local/network-rules.md`: **Manage local network rules** — Allow, deny, and remove local network rules for sandboxes on your machine with sbx policy. [Allow or block a destination; Hostname blocking limitations; Allow or block a destination for one sandbox; Allow or block HTTP methods and paths]
+  - On connections the proxy doesn't decrypt, the HTTP `Host` or `:authority`
+  - On cleartext HTTP connections sent through a `CONNECT` tunnel or without
+- `ai/governance/local/test-monitor.md`: **Test and monitor network policy** — Check whether policy allows a destination, and view the network requests your sandboxes make, with sbx policy check and sbx policy log. [Check whether a destination is allowed; View network activity; Filter the log; Get the log as JSON or YAML]
+- `ai/governance/local/try-it-out.md`: **Try out local policy** — Follow an example that allows and blocks network destinations and HTTP methods for one sandbox with local policy. [Before you begin; Step 1: Create a sandbox; Step 2: Allow a destination for this sandbox; Step 3: Block a destination for this sandbox]
+  - Learn how presets, rules for one sandbox, and kit rules combine in
+  - Approve destinations that no rule allows, under the Balanced and Locked Down
+- `ai/governance/organization/_index.md`: **Organization governance** — Centrally manage sandbox network, filesystem, and MCP policies and review audit logs for your organization. [How organization governance works; Licenses and sign-in enforcement; Organization policies; Audit logs]
+- `ai/governance/organization/audit/_index.md`: **Audit logs** — Capture, view, export, and collect structured audit records for Docker AI Governance policy decisions. [What audit logs record; Delivery modes; Where records are stored; What you can do with records]
+  - **Local disk**: the sandbox daemon writes JSON Lines (`.jsonl`)
+  - **Docker Cloud**: Docker stores audit records in Docker Cloud. Cloud
+- `ai/governance/organization/audit/api.md`: **Retrieve audit events with the API** — Retrieve and filter Docker AI Governance audit events with the Audit Logs API. [Prerequisites; Create an access token; List audit events; Filter events]
+  - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
+  - Cloud delivery turned on in [audit delivery settings](configure.md)
+- `ai/governance/organization/audit/configure.md`: **Configure audit delivery** — Configure local and cloud delivery for Docker AI Governance audit logs, and review who changed the delivery settings. [Before you begin; Configure delivery; Review delivery change history]
+  - A Docker [AI Governance plan](/manuals/subscription-billing/plans/ai-governance.md)
+  - Organization owner access, or a
+- `ai/governance/organization/audit/siem.md`: **Forward audit events to a SIEM** — Forward Docker AI Governance audit events to Splunk, Dynatrace, Datadog, Sumo Logic, or CrowdStrike Falcon Next-Gen SIEM. [Forward events from Docker Cloud; Supported destinations; Before you begin; Add a SIEM destination]
+  - With cloud delivery, Docker forwards events directly to a supported
+  - With local delivery, your own log shipper collects the audit files from
+- `ai/governance/organization/audit/view-export.md`: **View and export audit events** — Search, filter, and export Docker AI Governance audit events from the hosted audit log view. [Before you begin; View audit events; Filter and search events; Export events to CSV]
+  - [Cloud delivery](configure.md) must be turned on for your
+  - You need organization owner access, or a
+- `ai/governance/organization/get-started.md`: **Get started with organization governance** — Set up organization governance for Docker Sandboxes, from planning policies and configuring audit logs to turning on AI governance, assigning licenses, enforcing sign-in, deploying [Before you begin; Step 1: Plan what to allow; Step 2: Create your policies; Step 3: Configure audit delivery]
+  - Your developers added as
+  - The organization
+- `ai/governance/organization/policies/_index.md`: **Organization policies** — How organization policy scope, rule evaluation, and precedence work for Docker Sandboxes. [What a policy contains; Policy scope; How rules decide a request; How organization policy relates to local and kit rules]
+  - [Organization network access policies](network.md) control the destinations
+  - [Organization filesystem access policies](filesystem.md) control the host
+- `ai/governance/organization/policies/create-manage.md`: **Create and manage organization policies** — Create, scope, edit, and delete organization network, filesystem, and MCP policies in Docker Home. [Before you begin; Create a policy; Scope policies to teams; Edit or delete a policy]
+  - Network and filesystem policies: select **Add rule** for each rule. For a
+  - MCP policies: enter Cedar statements in the policy editor. For more
+- `ai/governance/organization/policies/filesystem.md`: **Organization filesystem access policies** — Control which host paths Docker Sandboxes can mount as workspaces with organization filesystem policies. [What a filesystem mount rule can match; Example policies; Allow home directories and a shared projects directory; Allow clone mode while blocking writable mounts]
+- `ai/governance/organization/policies/mcp.md`: **Organization MCP access policies** — Use Cedar-based policies to control MCP server registration and activity routed through the Docker Sandboxes MCP gateway. [Where MCP policy applies; Allowlist and blocklist policies; Example policies; Approve a server]
+- `ai/governance/organization/policies/network.md`: **Organization network access policies** — Control outbound network access from Docker Sandboxes with organization network access policies. [What a network rule can match; All traffic rules; HTTP rules; Approval-required access]
+  - Under **Protocols**, select **TCP**, **UDP**, or **Both**.
+  - Under **Destinations**, add the hosts, IP addresses, or CIDR ranges the rule
+- `ai/governance/organization/sign-in-enforcement.md`: **Enforce sign-in for Docker Sandboxes** — Require Docker Sandboxes users to sign in as members of your organization, enforced through endpoint management. [How sign-in enforcement works; Write the enforcement configuration; Test the configuration on one machine; Deploy the configuration to your managed machines]
+- `ai/governance/reference/_index.md`: **Reference**
+- `ai/governance/reference/api.md`: **AI Governance API** — Programmatic management of Docker AI Governance policies and rules via HTTP+JSON.
+- `ai/governance/reference/audit-logs-api.md`: **AI Governance Audit Logs API** — HTTP API for retrieving Docker AI Governance audit events programmatically.
+- `ai/governance/reference/audit-records.md`: **Audit record reference** — Reference fields, categories, decisions, and payload types for Docker AI Governance audit records. [Common fields; Denial codes; Categories; Decisions]
+- `ai/governance/reference/filesystem-rules.md`: **Filesystem mount rule syntax** — Syntax for sandbox filesystem mount rules, including path patterns across macOS, Linux, Windows, and WSL. [Path patterns; Home directory; Operating system formats; Wildcards]
+- `ai/governance/reference/mcp-policy.md`: **MCP policy reference** — Reference for Docker MCP policy actions, resources, attributes, context fields, and approval behavior. [Evaluation model; Actions; Resources; Resource attributes]
+  - `local-stdio`: a host-run stdio server. This includes explicit commands and
+  - `container-stdio`: an OCI-packaged server resolved from metadata without
+- `ai/governance/reference/network-rules.md`: **Network and HTTP rule syntax** — Syntax for sandbox network rules, including hostname patterns, CIDR ranges, ports, and HTTP method and path rules. [HTTP method and path; Query parameters; Combine HTTP and host rules; Destinations]
+  - A host rule names no method or path, so it matches all traffic to the
+  - An HTTP rule also names an HTTP method and URL path, with optional
+- `ai/governance/reference/policy-limits.md`: **Organization policy limits** — Limits on the number and size of Docker Sandboxes organization policies and their rules.
+- `ai/governance/troubleshooting.md`: **Troubleshoot governance** — Resolve blocked requests, inactive rules, approval prompts, policy sync, and missing audit records for Docker Sandboxes governance. [A command fails with "global network policy has not been initialized"; Agent can't install packages or reach an API; Every request from a sandbox is blocked; A local allow rule has no effect]
+  - `Denied because governance could not be resolved`: run `sbx policy ls`. If
+  - `Denied because the policy snapshot is stale`: the daemon lost its connection
+- `ai/model-runner/_index.md`: **Docker Model Runner** — Learn how to use Docker Model Runner to manage and run AI models. [Key features; Requirements; How Docker Model Runner works; Inference engines]
+  - [Pull and push models to and from Docker Hub or any OCI-compliant registry](https://hub.docker.com/u/ai)
+  - [Pull models from Hugging Face](https://huggingface.co/)
+- `ai/model-runner/api-reference.md`: **DMR REST API** — Reference documentation for the Docker Model Runner REST API endpoints, including OpenAI, Anthropic, and Ollama compatibility. [Determine the base URL; Base URLs for third-party tools; Supported APIs; OpenAI-compatible API]
+  - Docker Hub models: `ai/smollm2`, `ai/llama3.2`, `ai/qwen2.5-coder`
+  - Tagged versions: `ai/smollm2:360M-Q4_K_M`
+- `ai/model-runner/configuration.md`: **Configuration options** — Configure context size, runtime parameters, and model behavior in Docker Model Runner. [Context size (context length); Default context size; Configure context size; Context size guidelines]
+  - [Inference engines](inference-engines.md) - Learn about llama.cpp and vLLM
+  - [API reference](api-reference.md) - API parameters for per-request configuration
+- `ai/model-runner/examples.md`: **DMR examples** — Example projects and CI/CD workflows for Docker Model Runner. [Sample project; Use Model Runner in GitHub Actions; Related pages]
+  - [Models and Compose](/manuals/compose/how-tos/models-and-compose.md)
+- `ai/model-runner/get-started.md`: **Get started with DMR** — How to install, enable, and use Docker Model Runner to manage and run AI models. [Enable Docker Model Runner; Docker Desktop; Docker Engine; Update DMR in Docker Engine]
+  - The time the request was sent.
+  - The model name and version
+- `ai/model-runner/ide-integrations.md`: **IDE and tool integrations** — Configure popular AI coding assistants and tools to use Docker Model Runner as their backend. [Prerequisites; Cline (VS Code); Configuration; Troubleshooting Cline]
+  - Docker Desktop: Enable **host-side TCP support** in Settings > AI, or run:
+  - Docker Engine: TCP is enabled by default on port 12434.
+- `ai/model-runner/inference-engines.md`: **Inference engines** — Learn about the llama.cpp, vLLM, and Diffusers inference engines in Docker Model Runner. [Engine comparison; llama.cpp; Platform support; Model format: GGUF]
+  - Docker Desktop 4.54 or later (minimum version for vLLM support)
+  - NVIDIA GPU with updated drivers
+- `ai/model-runner/openwebui-integration.md`: **Open WebUI integration** — Set up Open WebUI as a ChatGPT-like interface for Docker Model Runner. [Prerequisites; Quick start with Docker Compose; Configuration options; Environment variables]
+  - Docker Model Runner enabled with TCP access
+  - A model pulled (e.g., `docker model pull ai/llama3.2`)
+- `ai/sandboxes-api/_index.md`: **Docker Sandboxes API and SDK** — Use the Docker Sandboxes API and TypeScript SDK to manage cloud sandboxes programmatically. [Activate cloud access; Choose an interface; Develop your application]
+  - [SDK cookbook](cookbook/_index.md): follow examples for processes, files,
+  - [API concepts](concepts.md): choose a kit or image, identify resources, and
+- `ai/sandboxes-api/authentication.md`: **Authentication and authorization** — >- [Sign in through your browser; Authenticate automation with a PAT; Authenticate agents; Resource access and permissions]
+- `ai/sandboxes-api/concepts.md`: **Docker Sandboxes API concepts** — Learn how kits and images define a cloud sandbox, how to connect to it, and how to manage resources throughout their lifecycle. [Kits and sandbox images; Bundled kits; Resource names; Wait for an action to finish]
+- `ai/sandboxes-api/cookbook/_index.md`: **Docker Sandboxes SDK cookbook** — Build agent workflows with the Docker Sandboxes SDK for TypeScript. [Get started; Working in a sandbox; Packaging and state; Security and policy]
+- `ai/sandboxes-api/cookbook/add-a-docker-credential-for-cloud-sandboxes.md`: **Add a Docker credential for cloud sandboxes** — Exchange a Docker OIDC identity token for a credential that the service stores for your sandboxes to use. [Exchange the token {#1-exchange-the-token}]
+- `ai/sandboxes-api/cookbook/add-tools-with-kits.md`: **Run agents with kits** — Discover the available kits, launch an agent sandbox, and run work inside it. [Discover available kits {#1-discover-available-kits}; Launch a kit {#2-launch-a-kit}; Run the agent {#3-run-the-agent}; Explore the wider kit catalog {#4-explore-the-wider-kit-catalog}]
+- `ai/sandboxes-api/cookbook/attach-persistent-storage.md`: **Attach persistent storage** — Create a volume, mount it into a new sandbox so its data outlives the sandbox, and delete the volume when you no longer need it. [Create a volume {#1-create-a-volume}; Mount it in a new sandbox {#2-mount-it-in-a-new-sandbox}; Delete the volume {#3-delete-the-volume}]
+- `ai/sandboxes-api/cookbook/clone-a-cloud-sandbox.md`: **Clone a cloud sandbox** — Read how a running sandbox was configured, then create a second sandbox with the same image and environment. [Read the source configuration {#1-read-the-source-configuration}; Create a fresh sandbox {#2-create-a-fresh-sandbox}]
+- `ai/sandboxes-api/cookbook/connect-to-cloud-with-a-bearer-token.md`: **Authenticate to Docker** — Sign in interactively, use a Docker personal access token, or supply an access token from your application. [Sign in interactively {#1-sign-in-interactively}; Optional: save credentials between runs {#2-optional-save-credentials-between-runs}; Use a personal access token {#3-use-a-personal-access-token}; Supply an access token {#4-supply-an-access-token}]
+- `ai/sandboxes-api/cookbook/control-what-a-sandbox-can-reach.md`: **Control what a sandbox can reach** — Attach your account's network policies to a new sandbox, read the policy the service enforces, and review which destinations it allowed or blocked. [Attach policies at creation {#1-attach-policies-at-creation}; Inspect the rules in force {#2-inspect-the-rules-in-force}; Check allowed and blocked traffic {#3-check-allowed-and-blocked-traffic}]
+- `ai/sandboxes-api/cookbook/copy-a-file-into-a-cloud-sandbox.md`: **Copy a file into a cloud sandbox** — Create a directory inside a running cloud sandbox, write one file into it from memory, and read the size the write reports back. [Create the destination directory {#1-create-the-destination-directory}; Write a small text file {#2-write-a-small-text-file}; Upload file content {#3-upload-file-content}]
+
+## Section `build` (96 pages)
+
+- `build/_index.md`: **Docker Build** — Get an overview of Docker Build to package and bundle your code and ship it anywhere
+- `build/bake/_index.md`: **Bake** — Define and run concurrent builds, checks, and artifact exports with Docker Buildx Bake. [Get started]
+- `build/bake/compose-file.md`: **Building with Bake from a Compose file** — Build your compose services with Bake [Extend Compose builds with HCL; .env file; Extension field with x-bake]
+  - Specifying variables or global scope attributes is not supported
+  - `inherits` service field is not supported, but you can use [YAML anchors](/reference/compose-file/fragments.md)
+- `build/bake/contexts.md`: **Using Bake with additional contexts** — | [Pinning alpine image; Using a secondary source directory; Using a target as a build context]
+  - Local filesystem directories
+  - Container images
+- `build/bake/expressions.md`: **Expression evaluation in Bake** — Learn about advanced Bake features, like user-defined functions [Arithmetic operations; Ternary operators; Expressions with variables]
+- `build/bake/funcs.md`: **Functions** — Learn about built-in and user-defined HCL functions with Bake [Standard library; User-defined functions; Variables in functions]
+- `build/bake/inheritance.md`: **Inheritance in Bake** — Learn how to inherit attributes from other targets in Bake [Common reusable targets; Overriding inherited attributes; Inherit from multiple targets; Reusing single attributes from targets]
+- `build/bake/introduction.md`: **Introduction to Bake** — Get started with using Bake to build your project [Building a project with Bake; The Bake file format; Next steps]
+  - Learn how to define and use [targets](./targets.md) in Bake
+  - To see all the properties that can be set for a target, refer to the
+- `build/bake/matrices.md`: **Matrix targets** — Learn how to define and use matrix targets in Bake to fork a single target into multiple different variants [Release and debug variants; Multiple axes; Multiple values per matrix target]
+- `build/bake/overrides.md`: **Overriding configurations** — Learn how to override configurations in Bake files to build with different attributes. [File overrides; Default file lookup; Manual file overrides; Command line]
+  - [File overrides](#file-overrides)
+  - [CLI overrides](#command-line)
+- `build/bake/remote-definition.md`: **Remote Bake file definition** — Build with Bake using a remote file definition using Git or HTTP [Use the local context with a remote definition; Local named contexts; Specify the Bake definition to use; Combine local and remote Bake definitions]
+  - `-f bake.hcl`: this definition is loaded relative to the Git URL.
+  - `-f cwd://local.hcl`: this definition is loaded relative to the current
+- `build/bake/targets.md`: **Bake targets** — Learn how to define and use targets in Bake [Default target; Target properties; Grouping targets; Run tests and lint checks]
+  - `*` matches any sequence of characters
+  - `?` matches any single character
+- `build/bake/variables.md`: **Variables in Bake** — Define, override, and validate variables in Docker Bake files [Using variables as attribute values; Override variable values; Interpolate variables into values; Validating variables]
+  - The variable must not be empty.
+  - The variable must match a specific character set.
+- `build/builders/_index.md`: **Builders** — Learn about builders and how to manage them [Default builder; Build drivers; Selected builder; Select a different builder]
+  - `docker`: uses the BuildKit library bundled into the Docker daemon.
+  - `docker-container`: creates a dedicated BuildKit container using Docker.
+- `build/builders/drivers/_index.md`: **Build drivers** — Build drivers are configurations for how and where the BuildKit backend runs. [Loading to local image store; Load by default; What's next]
+  - `docker`: uses the BuildKit library bundled into the Docker daemon.
+  - `docker-container`: creates a dedicated BuildKit container using Docker.
+- `build/builders/drivers/cloud.md`: **Cloud driver** — The cloud driver connects Buildx to managed builders in Docker Build Cloud. [Synopsis]
+- `build/builders/drivers/docker-container.md`: **Docker container driver** — The Docker container driver runs BuildKit in a container image. [Synopsis; Usage; Cache persistence; QEMU]
+  - Specify custom BuildKit versions to use.
+  - Build multi-arch images, see [QEMU](#qemu)
+- `build/builders/drivers/docker.md`: **Docker driver** — | [Synopsis; Further reading]
+- `build/builders/drivers/kubernetes.md`: **Kubernetes driver** — | [Synopsis; Scaling BuildKit; Persistent storage; Node assignment]
+  - `requests.cpu`, `requests.memory`, `requests.ephemeral-storage`, `limits.cpu`, `limits.memory`, `limits.ephemeral-storage`
+  - Create a namespace for your Buildx resources
+- `build/builders/drivers/remote.md`: **Remote driver** — | [Synopsis; Example: Remote BuildKit over Unix sockets; Example: Remote BuildKit in Docker container; Example: Remote BuildKit in Kubernetes]
+- `build/builders/manage.md`: **Manage builders** — null [Create a new builder; List available builders; Inspect a builder; Remove a builder]
+- `build/building/_index.md`: **Building**
+- `build/building/base-images.md`: **Base images** — Learn about base images and how they're created [Create a base image; Create a minimal base image using scratch; Create a full image using tar; More resources]
+  - Programming language runtimes
+  - Dynamically linked C libraries
+- `build/building/best-practices.md`: **Building best practices** — Hints, tips and guidelines for writing clean, reliable Dockerfiles [Use multi-stage builds; Create reusable stages; Choose the right base image; Rebuild your images often]
+  - [Docker Official Images](https://hub.docker.com/search?badges=official)
+  - [Verified Publisher](https://hub.docker.com/search?badges=verified_publisher) images
+- `build/building/cdi.md`: **Container Device Interface (CDI)** — Using CDI to access GPUs and other devices in your builds [Getting started; Building with a simple CDI specification; Set up a container builder with GPU support; Building with GPU support]
+  - `/etc/buildkit/cdi`
+- `build/building/export.md`: **Export binaries** — Using Docker builds to create and export executable binaries [Export binaries from a build; Exporting multi-platform builds; Additional information]
+- `build/building/multi-platform.md`: **Multi-platform builds** — Introduction to what multi-platform builds are and how to execute them using Docker Buildx. [Why multi-platform builds?; Difference between single-platform and multi-platform images; Prerequisites; Custom builder]
+  - Enable the containerd image store using the
+  - Create a custom builder using the `docker-container` driver (see the following section).
+- `build/building/multi-stage.md`: **Multi-stage builds** — | [Use multi-stage builds; Name your build stages; Stop at a specific build stage; Use an external image as a stage]
+  - Debugging a specific build stage
+  - Using a `debug` stage with all debugging symbols or tools enabled, and a
+- `build/building/registry-auth.md`: **Registry authentication** — Select registry credentials by repository and scope for builds [Select credentials by repository and scope]
+- `build/building/secrets.md`: **Build secrets** — Manage credentials and other secrets securely [Types of build secrets; Using build secrets; Secret mounts; Sources]
+  - [Secret mounts](#secret-mounts) are general-purpose mounts for passing
+  - [SSH mounts](#ssh-mounts) are special-purpose mounts for making SSH sockets
+- `build/building/variables.md`: **Build variables** — Using build arguments and environment variables to configure builds [Similarities and differences; Build arguments; Environment variables; ARG usage example]
+  - Configure the execution environment for builds
+  - Set default environment variables for containers
+- `build/buildkit/_index.md`: **BuildKit** — Introduction and overview of BuildKit [LLB; Frontend; Getting started; BuildKit on Windows]
+  - Detect and skip executing unused build stages
+  - Parallelize building independent build stages
+- `build/buildkit/configure.md`: **Configure BuildKit** — Learn how to configure BuildKit for your builder. [Registry mirror; Setting registry certificates; CNI networking; Bridge networking]
+- `build/buildkit/dockerfile-release-notes.md`: **Dockerfile release notes**
+- `build/buildkit/frontend.md`: **Custom Dockerfile syntax** — Dive deep into the Dockerfile frontend, and learn about custom frontends [Dockerfile frontend; Official releases; Stable channel; Labs channel]
+  - Automatically get bug fixes without updating the Docker daemon
+  - Make sure all users are using the same implementation to build your Dockerfile
+- `build/cache/_index.md`: **Docker build cache** — Improve your build speed with effective use of the build cache [How the build cache works; Other resources]
+  - [Cache invalidation](invalidation.md)
+  - [Optimize build cache](optimization.md)
+- `build/cache/backends/_index.md`: **Cache storage backends** — | [Backends; Command syntax; Multiple caches; Configuration options]
+  - `inline`: embeds the build cache into the image.
+  - `registry`: embeds the build cache into a separate image, and pushes to a
+- `build/cache/backends/azblob.md`: **Azure Blob Storage cache** — Manage build cache with Azure blob storage [Synopsis; Authentication; Further reading]
+- `build/cache/backends/gha.md`: **GitHub Actions cache** — Use the GitHub Actions cache to manage your build cache in CI [Synopsis; Authentication; Scope; Version]
+  - Setting `url_v2` selects v2.
+  - Otherwise a `url` that points at the v2 cache service
+- `build/cache/backends/inline.md`: **Inline cache** — Embed the build cache into the image [Synopsis; Further reading]
+- `build/cache/backends/local.md`: **Local cache** — Manage build cache with a local directory [Synopsis; Cache versioning; Further reading]
+- `build/cache/backends/registry.md`: **Registry cache** — Manage build cache with an OCI registry [Synopsis; Further reading]
+  - Allows for separating the cache and resulting image artifacts so that you can
+  - It can efficiently cache multi-stage builds in `max` mode, instead of only the
+- `build/cache/backends/s3.md`: **Amazon S3 cache** — Manage build cache with Amazon S3 buckets [Synopsis; Authentication; Further reading]
+- `build/cache/garbage-collection.md`: **Build garbage collection** — Learn about garbage collection in the BuildKit daemon [Garbage collection policies; Configuration; Docker daemon configuration file; BuildKit configuration file]
+  - 7GB of which is "stale" cache
+  - 4GB is other, more valuable cache
+- `build/cache/invalidation.md`: **Build cache invalidation** — Dig into the details about how cache invalidation works for Docker's build cache [General rules; WORKDIR and SOURCE_DATE_EPOCH; RUN instructions; Build secrets]
+  - The builder begins by checking if the base image is already cached. Each
+  - In most cases, comparing the Dockerfile instruction with the corresponding
+- `build/cache/optimize.md`: **Optimize cache usage in builds** — An overview on how to optimize cache utilization in Docker builds. [Order your layers; Keep the context small; Use bind mounts; Use cache mounts]
+  - [Order your layers](#order-your-layers): Putting the commands in your
+  - [Keep the context small](#keep-the-context-small): The context is the set of
+- `build/checks.md`: **Checking your build configuration** — Learn how to use build checks to validate your build configuration. [How build checks work; Build with checks; More verbose output; Check a build without building]
+  - Validating your Dockerfile and build options before running a build.
+  - Ensuring that your Dockerfile and build options are up-to-date with the
+- `build/ci/_index.md`: **Continuous integration with Docker** — Using Docker for continuous integration [Docker as a build environment; Docker in Docker; What's next]
+  - [GitHub Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)
+  - [GitLab](https://docs.gitlab.com/runner/executors/docker.html)
+- `build/ci/github-actions/_index.md`: **Docker Build GitHub Actions** — Build and publish images with Docker GitHub Builder or individual Docker GitHub Actions. [Get started; Prerequisites; Configure your GitHub repository; Set up your GitHub Actions workflow {#call-a-reusable-workflow}]
+  - A GitHub repository with your application and a `Dockerfile` at its root.
+  - A Docker Hub account and a
+- `build/ci/github-actions/annotations.md`: **Add image annotations with GitHub Actions** — Add OCI annotations to image components using GitHub Actions [Add annotations with GitHub Builder {#add-annotations-with-builder}; Add annotations with individual actions; Configure annotation level]
+- `build/ci/github-actions/attestations.md`: **Add SBOM and provenance attestations with GitHub Actions** — Add SBOM and provenance attestations to your images with GitHub Actions [Add attestations with GitHub Builder {#add-attestations-with-builder}; Use individual actions; Default provenance; Max-level provenance]
+  - If the GitHub repository is public, provenance attestations with `mode=max`
+  - If the GitHub repository is private, provenance attestations with `mode=min`
+- `build/ci/github-actions/bake-workflow.md`: **Bake with Docker GitHub Builder** — Use the Docker GitHub Builder bake.yml reusable workflow to build images and local artifacts from a Bake definition. [Build and push a Bake target; Override target values and variables; Export local output from Bake]
+- `build/ci/github-actions/build-summary.md`: **GitHub Actions build summary** — Get an overview of your Docker Builds with GitHub Actions [Import build records to Docker Desktop; Disable job summary; Disable build record upload; Limitations]
+  - A summary showing the Dockerfile used, the build duration, and cache utilization
+  - Inputs for the build, such as build arguments, tags, labels, and build contexts
+- `build/ci/github-actions/build-workflow.md`: **Build with Docker GitHub Builder** — Use the Docker GitHub Builder build.yml reusable workflow to build images and local artifacts from a Dockerfile. [Build and push an image; Export local output as an artifact; Add cache, Dockerfile inputs, and metadata labels]
+- `build/ci/github-actions/cache.md`: **Cache management with GitHub Actions** — Configure build cache backends for GitHub Actions and handle cache write restrictions. [GitHub cache; Enable cache with GitHub Builder {#enable-cache-with-builder}; Cache backend API; Cache write restrictions]
+- `build/ci/github-actions/checks.md`: **Validating build configuration with GitHub Actions** — Discover how to validate your build configuration and identify best practice violations using build checks in GitHub Actions. [Run checks with docker/build-push-action; Run checks with docker/bake-action; Using the call input directly]
+- `build/ci/github-actions/configure-builder.md`: **Configuring your GitHub Actions builder** — Configuring BuildKit instances for building in CI with GitHub Actions [Version pinning; BuildKit container logs; BuildKit Daemon configuration; Registry mirror]
+  - `BUILDER_NODE_<idx>_AUTH_TLS_CACERT`
+  - `BUILDER_NODE_<idx>_AUTH_TLS_CERT`
+- `build/ci/github-actions/copy-image-registries.md`: **Copy image between registries with GitHub Actions** — Build multi-platform images and copy them between registries with GitHub Actions
+- `build/ci/github-actions/export-docker.md`: **Export to Docker with GitHub Actions** — Load the build results to the image store with GitHub Actions
+- `build/ci/github-actions/github-builder-architecture/index.md`: **Docker GitHub Builder architecture** — Learn about the architecture of Docker GitHub Builder, a set of reusable workflows for building images and artifacts with BuildKit in GitHub Actions. [Core architecture; Runner selection; Execution path; The two reusable entrypoints]
+
+## Section `compose` (46 pages)
+
+- `compose/_index.md`: **Docker Compose** — Learn how to use Docker Compose to define and run multi-container applications
+  - Start, stop, and rebuild services
+  - View the status of running services
+- `compose/bridge/_index.md`: **Overview of Compose Bridge** — Learn how Compose Bridge transforms Docker Compose files into Kubernetes manifests for seamless platform transitions [How it works; Apply organizational standards at scale; What's next?]
+  - Kubernetes manifests
+  - A Kustomize overlay
+- `compose/bridge/customize.md`: **Customize Compose Bridge** — Learn how to customize Compose Bridge transformations using Go templates and Compose extensions [How it works; Template syntax; Input model; Helper functions]
+  - A Dockerfile that lets you create your own image to distribute your template
+  - A directory containing the templating files
+- `compose/bridge/usage.md`: **Use the default Compose Bridge transformation** — Learn how to use the default Compose Bridge transformation to convert Compose files into Kubernetes manifests [Use the default Compose Bridge transformation; Deploy the generated manifests; Additional commands; What's next?]
+  - A [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) so all your resources are isolated and don't co
+  - A [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) with an entry for each and every [config](/reference/compose-fil
+- `compose/bridge/use-model-runner.md`: **Use Docker Model Runner with Compose Bridge** — How to use Docker Model Runner with Compose Bridge for consistent deployments [Configure model runner settings; Deploying a model runner; Docker Desktop; Kubernetes]
+  - Automatically injects environment variables for each model’s endpoint and name.
+  - Configures model endpoints differently for Docker Desktop vs Kubernetes.
+- `compose/compose-sdk.md`: **Using the Compose SDK** — Integrate Docker Compose directly into your applications with the Compose SDK. [Set up the SDK; Requirements; Example usage; Customizing the SDK]
+  - `WithOutputStream(io.Writer)`: Redirect standard output to a custom writer
+  - `WithErrorStream(io.Writer)`: Redirect error output to a custom writer
+- `compose/gettingstarted.md`: **Docker Compose Quickstart** — Follow this hands-on tutorial to learn how to use Docker Compose from defining application [Prerequisites; Step 1: Set up the project; Step 2: Define and start your services; Step 3: Fix the startup race with health checks]
+  - [Installed the latest version of Docker Compose](/manuals/compose/install/_index.md)
+  - A basic understanding of Docker concepts and how Docker works
+- `compose/how-tos/_index.md`: **_index**
+- `compose/how-tos/dependent-images.md`: **Build dependent images** — Build images for services with shared definition [Multi-stage Dockerfile; Use another service's image as the base image; Build with Bake; Additional resources]
+  - [Docker Compose build reference](/reference/cli/docker/compose/build/)
+  - [Learn about multi-stage Dockerfiles](/manuals/build/building/multi-stage.md)
+- `compose/how-tos/environment-variables/_index.md`: **Environment variables in Compose** — Explains how to set, use, and manage environment variables in Docker Compose.
+  - [How to set environment variables within your container's environment](set-environment-variables.md).
+  - [How environment variable precedence works within your container's environment](envvars-precedence.md).
+- `compose/how-tos/environment-variables/best-practices.md`: **Best practices for working with environment variables in Docker Compose** — Explainer on the best ways to set, use, and manage environment variables in
+- `compose/how-tos/environment-variables/envvars-precedence.md`: **Environment variables precedence in Docker Compose** — Scenario overview illustrating how environment variables are resolved [Simple example; Advanced example; How the table works; Understanding precedence results]
+  - [Set environment variables in Compose](set-environment-variables.md)
+  - [Use variable interpolation in Compose files](variable-interpolation.md)
+- `compose/how-tos/environment-variables/envvars.md`: **Configure pre-defined environment variables in Docker Compose** — Compose pre-defined environment variables [Methods to override; Configuration details; Project and file configuration; Environment handling and container lifecycle]
+  - `COMPOSE_PROJECT_NAME`
+  - `COMPOSE_PROFILES`
+- `compose/how-tos/environment-variables/set-environment-variables.md`: **Set environment variables within your container's environment** — How to set, use, and manage environment variables with Compose [Use the environment attribute; Additional information; Use the env_file attribute; Set environment variables with docker compose run --env]
+  - You can choose not to set a value and pass the environment variables from your shell straight through to your containers. It works in the sa
+  - You can also take advantage of [interpolation](variable-interpolation.md#interpolation-syntax). In the following example, the result is simi
+- `compose/how-tos/environment-variables/variable-interpolation.md`: **Set, use, and manage variables in a Compose file with interpolation** — How to set, use, and manage variables in your Compose file with interpolation [Interpolation syntax; Ways to set variables with interpolation; .env file; Substitute with --env-file]
+  - Direct substitution
+  - `${VAR}` -> value of `VAR`
+- `compose/how-tos/file-watch.md`: **Use Compose Watch** — Use File watch to automatically update running services as you work [Compose Watch versus bind mounts; Configuration; Prerequisites; action]
+  - All paths are relative to the project directory, apart from ignore file patterns
+  - Directories are watched recursively
+- `compose/how-tos/gpu-support.md`: **Run Docker Compose services with GPU access** — Learn how to configure Docker Compose to use NVIDIA GPUs with CUDA-based containers [Enabling GPU access to service containers; Example of a Compose file for running a service with access to 1 GPU device; Access specific devices]
+  - `capabilities`. This value is specified as a list of strings. For example, `capabilities: [gpu]`. You must set this field in the Compose fil
+  - `count`. Specified as an integer or the value `all`, represents the number of GPU devices that should be reserved (providing the host holds 
+- `compose/how-tos/init-containers.md`: **Use init containers in Compose** — Use pre_start init containers to run setup tasks before a service starts in Docker Compose. [When not to use init containers; How pre_start containers run; Examples; Run a database migration before the app starts]
+  - Runs in its own ephemeral container, created after the service container is created but before it starts.
+  - Inherits the service's image by default. Set `image` to override. The hook image follows the parent service's `pull_policy`, including refre
+- `compose/how-tos/jobs.md`: **Run jobs in Compose** — Declare one-shot and scheduled workloads as jobs in a Compose file, run them on demand or on a cron schedule, and check the result of each run. [When to use jobs; Prerequisites; Quickstart; Run a job on demand]
+  - Work that must finish before a service starts, such as a migration that
+  - Processes that run until you stop them. Use a service instead.
+- `compose/how-tos/lifecycle.md`: **Using lifecycle hooks with Compose** — Learn how to use Docker Compose lifecycle hooks like pre_start, post_start, and pre_stop to customize container behavior. [Services lifecycle hooks; Post-start hooks; Pre-stop hooks; Reference information]
+  - [`post_start`](/reference/compose-file/services.md#post_start)
+  - [`pre_stop`](/reference/compose-file/services.md#pre_stop)
+- `compose/how-tos/models-and-compose.md`: **Define AI Models in Docker Compose applications** — Learn how to define and use AI models in Docker Compose applications using the models top-level element [Prerequisites; What are Compose models?; Basic model definition; Model configuration options]
+  - Docker Compose v2.38 or later
+  - A platform that supports Compose models such as [Docker Model Runner (DMR)](/manuals/ai/model-runner/_index.md#requirements).
+- `compose/how-tos/multiple-compose-files/_index.md`: **Use multiple Compose files** — General overview for the different ways you can work with multiple compose
+  - [Extend a Compose file](extends.md) by referring to another Compose file and selecting the bits you want to use in your own application, wit
+  - [Include other Compose files](include.md) directly in your Compose file.
+- `compose/how-tos/multiple-compose-files/extends.md`: **Extend your Compose file** — Learn how to reuse service configurations across files and projects using Docker Compose’s extends attribute. [How the extends attribute works; Extending services from another file; Extending services within the same file; Extending services within the same file and from another file]
+  - [`extends`](/reference/compose-file/services.md#extends)
+- `compose/how-tos/multiple-compose-files/include.md`: **Include** — How to use Docker Compose's include top-level element [Example; Using overrides with included Compose files; Reference information]
+- `compose/how-tos/multiple-compose-files/merge.md`: **Merge Compose files** — How merging Compose files works [How to merge multiple Compose files; Merging rules; Additional information; Example]
+  - Paths are evaluated relative to the base file. When you use multiple Compose files, you must make sure all paths in the files are relative t
+  - Compose copies configurations from the original service over to the local one.
+- `compose/how-tos/networking.md`: **Networking in Compose** — How Docker Compose sets up networking between containers [Default network and service discovery; Updating containers on the network; Change the network mode; Specify custom networks]
+  - `host`: The container shares the host's network stack. No port mapping is needed or supported, and service name DNS resolution does not work
+  - `none`: Turns off all container networking.
+- `compose/how-tos/oci-artifact.md`: **Package and deploy Docker Compose applications as OCI artifacts** — Learn how to package, publish, and securely run Docker Compose applications from OCI-compliant registries. [Publish your Compose application as an OCI artifact; General steps; Advanced publishing options; Limitations]
+  - `--oci-version`: Specify the OCI version (default is automatically determined).
+  - `--resolve-image-digests`: Pin image tags to digests.
+- `compose/how-tos/production.md`: **Use Compose in production** — Learn how to configure, deploy, and update Docker Compose applications for production environments. [Modify your Compose file for production; Deploying changes; Running Compose on a single server; Next steps]
+  - Removing any volume bindings for application code, so that code stays inside
+  - Binding to different ports on the host
+- `compose/how-tos/profiles.md`: **Using profiles with Compose** — How to use profiles with Docker Compose [Assigning profiles to services; Start specific profiles; Start multiple profiles; Auto-starting profiles and dependency resolution]
+  - They are also explicitly targeted, or
+  - The profile is explicitly enabled using `--profile` or `COMPOSE_PROFILES`.
+- `compose/how-tos/project-name.md`: **Specify a project name** — Learn how to set a custom project name in Compose and understand the precedence of each method. [Example use cases; Set a project name; What's next?]
+  - On a development host: Create multiple copies of a single environment, useful for running stable copies for each feature branch of a project
+  - On a CI server: Prevent interference between builds by setting the project name to a unique build number.
+- `compose/how-tos/provider-services.md`: **Use provider services** — Learn how to use provider services in Docker Compose to integrate external capabilities into your applications [What are provider services?; Using provider services; How it works; Provider types]
+  - `DATABASE_URL` with the URL to access the provisioned resource
+  - `DATABASE_TOKEN` with an authentication token
+- `compose/how-tos/startup-order.md`: **Control startup and shutdown order in Compose** — Learn how to manage service startup and shutdown order in Docker Compose using depends_on and healthchecks. [Control startup; Example; Reference information]
+  - `service_started`
+  - `service_healthy`. This specifies that a dependency is expected to be “healthy”, which is defined with `healthcheck`, before starting a depe
+- `compose/how-tos/use-secrets.md`: **Manage secrets securely in Docker Compose** — Learn how to securely manage runtime and build-time secrets in Docker Compose. [Use secrets; Examples; Single-service secret injection; Multi-service secret sharing and password management]
+  - The `secrets` attribute under each service defines the secrets you want to inject into the specific container.
+  - The top-level `secrets` section defines the variables `db_password` and `db_root_password` and provides the `file` that populates their valu
+- `compose/install/_index.md`: **Overview of installing Docker Compose** — Learn how to install Docker Compose. Compose is available natively on [Installation scenarios; Docker Desktop (Recommended); Plugin (Linux only); Standalone (Legacy)]
+  - [Linux](/manuals/desktop/setup/install/linux/_index.md)
+  - [Mac](/manuals/desktop/setup/install/mac-install.md)
+- `compose/install/linux.md`: **Install the Docker Compose plugin** — Step-by-step instructions for installing the Docker Compose plugin on Linux using a package repository or manual method. [Install using the repository; Update Docker Compose; Install the plugin manually; What's next?]
+  - [Set up Docker's repository on your Linux system](#install-using-the-repository).
+  - [Install manually](#install-the-plugin-manually).
+- `compose/install/standalone.md`: **Install the Docker Compose standalone (Legacy)** — Instructions for installing the legacy Docker Compose standalone tool on Linux and Windows Server [On Linux; On Windows Server; What's next?]
+  - [Understand how Compose works](/manuals/compose/intro/compose-application-model.md)
+  - [Try the Quickstart guide](/manuals/compose/gettingstarted.md)
+- `compose/install/uninstall.md`: **Uninstall Docker Compose** — How to uninstall Docker Compose [Uninstalling Docker Compose with Docker Desktop; Uninstalling the Docker Compose CLI plugin; Manually installed; Remove for all users]
+  - Docker Compose installed via Docker Desktop
+  - Docker Compose installed as a CLI plugin
+- `compose/intro/_index.md`: **Introduction to Compose**
+- `compose/intro/compose-application-model.md`: **How Compose works** — Learn how Docker Compose works, from the application model to Compose files and CLI, whilst following a detailed example. [The Compose file; CLI; Key commands; Illustrative example]
+  - Two services, backed by Docker images: `webapp` and `database`
+  - One secret (HTTPS certificate), injected into the frontend
+- `compose/intro/features-uses.md`: **Why use Compose?** — Discover the benefits and typical use cases of Docker Compose for containerized application development and deployment [Key benefits of Docker Compose; Common use cases of Docker Compose; Development environments; Automated testing environments]
+  - Simplified control: Define and manage multi-container apps in one YAML file, streamlining orchestration and replication.
+  - Efficient collaboration: Shareable YAML files support smooth collaboration between developers and operations, improving workflows and issue 
+- `compose/intro/history.md`: **History and development of Docker Compose** — Explore the evolution of Docker Compose from v1 to v5, including CLI changes, YAML versioning, and the Compose Specification. [Introduction; Docker Compose CLI versioning; Compose file format versioning; What's next?]
+  - A brief history of the development of the Docker Compose CLI
+  - A clear explanation of the major versions and file formats that make up Compose v1, v2, and v5
+- `compose/release-notes.md`: **release-notes**
+- `compose/support-and-feedback/_index.md`: **_index**
+- `compose/support-and-feedback/faq.md`: **Frequently asked questions about Docker Compose** — Answers to common questions about Docker Compose, including v1 vs v2, commands, shutdown behavior, and development setup. [What is the difference between docker compose and docker-compose; What's the difference between up, run, and start?; Why do my services take 10 seconds to recreate or stop?; How do I run multiple copies of a Compose file on the same host?]
+  - Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
+  - If you are able, modify the application that you're running to
+- `compose/support-and-feedback/feedback.md`: **Give feedback** — Find a way to provide feedback on Docker Compose that's right for you [Report bugs or problems on GitHub; Feedback via Community Slack channels]
+- `compose/trust-model.md`: **Trust model for Compose files** — Learn how Docker Compose treats Compose files as trusted input and what this means when using files you did not author. [The dependency chain; Best practices; Inspect the full configuration; CI/CD environments]
+  - Avoid referencing public or unverified Compose configurations in automated
+  - Gate updates behind your normal code review process.
+
+## Section `engine` (20 pages)
+
+- `engine/_index.md`: **Docker Engine** — Find a comprehensive overview of Docker Engine, including how to install, storage details, networking, and more [Licensing]
+  - A server with a long-running daemon process
+  - APIs which specify interfaces that programs can use to talk to and instruct
+- `engine/security/_index.md`: **Docker Engine security** — Review of the Docker Daemon attack surface [Kernel namespaces; Control groups; Docker daemon attack surface; Linux kernel capabilities]
+  - The intrinsic security of the kernel and its support for
+  - The attack surface of the Docker daemon itself
+- `engine/security/antivirus.md`: **Antivirus software and Docker** — General guidelines for using antivirus software with Docker
+- `engine/security/apparmor.md`: **AppArmor security profiles for Docker** — Enabling AppArmor in Docker [Understand the policies; Customize the default profile; Create a template; Configure the daemon]
+  - `.Abi`: `abi/3.0` when the host provides that AppArmor ABI, or an empty string
+  - `.Name`: the profile name, `docker-default`
+- `engine/security/certificates.md`: **Verify repository client with certificates** — How to set up and use certificates with a registry to verify access [Understand the configuration; Create the client certificates; Troubleshooting tips; Related information]
+  - Native Linux Engine: `/etc/docker/certs.d/`
+  - Rootless Linux: `$XDG_CONFIG_HOME/docker/certs.d` (defaults to
+- `engine/security/https/README.md`: **README**
+- `engine/security/non-events.md`: **Docker security non-events** — Review of security vulnerabilities Docker mitigated
+  - [CVE-2013-1956](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1956),
+  - [CVE-2014-0181](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0181),
+- `engine/security/protect-access.md`: **Protect the Docker daemon socket** — How to setup and run Docker with SSH or HTTPS [Use SSH to protect the Docker daemon socket; SSH Tips; Use TLS (HTTPS) to protect the Docker daemon socket; Create a CA, server and client keys with OpenSSL]
+  - `tlsverify`, `tlscacert`, `tlscert`, `tlskey` set: Authenticate clients
+  - `tls`, `tlscert`, `tlskey`: Do not authenticate clients
+- `engine/security/rootless/_index.md`: **Rootless mode** — Run the Docker daemon as a non-root user (Rootless mode) [How it works; Prerequisites; Install]
+  -  You must install `newuidmap` and `newgidmap` on the host. These commands
+  - `/etc/subuid` and `/etc/subgid` should contain at least 65,536 subordinate
+- `engine/security/rootless/tips.md`: **Tips** — Tips for the Rootless mode [Advanced usage; Daemon; Client; Best practices]
+  - `$HOME`: the home directory
+  - `$XDG_RUNTIME_DIR`: an ephemeral directory that is only accessible by the expected user, e,g, `~/.docker/run`.
+- `engine/security/rootless/troubleshoot.md`: **Troubleshooting** — Troubleshooting the Rootless mode [Distribution-specific hint; Known limitations; Historical limitations; Troubleshooting]
+  - Ubuntu 24.04 and later enables restricted unprivileged user namespaces by
+  - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
+- `engine/security/rootless/uid-gid-mapping.md`: **UID/GID mapping** — How container UIDs and GIDs are mapped to the host in rootless mode
+  - In `userns-remap` mode, container UID `0` is mapped to the first subordinate
+  - In rootless mode, container UID `0` is mapped to the host UID of the user
+- `engine/security/seccomp.md`: **Seccomp security profiles for Docker** — Enabling seccomp in Docker [Pass a profile for a container; Significant syscalls blocked by the default profile; Run without the default seccomp profile]
+- `engine/security/trust/_index.md`: **Content trust in Docker** — Enabling content trust in Docker [About Docker Content Trust (DCT); Image tags and DCT; Docker Content Trust Keys; Signing images with Docker Content Trust]
+  - An offline key that is the root of DCT for an image tag
+  - Repository or tagging keys that sign tags
+- `engine/security/trust/deploying_notary.md`: **Deploy Notary Server with Compose** — Deploying Notary [If you want to use Notary in production]
+- `engine/security/trust/trust_automation.md`: **Automation with content trust** — Automating content push pulls with trust [Add a delegation private key; Add a delegation public key; Sign an image; Build with content trust]
+  - [Delegations for content trust](trust_delegation.md)
+  - [Content trust in Docker](index.md)
+- `engine/security/trust/trust_delegation.md`: **Delegations for content trust** — Delegations for content trust [Configuring the Docker client; Configuring the Notary client; Creating delegation keys; Using Docker Trust to generate keys]
+  - [Content trust in Docker](index.md)
+  - [Manage keys for content trust](trust_key_mng.md)
+- `engine/security/trust/trust_key_mng.md`: **Manage keys for content trust** — Manage keys for content trust [Choose a passphrase; Back up your keys; Hardware storage and signing; Key loss]
+  - The root and targets key are generated and stored locally client-side.
+  - The timestamp and snapshot keys are safely generated and stored in a signing server
+- `engine/security/trust/trust_sandbox.md`: **Play in a content trust sandbox** — Play in a trust sandbox [Prerequisites; What is in the sandbox?; Build the sandbox; Play in the sandbox]
+- `engine/security/userns-remap.md`: **Isolate containers with a user namespace** — Isolate containers within a user namespace [About remapping and subordinate user and group IDs; Prerequisites; Enable userns-remap on the daemon; Disable namespace remapping for a container]
+  - `testuser:testuser`
+  - `testuser:1001`
+
+## Section `scout` (33 pages)
+
+- `scout/_index.md`: **Docker Scout** — Get an overview on Docker Scout to proactively enhance your software supply chain security
+- `scout/deep-dive/_index.md`: **Deep dive**
+- `scout/deep-dive/advisory-db-sources.md`: **Advisory database sources and matching service** — More details on the advisory database and CVE-to-package matching service [Advisory database sources; Severity and scoring priority; Vulnerability matching; Supported package ecosystems]
+  - [AlmaLinux Security Advisory](https://errata.almalinux.org/)
+  - [Alpine secdb](https://secdb.alpinelinux.org/)
+- `scout/deep-dive/data-handling.md`: **Data collection and storage in Docker Scout** — How Docker Scout handles image metadata [Data transmission; Image metadata; SBOM metadata; Environment metadata]
+  - Image creation timestamp
+  - Ports exposed by the image
+- `scout/explore/_index.md`: **Explore**
+- `scout/explore/analysis.md`: **Docker Scout image analysis** — Docker Scout image analysis provides a detailed view into the composition of [Activate Docker Scout on a repository; Analyze registry images; Analyze images locally; Docker Desktop]
+  - `docker scout quickview`: summary of the specified image, see [Quickview](#quickview)
+  - `docker scout cves`: local analysis of the specified image, see [CVEs](#cves)
+- `scout/explore/dashboard.md`: **Dashboard** — The Docker Scout Dashboard helps review and share the analysis of images. [Overview; Images; Vulnerabilities; Settings]
+  - **Images**: lists all Docker Scout-enabled repositories in the organization, see [Images](#images)
+  - **Base images**: lists all base images used by repositories in an organization
+- `scout/explore/exceptions.md`: **Manage vulnerability exceptions** — | [Create exceptions; View exceptions; View exceptions in Docker Scout Dashboard or Docker Desktop; View exceptions in the CLI]
+  - Create an exception in the [GUI](/manuals/scout/how-tos/create-exceptions-gui.md) of
+  - Create a [VEX](/manuals/scout/how-tos/create-exceptions-vex.md) document and attach
+- `scout/explore/image-details-view.md`: **Image details view** — The Docker Scout image detail view analyzes images to show their hierarchy, [Image hierarchy; Layers; Vulnerabilities; Remediation recommendations]
+  - [**Recommendations for this image**](#recommendations-for-current-image)
+  - [**Recommendations for base image**](#recommendations-for-base-image) provides
+- `scout/explore/metrics-exporter.md`: **Docker Scout metrics exporter** — | [Metrics; Creating an access token; Prometheus; Add a job for your organization]
+  - Specifies the OpenMetrics endpoint targeting the `dockerscoutpolicy` Docker organization
+  - A `namespace` that all collected metrics will be prefixed with
+- `scout/how-tos/_index.md`: **How-tos**
+- `scout/how-tos/artifact-types.md`: **Use Scout with different artifact types** — | [Supported prefixes; Examples; Analyze a local project; Compare a local project to an image]
+  - `docker scout compare`
+  - `docker scout cves`
+- `scout/how-tos/configure-cli.md`: **Configure Docker Scout with environment variables** — Configure how the behavior of Docker Scout CLI commands using these environment variables [Offline mode]
+- `scout/how-tos/create-exceptions-gui.md`: **Create an exception using the GUI** — Create an exception for a vulnerability in an image using the Docker Scout Dashboard or Docker Desktop. [Prerequisites; Steps]
+  - **Exception type**: The type of exception. The only supported types are:
+  - **Accepted risk**: The vulnerability is not addressed due to its minimal
+- `scout/how-tos/create-exceptions-vex.md`: **Create an exception using the VEX** — Create an exception for a vulnerability in an image using VEX documents. [Prerequisites; Introduction to VEX; vexctl example; Example JSON document]
+  - The latest version of Docker Desktop or the Docker Scout CLI plugin
+  - The [`vexctl`](https://github.com/openvex/vexctl) command line tool.
+- `scout/how-tos/view-create-sboms.md`: **Docker Scout SBOMs** — Use Docker Scout to extract the SBOM for your project. [View from CLI; Attach as build attestation {#attest}; Extract to file; Remote image]
+- `scout/install.md`: **Install Docker Scout** — Installation instructions for the Docker Scout CLI plugin [Installation script; Manual installation; Container image; GitHub Action]
+- `scout/integrations/_index.md`: **Integrating Docker Scout with other systems** — How to set up Docker Scout with other systems. [Integration categories; Container registries; Continuous Integration; Environment monitoring]
+  - [GitHub Actions](./ci/gha.md)
+  - [GitLab](./ci/gitlab.md)
+- `scout/integrations/ci/_index.md`: **Using Docker Scout in continuous integration** — How to set up Docker Scout in continuous integration pipelines
+  - [GitHub Actions](gha.md)
+  - [GitLab](gitlab.md)
+- `scout/integrations/ci/azure.md`: **Integrate Docker Scout with Microsoft Azure DevOps Pipelines** — How to integrate Docker Scout with Microsoft Azure DevOps Pipelines
+- `scout/integrations/ci/circle-ci.md`: **Integrate Docker Scout with Circle CI** — How to integrate Docker Scout with Circle CI
+- `scout/integrations/ci/gha.md`: **Integrate Docker Scout with GitHub Actions** — How to integrate Docker Scout with GitHub Actions [Prerequisites; Steps]
+  - This example assumes that you have an existing image repository, in Docker Hub
+  - This example makes use of [environments](../environment/_index.md), to compare
+- `scout/integrations/ci/gitlab.md`: **Integrate Docker Scout with GitLab CI/CD** — How to integrate Docker Scout with GitLab CI [Steps; Video walkthrough]
+- `scout/integrations/ci/jenkins.md`: **Integrate Docker Scout with Jenkins** — How to integrate Docker Scout with Jenkins
+- `scout/integrations/environment/_index.md`: **Integrating Docker Scout with environments** — Docker Scout can integrate with runtime environments to give you real-time [Assign to environments; List environments; Comparing between environments; View images for an environment]
+  - Use the `docker scout env <environment> <image>` CLI command to record images to environments manually
+  - Enable a runtime integration to automatically detect images in your environments.
+- `scout/integrations/environment/cli.md`: **Generic environment integration with CLI** — Integrate your runtime environments with Docker Scout using the CLI client [Examples]
+  - `DOCKER_SCOUT_HUB_USER`: your Docker Hub username
+  - `DOCKER_SCOUT_HUB_PASSWORD`: your Docker Hub personal access token
+- `scout/integrations/registry.md`: **Integrate Docker Scout with a container registry** — Integrate Docker Scout with any container registry using the docker scout watch CLI command [How it works; Set up docker scout watch; Registry-specific options; Example: JFrog Artifactory]
+  - Watch specific repositories or an entire registry
+  - Optionally ingest all existing images once, using `--all-images`
+- `scout/policy/_index.md`: **Policy Evaluation** — | [How Policy Evaluation works; Policy types; Severity-Based Vulnerability; No copyleft licenses]
+  - [Severity-Based Vulnerability](#severity-based-vulnerability)
+  - [No copyleft licenses](#no-copyleft-licenses)
+- `scout/policy/local.md`: **Evaluate policies** — Evaluate Docker Scout policies using the CLI, with built-in and custom Rego policies [How it works; Use in CI; Examples; Health score]
+  - Built-in defaults: a curated set embedded in the CLI, used when no other
+  - OCI policy bundles: Rego packaged as an OCI artifact and pulled from a
+- `scout/quickstart.md`: **Docker Scout quickstart** — Learn how to get started with Docker Scout to analyze images and fix vulnerabilities [Step 1: Setup; Step 2: Enable Docker Scout; Step 3: Analyze image vulnerabilities; Step 4: Fix application vulnerabilities]
+  - How to enable Docker Scout for your repositories
+  - Analyzing images for vulnerabilities
+- `scout/release-notes/_index.md`: **Release notes**
+- `scout/release-notes/cli.md`: **cli**
+- `scout/release-notes/platform.md`: **Docker Scout release notes** — Learn about the latest features of Docker Scout [Q2 2026; 2026-09-01; 2026-07-30; 2026-07-01]
+  - Notifications: In-product and email notifications about newly disclosed CVEs.
+  - Native Amazon ECR integration: ECR is still supported using
+
+## Section `security` (32 pages)
+
+- `security/_index.md`: **Secure Docker accounts and organizations** — >- [Secure your account; Secure your organization; Next steps]
+  - [Two-factor authentication](/manuals/security/authentication/2fa/_index.md)
+  - A [personal access token](/manuals/security/access-tokens/personal-access-tokens.md)
+- `security/access-tokens/_index.md`: **Access tokens** — >- [Choose a token type; Personal access tokens (PATs) {#pats}; Organization access tokens (OATs) {#oats}; OIDC connections]
+- `security/access-tokens/organization-access-tokens.md`: **Create and manage organization access tokens** — >- [Best practices; Prerequisites; Create an organization access token; Sign in]
+  - Set an expiration date and rotate tokens on a schedule
+  - Grant only the repositories and scopes each job needs
+- `security/access-tokens/personal-access-tokens.md`: **Create and manage personal access tokens** — >- [Create a personal access token {#create}; Sign in with a personal access token {#sign-in}; Update or delete a personal access token {#update-or-delete}; Auto-generated tokens]
+  - **Access token description:** Enter a name for the token, up to
+  - **Expiration date:** Optional. The default is **None**, which
+- `security/access-tokens/reference.md`: **Access token reference** — >- [Personal access token permissions; Repository permissions; Cloud Sandboxes access; Organization access token scopes]
+  - **Repo Public Read-only:** View, search, and pull images from public
+  - **Repo Read-only:** View, search, and pull images from public
+- `security/authentication/2fa/_index.md`: **Two-factor authentication for your individual Docker account** — >- [How two-factor authentication works; When Docker asks for the code; Recovery code; Next steps]
+- `security/authentication/2fa/manage.md`: **Manage two-factor authentication for your Docker account** — >- [Prerequisites; Enable two-factor authentication; Disable two-factor authentication; Move 2FA to a new device]
+  - A time-based one-time password (TOTP) authenticator app on your phone or
+  - Your Docker account password
+- `security/authentication/2fa/recover-hub-account.md`: **Recover your Docker account and two-factor recovery code** — >- [Generate a new recovery code; Sign in with your recovery code; Contact Docker Support; Next steps]
+  - [Turn on 2FA][enable] again after you recover your account.
+  - Create a [personal access token][pat] for the Docker CLI and automation.
+- `security/authentication/_index.md`: **Authentication** — Configure single sign-on, OIDC connections, and two-factor authentication. [Choose an authentication method; Next steps]
+- `security/authentication/oidc-connections/_index.md`: **OIDC connections overview** — Authenticate GitHub Actions to Docker with short-lived OpenID Connect tokens [How OIDC connections work; Connection limits; Next steps]
+  - GitHub issues a JWT ID token for the workflow run.
+  - During authentication, Docker:
+- `security/authentication/oidc-connections/create-manage.md`: **Create and manage OIDC connections** — Create and manage OIDC connections in Docker Home, then authenticate GitHub Actions to Docker Hub with docker/login-action and short-lived tokens [Create an OIDC connection; Configure a GitHub Actions workflow; Read Docker Hardened Images and attestations; Manage OIDC connections]
+  - **Connection name**, a **Ruleset name**, and a **Subject claim** are
+  - For rulesets, subject claims, and resources, see
+- `security/authentication/oidc-connections/rulesets-claims.md`: **Configure OIDC rulesets and subject claims** — >- [Rulesets; Subject claims; Resources; DHI and Scout compatibility exceptions]
+  - **Ruleset name**: A name for the ruleset.
+  - **Subject claim**: One `sub` string from the GitHub ID token.
+- `security/authentication/oidc-connections/troubleshoot.md`: **Troubleshoot OIDC connections** — >- [Subject claim does not match a ruleset; Error message; Causes; Solutions]
+  - The workflow's repository, branch, tag, pull request, or environment
+  - The ruleset uses a narrow pattern and the workflow runs from a
+- `security/authentication/single-sign-on/_index.md`: **Single sign-on overview** — >- [How SSO works; Set up SSO; Next steps]
+  - Start [configuring SSO](connect.md).
+  - Read the [FAQs](/manuals/faqs/security.md).
+- `security/authentication/single-sign-on/connect.md`: **Set up single sign-on** — >- [Prerequisites; Set up an SSO connection; Step 1: Add a domain; Step 2: Verify your domain]
+  - Notify your company about the upcoming SSO sign-in process.
+  - Confirm that each Docker user has a valid IdP account using the same email
+- `security/authentication/single-sign-on/manage.md`: **Manage SSO domains and connections** — >- [Manage domains; Add a domain; Remove a domain from an SSO connection; Manage SSO connections]
+  - JIT provisioning (default): Users are automatically added to your organization
+  - SCIM provisioning: Sync users and groups from your identity provider to Docker
+- `security/authentication/single-sign-on/troubleshoot-sso.md`: **Troubleshoot single sign-on** — >- [Check for errors; Check Docker error logs; Check identity provider errors; Groups are not formatted correctly]
+  - Incorrect group name formatting in your identity provider (IdP): Docker
+  - Non-matching groups between IdP and Docker organization: If a group in your
+- `security/provisioning/_index.md`: **User provisioning overview** — >- [Choose a provisioning method; Manage JIT and SCIM together; Set attribute names in the identity provider; Next steps]
+  - [Add and manage domains](/manuals/security/provisioning/domain-management.md)
+  - [SCIM provisioning](/manuals/security/provisioning/scim/_index.md) to sync
+- `security/provisioning/auto-provisioning.md`: **Auto-provisioning** — Auto-provision users by associating members to your organization when email addresses match a verified domain. [Overview; Enable auto-provisioning; Disable auto-provisioning; Next steps]
+  - Users who sign in to Docker with matching email addresses are automatically
+  - Auto-provisioning only adds existing Docker users to your organization, it
+- `security/provisioning/domain-management.md`: **Add and manage domains** — Add, verify, and manage domains to control user access and enable auto-provisioning in Docker organizations [Add and verify a domain; Add a domain; Verify a domain; Audit domains for uncaptured users]
+  - Users who access Docker Desktop without authenticating
+  - Users who authenticate using an account that doesn't have an
+- `security/provisioning/just-in-time.md`: **Just-in-Time provisioning** — >- [How it works; Set up; Disable; Re-enable]
+  - Set up [group mapping](/manuals/security/provisioning/scim/group-mapping.md)
+- `security/provisioning/scim/_index.md`: **SCIM provisioning overview** — >- [Prerequisites; How SCIM works; Choose how SCIM works with JIT; Use SCIM without JIT]
+  - SSO configured for your organization
+  - Administrator access to Docker Home and your identity provider
+- `security/provisioning/scim/group-mapping.md`: **Map identity provider groups to Docker teams** — >- [Prerequisites; How group mapping works; Set up group mapping; Group naming format]
+  - SSO configured for your organization
+  - Administrator access to Docker Home and your identity provider
+- `security/provisioning/scim/migrate-scim.md`: **Migrate JIT to SCIM** — >- [Why migrate; Prerequisites; Assign users in your IdP; Sync and verify]
+  - Users are deprovisioned when they leave your organization
+  - User attributes and group membership stay synchronized with the IdP
+- `security/provisioning/scim/provision-scim.md`: **Set up SCIM provisioning** — >- [Supported attributes; Enable SCIM in Docker; Enable SCIM in your IdP; Step one: Enable SCIM]
+  - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
+  - [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/user-provisioning)
+- `security/provisioning/troubleshoot-provisioning.md`: **Troubleshoot provisioning** — Troubleshoot common user provisioning issues with SCIM and Just-in-Time provisioning [Full name or team membership changes after sign-in; Error message; Causes; Affected environments]
+  - Each SSO sign-in writes the full name from the SSO assertion to the Docker
+  - At sign-in, JIT adds the user to the teams the SSO assertion lists. SCIM
+- `security/roles-and-permissions/_index.md`: **Docker organization roles and permissions** — >- [Core roles; Custom roles; Roles and team permissions; Next steps]
+- `security/roles-and-permissions/core-roles.md`: **Docker core roles and permissions** — >- [Core roles; Permissions reference; Content and registry; Organization management]
+  - Owner provides full administrative access. Owners can manage all
+  - Editor has partial administrative access. Editors can create, edit, and
+- `security/roles-and-permissions/custom-roles/_index.md`: **Custom roles and permissions overview** — >- [Prerequisites; Creating custom roles; Next steps]
+  - A Docker Business subscription
+  - Owner permissions in your Docker organization
+- `security/roles-and-permissions/custom-roles/manage.md`: **Manage custom roles in Docker Home** — >- [Create a custom role; Edit a custom role; Assign custom roles; View role assignments]
+  - Provide a **Label**
+  - Enter a unique **Name** identifier. The identifier is permanent.
+- `security/roles-and-permissions/custom-roles/permissions-reference.md`: **Custom role permissions reference** — >- [{{ $group.name }}; Next steps]
+  - [Manage custom roles](manage.md): Create, assign, and delete custom
+  - [Core roles and permissions](/manuals/security/roles-and-permissions/core-roles.md):
+- `security/security-announcements.md`: **Docker security announcements** — >- [Docker Desktop 4.97.0 security update: CVE-2026-114409; Docker Desktop 4.97.0 security update: CVE-2026-99999; Docker Sandboxes response to eMudhra CA compromise; Recreate sandboxes with updated images]
+  - Addressed [CVE-2026-114409](https://www.cve.org/cverecord?id=CVE-2026-114409),
+  - Addressed [CVE-2026-99999](https://www.cve.org/cverecord?id=CVE-2026-99999),

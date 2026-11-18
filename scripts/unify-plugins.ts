@@ -120,6 +120,10 @@ export function unifyPlugins(): {
         command: "bun",
         args: ["--no-install", "--no-env-file", "${PLUGIN_ROOT}/mcp/nextjs-mcp.ts"],
       },
+      "docker-brain": {
+        command: "bun",
+        args: ["--no-install", "--no-env-file", "${PLUGIN_ROOT}/mcp/docker-mcp.ts"],
+      },
     },
   };
   writeIfChanged(
@@ -201,6 +205,10 @@ export function exportCrossAgentConfigs(): { outDir: string; targets: string[] }
     "nextjs-brain": {
       command: "bun",
       args: ["--no-install", "--no-env-file", `${pluginRootSlash}/mcp/nextjs-mcp.ts`],
+    },
+    "docker-brain": {
+      command: "bun",
+      args: ["--no-install", "--no-env-file", `${pluginRootSlash}/mcp/docker-mcp.ts`],
     },
   };
 
