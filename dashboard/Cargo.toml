@@ -8,8 +8,8 @@ description = "Fused GPUI + WebView2 desktop shell unifying Google Gemini Deskto
 
 [dependencies]
 anyhow = "1.0.86"
-gpui = { git = "https://github.com/aphrody-dev/aphrody.git" }
-gpui_platform = { git = "https://github.com/aphrody-dev/aphrody.git" }
+gpui = { git = "https://github.com/aphrody-labs/aphrody.git" }
+gpui_platform = { git = "https://github.com/aphrody-labs/aphrody.git" }
 raw-window-handle = "0.6"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.144"

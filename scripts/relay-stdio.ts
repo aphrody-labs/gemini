@@ -5,12 +5,12 @@ import { discoverWorkspaceRoot, HOME, userEnv } from "./lib.ts";
 
 const workspace = discoverWorkspaceRoot();
 const candidates = [
-  process.env.AI_OS_ROOT,
-  userEnv("AI_OS_ROOT"),
-  join(workspace, "ai-os"),
-  process.env.SRC_ROOT && join(dirname(process.env.SRC_ROOT), "ai-os"),
-  join(HOME, "src", "ai-os"),
-  join(HOME, "ai-os"),
+  process.env.AY_ROOT,
+  userEnv("AY_ROOT"),
+  join(workspace, "ay"),
+  process.env.SRC_ROOT && join(dirname(process.env.SRC_ROOT), "ay"),
+  join(HOME, "src", "ay"),
+  join(HOME, "ay"),
 ].filter((x): x is string => Boolean(x));
 
 const git = Bun.which("git");
@@ -22,16 +22,16 @@ function trusted(dir: string): boolean {
     stderr: "ignore",
     stdin: "ignore",
   });
-  return /[/:]aphrody-dev\/ai-os(\.git)?$/i.test(r.stdout.toString().trim());
+  return /[/:]aphrody-(?:labs|dev)\/ay(\.git)?$/i.test(r.stdout.toString().trim());
 }
 
-const rel = ["frameworks", "ai-os", "src", "relay", "cli.ts"] as const;
+const rel = ["packages", "ai-os", "src", "server", "cli.ts"] as const;
 const target = candidates.find(
   (c) => existsSync(join(c, ...rel)) && trusted(c),
 );
 if (!target) {
   console.error(
-    "relay-stdio: no trusted aphrody-dev/ai-os checkout with frameworks/ai-os/src/relay/cli.ts",
+    "relay-stdio: no trusted aphrody-labs/ay checkout with packages/ai-os/src/server/cli.ts",
   );
   process.exit(1);
 }
