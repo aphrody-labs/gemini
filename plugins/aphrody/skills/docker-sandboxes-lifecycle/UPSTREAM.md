@@ -1,0 +1,1 @@
+Vendored from https://github.com/docker/skills/tree/a65ae5b65d22f0613375d6c3e5ea8bb287698cc0/skills/docker-sandboxes-lifecycle (Apache-2.0, Docker, Inc.). Refresh by re-copying at a newer commit; edit upstream, not here.

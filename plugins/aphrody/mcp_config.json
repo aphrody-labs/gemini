@@ -21,6 +21,10 @@
         "--no-env-file",
         "${PLUGIN_ROOT}/mcp/nextjs-mcp.ts"
       ]
+    },
+    "docker-docs": {
+      "type": "http",
+      "url": "https://ai-backend-service.docker.com/mcp"
     }
   }
 }
