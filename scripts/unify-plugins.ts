@@ -192,6 +192,7 @@ export function unifyPlugins(): {
 
 export function exportCrossAgentConfigs(): { outDir: string; targets: string[] } {
   const pluginRootSlash = join(GEMINI_ROOT, "plugins", "aphrody").replaceAll("\\", "/");
+  const vercelPluginRootSlash = join(GEMINI_ROOT, "plugins", "vercel").replaceAll("\\", "/");
   const relayScript = join(GEMINI_ROOT, "scripts", "relay-stdio.ts").replaceAll("\\", "/");
   const outDir = join(GEMINI_ROOT, "dist", "cross-agent");
   mkdirSync(outDir, { recursive: true });
@@ -210,6 +211,10 @@ export function exportCrossAgentConfigs(): { outDir: string; targets: string[] }
     "docker-brain": {
       command: "bun",
       args: ["--no-install", "--no-env-file", `${pluginRootSlash}/mcp/docker-mcp.ts`],
+    },
+    "vercel-brain": {
+      command: "bun",
+      args: ["--no-install", "--no-env-file", `${vercelPluginRootSlash}/mcp/vercel-mcp.ts`],
     },
   };
 

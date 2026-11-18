@@ -30,22 +30,21 @@
     "os-craft",
     "bun-brain",
     "nextjs-brain",
-    "docker-brain"
+    "docker-brain",
+    "vercel-brain"
   ],
   "lspServers": [
     "bun-lsp"
   ],
-  "skillCount": 199,
+  "skillCount": 195,
   "skills": [
     "3ds-reverse",
     "agent-browser",
     "agents-sdk",
     "ai-os-orchestrator",
     "ai-os-pilot",
-    "ai-sdk",
     "amd",
     "aphrody-brand",
-    "auth",
     "ay-cf-finops-infra",
     "banner-design",
     "base-ui",
@@ -75,7 +74,6 @@
     "bun-vpn",
     "bun-yolo",
     "cf-cli",
-    "chat-sdk",
     "chrome-devtools",
     "chromium",
     "claude-live-bridge",
@@ -177,7 +175,6 @@
     "rea-changelog-update",
     "rea-ci-tests-audit",
     "rea-tool-design",
-    "react-best-practices",
     "replica-architect",
     "replica-backend",
     "replica-brand",

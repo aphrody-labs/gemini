@@ -19,7 +19,11 @@ export const SOURCES: VendorSource[] = [{ repo: "docker/skills", dir: "skills", 
 
 /** Skills removed as duplicates of another skill; unify-plugins.ts never copies them back. */
 export const SUPERSEDED: Record<string, string> = {
-  "vercel-react-best-practices": "react-best-practices (same Vercel rules; its upstream/ holds this skill verbatim)",
+  "vercel-react-best-practices": "react-best-practices (now provided by official plugins/vercel/skills)",
+  "ai-sdk": "provided by official ~/.gemini/plugins/vercel/skills/ai-sdk",
+  auth: "provided by official ~/.gemini/plugins/vercel/skills/auth",
+  "chat-sdk": "provided by official ~/.gemini/plugins/vercel/skills/chat-sdk",
+  "react-best-practices": "provided by official ~/.gemini/plugins/vercel/skills/react-best-practices",
 };
 
 const ROOT = join(import.meta.dir, "..");

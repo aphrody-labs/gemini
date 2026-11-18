@@ -1,0 +1,19 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "vercel",
+  "displayName": "Vercel",
+  "version": "0.56.0",
+  "description": "Official Vercel ecosystem plugin with skills from vercel/vercel-plugin and vercel-labs/agent-skills, specialist agents, local vercel-brain MCP, and https://mcp.vercel.com.",
+  "logo": "assets/vercel-antigravity.svg",
+  "suggestedPrompts": [
+    "Help me deploy this app to Vercel",
+    "Investigate my latest failed Vercel deployment",
+    "Build an AI agent with the Vercel AI SDK"
+  ],
+  "author": {
+    "name": "Vercel",
+    "url": "https://vercel.com"
+  },
+  "homepage": "https://github.com/vercel/vercel-plugin#readme",
+  "repository": "https://github.com/vercel/vercel-plugin"
+}
