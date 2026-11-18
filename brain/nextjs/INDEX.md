@@ -1,0 +1,520 @@
+# Next.js 16.5.0-canary.52 Knowledge Brain Index
+
+- Installed / source version: `16.5.0-canary.52`
+- Corpus: 479 docs (302 App Router, 168 Pages Router, 8 Arch/Community), 29 public entrypoints (71 resolved `.d.ts`, 2437 symbols), 67 `NextConfig` + 175 `ExperimentalConfig` + 21 `ImageConfig` fields.
+- Compression: 5.89 MiB raw -> 385.8 KiB digests (6.4%).
+
+## Brain Files
+
+| File | Scope |
+| :--- | :--- |
+| `INDEX.md` | Sitemap from `dist/docs/`, topic router, corpus stats |
+| `TYPES_DIGEST.md` | Public `next/*` entrypoint exports and compressed core `.d.ts` declarations |
+| `CONFIG_SCHEMA.md` | `NextConfig`, `ExperimentalConfig`, `ImageConfigComplete`, `AppSegmentConfig`, `ProxyConfig`, `rewrites` order, `cacheLife` profiles |
+| `DOCS_DIGEST.md` | Compacted digests for all bundled App Router, Pages Router, and Architecture docs |
+| `UPSTREAM_APIS.md` | Upstream `vercel/next.js`, `vercel/next-devtools-mcp`, `/_next/mcp` tools, official skills, Next 16.0-16.5 breaking changes |
+
+## Quick Topic Router
+
+| Area / Task | Canonical Next.js 16.5+ Surface | Brain File |
+| :--- | :--- | :--- |
+| Network boundary / proxy | `proxy.ts`, `NextProxy`, `ProxyConfig`, `skipProxyUrlNormalize` | `UPSTREAM_APIS.md`, `DOCS_DIGEST.md` |
+| Async request APIs | `await params`, `await searchParams`, `await cookies()`, `await headers()`, `next/root-params` | `TYPES_DIGEST.md`, `DOCS_DIGEST.md` |
+| Route-aware types | `PageProps<'/route'>`, `LayoutProps<'/route'>`, `RouteContext<'/api'>` (`next typegen`) | `TYPES_DIGEST.md`, `UPSTREAM_APIS.md` |
+| Cache Components & PPR | `cacheComponents: true`, `partialPrefetching: true`, `'use cache'`, `cacheLife`, `cacheTag` | `CONFIG_SCHEMA.md`, `DOCS_DIGEST.md` |
+| On-demand revalidation | `revalidateTag(tag, 'max')`, `updateTag(tag)`, `refresh()`, `revalidatePath()` | `TYPES_DIGEST.md`, `DOCS_DIGEST.md` |
+| Stage & static contracts | `io()`, `prefetch()`, `navigation()`, `connection()`, `instant`, `ensureStatic` | `CONFIG_SCHEMA.md`, `TYPES_DIGEST.md` |
+| Config & rewrites | `next.config.ts`, `rewrites` (`beforeFiles` host match, `afterFiles`, `fallback`), `images` | `CONFIG_SCHEMA.md` |
+| Error handling & offline | `catchError` (`next/error`), `error.tsx`, `useOffline` (`next/offline`) | `TYPES_DIGEST.md`, `DOCS_DIGEST.md` |
+| Runtime MCP inspection | `/_next/mcp` (`get_errors`, `get_compilation_issues`, `compile_route`, `get_routes`) + `next-devtools-mcp` | `UPSTREAM_APIS.md` |
+
+## Docs Sitemap (`dist/docs/`)
+
+### `01-app` (302)
+- `01-app/01-getting-started/01-installation.md` — **Installation**: Learn how to create a new Next.js application with the `create-next-app` CLI, and set up TypeScript, ESLint, and Module 
+- `01-app/01-getting-started/02-project-structure.md` — **Project structure and organization**: Learn the folder and file conventions in Next.js, and how to organize your project.
+- `01-app/01-getting-started/03-layouts-and-pages.md` — **Layouts and Pages**: Learn how to create your first pages and layouts, and link between them with the Link component.
+- `01-app/01-getting-started/04-linking-and-navigating.md` — **Linking and Navigating**: Learn how the built-in navigation optimizations work, including prefetching, prerendering, and client-side navigation, a
+- `01-app/01-getting-started/05-server-and-client-components.md` — **Server and Client Components**: Learn how you can use React Server and Client Components to render parts of your application on the server or the client
+- `01-app/01-getting-started/06-fetching-data.md` — **Fetching Data**: Learn how to fetch data and stream content that depends on data.
+- `01-app/01-getting-started/07-mutating-data.md` — **Mutating Data**: Learn how to mutate data using Server Functions and Server Actions in Next.js.
+- `01-app/01-getting-started/08-caching.md` — **Caching**: Learn how to cache data and UI in Next.js
+- `01-app/01-getting-started/09-revalidating.md` — **Revalidating**: Learn how to revalidate cached data using time-based and on-demand strategies.
+- `01-app/01-getting-started/10-error-handling.md` — **Error Handling**: Learn how to display expected errors and handle uncaught exceptions.
+- `01-app/01-getting-started/11-css.md` — **CSS**: Learn about the different ways to add CSS to your application, including Tailwind CSS, CSS Modules, Global CSS, and more
+- `01-app/01-getting-started/12-images.md` — **Image Optimization**: Learn how to optimize images in Next.js
+- `01-app/01-getting-started/13-fonts.md` — **Font Optimization**: Learn how to optimize fonts in Next.js
+- `01-app/01-getting-started/14-metadata-and-og-images.md` — **Metadata and OG images**: Learn how to add metadata to your pages and create dynamic OG images.
+- `01-app/01-getting-started/15-route-handlers.md` — **Route Handlers**: Create custom request handlers with Next.js Route Handlers using the Web Request and Response APIs.
+- `01-app/01-getting-started/16-proxy.md` — **Proxy**: Use Next.js Proxy to rewrite, redirect, modify headers, or respond directly before a request completes.
+- `01-app/01-getting-started/17-deploying.md` — **Deploying**: Learn how to deploy your Next.js application.
+- `01-app/01-getting-started/18-upgrading.md` — **Upgrading**: Learn how to upgrade your Next.js application to the latest version or canary.
+- `01-app/01-getting-started/index.md` — **Getting Started**: Learn how to create full-stack web applications with the Next.js App Router.
+- `01-app/02-guides/adopting-partial-prefetching.md` — **Adopting Partial Prefetching**: Learn how to enable Partial Prefetching and what changes for `<Link>`.
+- `01-app/02-guides/ai-agents.md` — **How Next.js supports AI coding agents**: Learn how Next.js helps AI coding agents use current framework guidance, inspect applications, verify changes, and repor
+- `01-app/02-guides/analytics.md` — **How to add analytics to your Next.js application**: Measure and track page performance using Next.js Speed Insights
+- `01-app/02-guides/authentication-with-cache-components.md` — **How to implement authentication with Cache Components**: Learn how to read the user session, show authenticated UI without slowing down the page, and cache data derived from the
+- `01-app/02-guides/authentication.md` — **How to implement authentication in Next.js**: Learn how to implement authentication in your Next.js application.
+- `01-app/02-guides/backend-for-frontend.md` — **How to use Next.js as a backend for your frontend**: Learn how to use Next.js as a backend framework
+- `01-app/02-guides/building.md` — **Building your application**: Learn what happens when you run next build and how to read the build output.
+- `01-app/02-guides/caching-without-cache-components.md` — **Caching and Revalidating (Previous Model)**: Learn how to cache and revalidate data using fetch options, unstable_cache, and route segment configs for projects not u
+- `01-app/02-guides/cdn-caching.md` — **Using a CDN with Next.js**: Learn how CDN caching works with Next.js, including what works today, cache variability, and the direction toward pathna
+- `01-app/02-guides/ci-build-caching.md` — **How to configure Continuous Integration (CI) build caching**: Learn how to configure CI to cache Next.js builds
+- `01-app/02-guides/client-side-data-fetching/index.md` — **Client-side data fetching**: Fetch data in Client Components with a data-fetching library, optionally provide initial data from a Server Component, a
+- `01-app/02-guides/client-side-data-fetching/swr.md` — **How to fetch client-side data with SWR**: Fetch client-side data with SWR, optionally provide initial data from a Server Component, and coordinate server and clie
+- `01-app/02-guides/client-side-data-fetching/tanstack-query.md` — **How to fetch client-side data with TanStack Query**: Fetch client-side data with TanStack Query, optionally provide initial data from a Server Component, and coordinate serv
+- `01-app/02-guides/content-security-policy.md` — **How to set a Content Security Policy (CSP) for your Next.js application**: Learn how to set a Content Security Policy (CSP) for your Next.js application.
+- `01-app/02-guides/css-in-js.md` — **How to use CSS-in-JS libraries**: Use CSS-in-JS libraries with Next.js
+- `01-app/02-guides/custom-server.md` — **How to set up a custom server in Next.js**: Start a Next.js app programmatically using a custom server.
+- `01-app/02-guides/custom-webpack.md` — **How to use a custom webpack version in Next.js**: Use your application's webpack installation with Next.js instead of the bundled version.
+- `01-app/02-guides/data-security.md` — **How to think about data security in Next.js**: Learn the built-in data security features in Next.js and learn best practices for protecting your application's data.
+- `01-app/02-guides/debugging.md` — **How to use debugging tools with Next.js**: Learn how to debug your Next.js application with VS Code, Chrome DevTools, or Firefox DevTools.
+- `01-app/02-guides/deploying-to-platforms.md` — **Deploying Next.js to different platforms**: Understand which Next.js features require specific platform capabilities and how to choose the right deployment target.
+- `01-app/02-guides/draft-mode.md` — **How to preview content with Draft Mode in Next.js**: Bypass Next.js caching for a request so editors can preview unpublished content from a headless CMS.
+- `01-app/02-guides/environment-variables.md` — **How to use environment variables in Next.js**: Learn to add and access environment variables in your Next.js application.
+- `01-app/02-guides/forms.md` — **How to create forms with Server Actions**: Learn how to create forms in Next.js with React Server Actions.
+- `01-app/02-guides/how-revalidation-works.md` — **How revalidation works in Next.js**: A deep dive into how Next.js revalidates cached content, including the tag system, cache consistency, and multi-instance
+- `01-app/02-guides/incremental-static-regeneration-cache-components.md` — **Incremental Static Regeneration with Cache Components**: Learn how to prerender a subset of dynamic routes, serve App Shells for the rest, and upgrade them after the first visit
+- `01-app/02-guides/incremental-static-regeneration.md` — **How to implement Incremental Static Regeneration (ISR)**: Learn how to create or update static pages at runtime with Incremental Static Regeneration.
+- `01-app/02-guides/index.md` — **Guides**: Learn how to implement common patterns and real-world use cases using Next.js
+- `01-app/02-guides/instant-navigation.md` — **Ensuring instant navigations**: Learn how to structure your app to prefetch and prerender more content, providing instant page loads and client navigati
+- `01-app/02-guides/instrumentation.md` — **How to set up instrumentation**: Learn how to use instrumentation to run code at server startup in your Next.js app
+- `01-app/02-guides/interactive-apps.md` — **Building interactive apps**: Learn how to build responsive interactions with Server Functions, transitions, optimistic UI, and pending feedback.
+- `01-app/02-guides/internationalization.md` — **Internationalization**: Add support for multiple languages with internationalized routing and localized content.
+- `01-app/02-guides/json-ld.md` — **How to implement JSON-LD in your Next.js application**: Learn how to add JSON-LD to your Next.js application to describe your content to search engines and AI.
+- `01-app/02-guides/keeping-pages-static.md` — **Keeping pages static**: Keep selected route output static as your app changes.
+- `01-app/02-guides/lazy-loading.md` — **How to lazy load Client Components and libraries**: Lazy load imported libraries and React Components to improve your application's loading performance.
+- `01-app/02-guides/local-development.md` — **How to optimize your local development environment**: Learn how to optimize your local development environment with Next.js.
+- `01-app/02-guides/mcp.md` — **Connecting coding agents to the Next.js MCP server**: Learn how to give coding agents access to your running Next.js app through the built-in MCP endpoint.
+- `01-app/02-guides/mdx.md` — **How to use markdown and MDX in Next.js**: Learn how to configure MDX and use it in your Next.js apps.
+- `01-app/02-guides/memory-usage.md` — **How to optimize memory usage**: Optimize memory used by your application in development and production.
+- `01-app/02-guides/migrating-to-cache-components.md` — **Migrating to Cache Components**: Learn how to migrate from route segment configs to Cache Components in Next.js.
+- `01-app/02-guides/migrating/app-router-migration.md` — **How to migrate from Pages to the App Router**: Learn how to upgrade your existing Next.js application from the Pages Router to the App Router.
+- `01-app/02-guides/migrating/from-create-react-app.md` — **How to migrate from Create React App to Next.js**: Learn how to migrate your existing React application from Create React App to Next.js.
+- `01-app/02-guides/migrating/from-vite.md` — **How to migrate from Vite to Next.js**: Learn how to migrate your existing React application from Vite to Next.js.
+- `01-app/02-guides/migrating/index.md` — **Migrating**: Learn how to migrate from popular frameworks to Next.js
+- `01-app/02-guides/multi-tenant.md` — **How to build multi-tenant apps in Next.js**: Learn how to build multi-tenant apps with the App Router.
+- `01-app/02-guides/multi-zones.md` — **How to build micro-frontends using multi-zones and Next.js**: Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
+- `01-app/02-guides/offline-support.md` — **Handling connectivity drops**: How a Next.js app can recover when the network drops mid-fetch or mid-Server Action, and how to communicate that state t
+- `01-app/02-guides/open-telemetry.md` — **How to set up instrumentation with OpenTelemetry**: Learn how to instrument your Next.js app with OpenTelemetry.
+- `01-app/02-guides/optimizing-prefetching.md` — **Optimizing prefetching**: Resolve per-link URL data, include session data in the App Shell, or defer expensive work to a later navigation stage.
+- `01-app/02-guides/optimizing-the-static-shell.md` — **Optimizing the static shell**: Learn how to use Cache Components to keep layouts, navigation, and useful loading states available while request-time co
+- `01-app/02-guides/package-bundling.md` — **Optimizing package bundling**: Learn how to analyze and optimize your application's server and client bundles with the Next.js Bundle Analyzer for Turb
+- `01-app/02-guides/ppr-platform-guide.md` — **Implementing Partial Prerendering on your platform**: A guide for platform engineers on implementing PPR support, from basic origin rendering to optimized CDN integration.
+- `01-app/02-guides/prefetching.md` — **Prefetching**: Learn how to configure prefetching in Next.js
+- `01-app/02-guides/preserving-ui-state.md` — **How Next.js preserves UI state with Activity**: Learn how React's Activity component preserves UI state across navigations in Next.js and how to control what resets.
+- `01-app/02-guides/preventing-flash-before-hydration.md` — **How to prevent flash before hydration**: Learn how to prevent a flash of unstyled content (FOUC) by correcting server-rendered HTML, such as a dark mode theme, b
+- `01-app/02-guides/production-checklist.md` — **How to optimize your Next.js application for production**: Recommendations to ensure the best performance and user experience before taking your Next.js application to production.
+- `01-app/02-guides/progressive-web-apps.md` — **How to build a Progressive Web Application (PWA) with Next.js**: Learn how to build a Progressive Web Application (PWA) with Next.js.
+- `01-app/02-guides/public-static-pages.md` — **Building public pages**: Learn how to build public, "static" pages that share data across users, such as landing pages, list pages (products, blo
+- `01-app/02-guides/redirecting.md` — **How to handle redirects in Next.js**: Learn the different ways to handle redirects in Next.js.
+- `01-app/02-guides/rendering-philosophy.md` — **Next.js Rendering Philosophy**: Learn how Next.js treats static and dynamic rendering as a spectrum at the component level, and what this means for depl
+- `01-app/02-guides/sass.md` — **How to use Sass**: Style your Next.js application using Sass.
+- `01-app/02-guides/scripts.md` — **How to load and optimize scripts**: Optimize 3rd party scripts with the built-in Script component.
+- `01-app/02-guides/self-hosting.md` — **How to self-host your Next.js application**: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports)
+- `01-app/02-guides/server-actions.md` — **Server Actions and Mutations**: How Server Actions work in Next.js, including the single-roundtrip response model, sequential dispatch, security, and ca
+- `01-app/02-guides/server-and-client-boundary.md` — **The Server and Client Boundary**: Learn where Server and Client Components run in the App Router and how the boundary between them works.
+- `01-app/02-guides/single-page-applications.md` — **How to build single-page applications with Next.js**: Next.js fully supports building Single-Page Applications (SPAs).
+- `01-app/02-guides/static-exports.md` — **How to create a static export of your Next.js application**: Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use featu
+- `01-app/02-guides/streaming.md` — **Streaming**: Learn how streaming works in Next.js and how to use it to progressively render UI as data becomes available.
+- `01-app/02-guides/tailwind-v3-css.md` — **How to install Tailwind CSS v3 in your Next.js application**: Style your Next.js Application using Tailwind CSS v3 for broader browser support.
+- `01-app/02-guides/testing/cypress.md` — **How to set up Cypress with Next.js**: Learn how to set up Cypress with Next.js for End-to-End (E2E) and Component Testing.
+- `01-app/02-guides/testing/index.md` — **Testing**: Learn how to set up Next.js with four commonly used testing tools — Cypress, Playwright, Vitest, and Jest.
+- `01-app/02-guides/testing/jest.md` — **How to set up Jest with Next.js**: Learn how to set up Jest with Next.js for Unit Testing and Snapshot Testing.
+- `01-app/02-guides/testing/playwright.md` — **How to set up Playwright with Next.js**: Learn how to set up Playwright with Next.js for End-to-End (E2E) Testing.
+- `01-app/02-guides/testing/vitest.md` — **How to set up Vitest with Next.js**: Learn how to set up Vitest with Next.js for Unit Testing.
+- `01-app/02-guides/third-party-libraries.md` — **How to optimize third-party libraries**: Optimize the performance of third-party libraries in your application with the `@next/third-parties` package.
+- `01-app/02-guides/upgrading/agent-upgrade.md` — **Upgrade with a coding agent**: Use a coding agent to upgrade and verify a Next.js app.
+- `01-app/02-guides/upgrading/codemods.md` — **Codemods**: Use codemods to upgrade your Next.js codebase when new features are released.
+- `01-app/02-guides/upgrading/index.md` — **Upgrade Guides**: Learn how to upgrade to the latest versions of Next.js.
+- `01-app/02-guides/upgrading/version-14.md` — **How to upgrade to version 14**: Upgrade your Next.js Application from Version 13 to 14.
+- `01-app/02-guides/upgrading/version-15.md` — **How to upgrade to version 15**: Upgrade your Next.js Application from Version 14 to 15.
+- `01-app/02-guides/upgrading/version-16.md` — **How to upgrade to version 16**: Upgrade your Next.js Application from Version 15 to 16.
+- `01-app/02-guides/videos.md` — **How to use and optimize videos**: Recommendations and best practices for optimizing videos in your Next.js application.
+- `01-app/02-guides/view-transitions.md` — **Designing view transitions**: Learn how to use view transitions to communicate meaning during navigation, loading, and content changes in a Next.js ap
+- `01-app/03-api-reference/01-directives/index.md` — **Directives**: Learn how React and Next.js directives define client entry points, Server Functions, and cached output.
+- `01-app/03-api-reference/01-directives/use-cache-private.md` — **use cache: private**: Learn how to use the "use cache: private" directive to cache functions that access runtime request APIs.
+- `01-app/03-api-reference/01-directives/use-cache-remote.md` — **use cache: remote**: Learn how to use the "use cache: remote" directive for persistent, shared caching using remote cache handlers.
+- `01-app/03-api-reference/01-directives/use-cache.md` — **use cache**: Learn how to use the "use cache" directive to cache data in your Next.js application.
+- `01-app/03-api-reference/01-directives/use-client.md` — **use client**: Learn how to use the use client directive to render a component on the client.
+- `01-app/03-api-reference/01-directives/use-server.md` — **use server**: Learn how to use the use server directive to execute code on the server.
+- `01-app/03-api-reference/02-components/font.md` — **Font Module**: Optimizing loading web fonts with the built-in `next/font` loaders.
+- `01-app/03-api-reference/02-components/form.md` — **Form Component**: Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation
+- `01-app/03-api-reference/02-components/image.md` — **Image Component**: Optimize Images in your Next.js Application using the built-in `next/image` Component.
+- `01-app/03-api-reference/02-components/index.md` — **Components**: API Reference for Next.js built-in components.
+- `01-app/03-api-reference/02-components/link.md` — **Link Component**: Enable fast client-side navigation with the built-in `next/link` component.
+- `01-app/03-api-reference/02-components/script.md` — **Script Component**: Optimize third-party scripts in your Next.js application using the built-in `next/script` Component.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/app-icons.md` — **favicon, icon, and apple-icon**: API Reference for the Favicon, Icon and Apple Icon file conventions.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/index.md` — **Metadata Files API Reference**: API documentation for the metadata file conventions.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/manifest.md` — **manifest.json**: API Reference for manifest.json file.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/opengraph-image.md` — **opengraph-image and twitter-image**: API Reference for the Open Graph Image and Twitter Image file conventions.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/robots.md` — **robots.txt**: API Reference for robots.txt file.
+- `01-app/03-api-reference/03-file-conventions/01-metadata/sitemap.md` — **sitemap.xml**: API Reference for the sitemap.xml file.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/dynamicParams.md` — **dynamicParams**: API reference for the dynamicParams route segment config option.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/ensureStatic.md` — **ensureStatic**: Require selected route output to remain static instead of rendering per request with the ensureStatic route segment conf
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/index.md` — **Route Segment Config**: Learn about how to configure options for Next.js route segments.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/instant.md` — **instant**: Configure instant navigation validation for a route segment.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/maxDuration.md` — **maxDuration**: API reference for the maxDuration route segment config option.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/preferredRegion.md` — **preferredRegion (deprecated)**: API reference for the preferredRegion route segment config option.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/prefetch.md` — **prefetch**: Configure how a route segment is prefetched during client navigation.
+- `01-app/03-api-reference/03-file-conventions/02-route-segment-config/runtime.md` — **runtime**: API reference for the runtime route segment config option.
+- `01-app/03-api-reference/03-file-conventions/default.md` — **default.js**: API Reference for the default.js file.
+- `01-app/03-api-reference/03-file-conventions/dynamic-routes.md` — **Dynamic Route Segments**: Use Dynamic Segments to read URL path params and generate routes from dynamic data.
+- `01-app/03-api-reference/03-file-conventions/error.md` — **error.js**: API reference for the error.js special file.
+- `01-app/03-api-reference/03-file-conventions/forbidden.md` — **forbidden.js**: API reference for the forbidden.js special file.
+- `01-app/03-api-reference/03-file-conventions/index.md` — **File-system conventions**: API Reference for Next.js file-system conventions.
+- `01-app/03-api-reference/03-file-conventions/instrumentation-client.md` — **instrumentation-client.js**: Learn how to add client-side instrumentation to track and monitor your Next.js application's frontend performance.
+- `01-app/03-api-reference/03-file-conventions/instrumentation.md` — **instrumentation.js**: API reference for the instrumentation.js file.
+- `01-app/03-api-reference/03-file-conventions/intercepting-routes.md` — **Intercepting Routes**: Use intercepting routes to load a new route within the current layout while masking the browser URL, useful for advanced
+- `01-app/03-api-reference/03-file-conventions/layout.md` — **layout.js**: API reference for the layout.js file.
+- `01-app/03-api-reference/03-file-conventions/loading.md` — **loading.js**: API reference for the loading.js file.
+- `01-app/03-api-reference/03-file-conventions/mdx-components.md` — **mdx-components.js**: API reference for the mdx-components.js file.
+- `01-app/03-api-reference/03-file-conventions/middleware.md` — **middleware.js**: API reference for the middleware.js file (deprecated, renamed to proxy.js).
+- `01-app/03-api-reference/03-file-conventions/not-found.md` — **not-found.js**: API reference for the not-found.js file.
+- `01-app/03-api-reference/03-file-conventions/page.md` — **page.js**: API reference for the page.js file.
+- `01-app/03-api-reference/03-file-conventions/parallel-routes.md` — **Parallel Routes**: Simultaneously render one or more pages in the same view that can be navigated independently. A pattern for highly dynam
+- `01-app/03-api-reference/03-file-conventions/proxy.md` — **proxy.js**: API reference for the proxy.js file.
+- `01-app/03-api-reference/03-file-conventions/public-folder.md` — **public Folder**: Next.js allows you to serve static files, like images, in the public directory. You can learn how it works here.
+- `01-app/03-api-reference/03-file-conventions/route-go.md` — **route.go**: API reference for building experimental Go API endpoints with the route.go file convention.
+- `01-app/03-api-reference/03-file-conventions/route-groups.md` — **Route Groups**: Route Groups can be used to partition your Next.js application into different sections.
+- `01-app/03-api-reference/03-file-conventions/route.md` — **route.js**: API reference for the route.js special file.
+- `01-app/03-api-reference/03-file-conventions/src-folder.md` — **src Folder**: Save pages under the `src` folder as an alternative to the root `pages` directory.
+- `01-app/03-api-reference/03-file-conventions/template.md` — **template.js**: API Reference for the template.js file.
+- `01-app/03-api-reference/03-file-conventions/unauthorized.md` — **unauthorized.js**: API reference for the unauthorized.js special file.
+- `01-app/03-api-reference/04-functions/after.md` — **after**: API Reference for the after function.
+- `01-app/03-api-reference/04-functions/cacheLife.md` — **cacheLife**: Learn how to use the cacheLife function to set the cache expiration time for a cached function or component.
+- `01-app/03-api-reference/04-functions/cacheTag.md` — **cacheTag**: Learn how to use the cacheTag function to manage cache invalidation in your Next.js application.
+- `01-app/03-api-reference/04-functions/catchError.md` — **catchError**: API Reference for the catchError function.
+- `01-app/03-api-reference/04-functions/connection.md` — **connection**: API Reference for the connection function.
+- `01-app/03-api-reference/04-functions/cookies.md` — **cookies**: API Reference for the cookies function.
+- `01-app/03-api-reference/04-functions/draft-mode.md` — **draftMode**: API Reference for the draftMode function.
+- `01-app/03-api-reference/04-functions/fetch.md` — **fetch**: API reference for the extended fetch function.
+- `01-app/03-api-reference/04-functions/forbidden.md` — **forbidden**: API Reference for the forbidden function.
+- `01-app/03-api-reference/04-functions/generate-image-metadata.md` — **generateImageMetadata**: Learn how to generate multiple images in a single Metadata API special file.
+- `01-app/03-api-reference/04-functions/generate-metadata.md` — **generateMetadata**: Learn how to add Metadata to your Next.js application for improved search engine optimization (SEO) and web shareability
+- `01-app/03-api-reference/04-functions/generate-sitemaps.md` — **generateSitemaps**: Learn how to use the generateSitemaps function to create multiple sitemaps for your application.
+- `01-app/03-api-reference/04-functions/generate-static-params.md` — **generateStaticParams**: API reference for the generateStaticParams function.
+- `01-app/03-api-reference/04-functions/generate-viewport.md` — **generateViewport**: API Reference for the generateViewport function.
+- `01-app/03-api-reference/04-functions/headers.md` — **headers**: API reference for the headers function.
+- `01-app/03-api-reference/04-functions/image-optimizer-transform.md` — **next/experimental/image-optimizer-transform**: API Reference for the next/experimental/image-optimizer-transform module, the standalone sharp-based image resizing and 
+- `01-app/03-api-reference/04-functions/image-response.md` — **ImageResponse**: API Reference for the ImageResponse constructor.
+- `01-app/03-api-reference/04-functions/index.md` — **Functions**: API Reference for Next.js Functions and Hooks.
+- `01-app/03-api-reference/04-functions/io.md` — **io**: API Reference for the io function.
+- `01-app/03-api-reference/04-functions/navigation.md` — **navigation**: Defer runtime work until the user navigates with the navigation function.
+- `01-app/03-api-reference/04-functions/next-request.md` — **NextRequest**: API Reference for NextRequest.
+- `01-app/03-api-reference/04-functions/next-response.md` — **NextResponse**: API Reference for NextResponse.
+- `01-app/03-api-reference/04-functions/next-root-params.md` — **next/root-params**: API Reference for the next/root-params module that provides access to root-level route parameters.
+- `01-app/03-api-reference/04-functions/not-found.md` — **notFound**: API Reference for the notFound function.
+- `01-app/03-api-reference/04-functions/permanentRedirect.md` — **permanentRedirect**: API Reference for the permanentRedirect function.
+- `01-app/03-api-reference/04-functions/prefetch.md` — **prefetch**: Defer runtime work until a per-link prefetch or navigation with the prefetch function.
+- `01-app/03-api-reference/04-functions/redirect.md` — **redirect**: API Reference for the redirect function.
+- `01-app/03-api-reference/04-functions/refresh.md` — **refresh**: API Reference for the refresh function.
+- `01-app/03-api-reference/04-functions/revalidatePath.md` — **revalidatePath**: API Reference for the revalidatePath function.
+- `01-app/03-api-reference/04-functions/revalidateTag.md` — **revalidateTag**: API Reference for the revalidateTag function.
+- `01-app/03-api-reference/04-functions/unauthorized.md` — **unauthorized**: API Reference for the unauthorized function.
+- `01-app/03-api-reference/04-functions/unstable_cache.md` — **unstable_cache**: API Reference for the unstable_cache function.
+- `01-app/03-api-reference/04-functions/unstable_noStore.md` — **unstable_noStore**: API Reference for the unstable_noStore function.
+- `01-app/03-api-reference/04-functions/unstable_rethrow.md` — **unstable_rethrow**: API Reference for the unstable_rethrow function.
+- `01-app/03-api-reference/04-functions/updateTag.md` — **updateTag**: API Reference for the updateTag function.
+- `01-app/03-api-reference/04-functions/use-link-status.md` — **useLinkStatus**: API Reference for the useLinkStatus hook.
+- `01-app/03-api-reference/04-functions/use-offline.md` — **useOffline**: API Reference for the useOffline hook.
+- `01-app/03-api-reference/04-functions/use-params.md` — **useParams**: API Reference for the useParams hook.
+- `01-app/03-api-reference/04-functions/use-pathname.md` — **usePathname**: API Reference for the usePathname hook.
+- `01-app/03-api-reference/04-functions/use-report-web-vitals.md` — **useReportWebVitals**: Measure Core Web Vitals (LCP, CLS, INP) plus FCP and TTFB, and report them to any analytics provider with the `useReport
+- `01-app/03-api-reference/04-functions/use-router.md` — **useRouter**: API reference for the useRouter hook.
+- `01-app/03-api-reference/04-functions/use-search-params.md` — **useSearchParams**: API Reference for the useSearchParams hook.
+- `01-app/03-api-reference/04-functions/use-selected-layout-segment.md` — **useSelectedLayoutSegment**: API Reference for the useSelectedLayoutSegment hook.
+- `01-app/03-api-reference/04-functions/use-selected-layout-segments.md` — **useSelectedLayoutSegments**: API Reference for the useSelectedLayoutSegments hook.
+- `01-app/03-api-reference/04-functions/use-server-inserted-html.md` — **useServerInsertedHTML**: API Reference for the useServerInsertedHTML hook.
+- `01-app/03-api-reference/04-functions/userAgent.md` — **userAgent**: The userAgent helper extends the Web Request API with additional properties and methods to interact with the user agent 
+- `01-app/03-api-reference/05-config/01-next-config-js/adapterPath.md` — **adapterPath**: Configure a custom adapter for Next.js to hook into the build process.
+- `01-app/03-api-reference/05-config/01-next-config-js/agentFeedback.md` — **agentFeedback**: Enable a review flow for Next.js issue reports prepared by AI coding agents.
+- `01-app/03-api-reference/05-config/01-next-config-js/agentRules.md` — **agentRules**: Configure whether Next.js creates instructions for AI coding agents.
+- `01-app/03-api-reference/05-config/01-next-config-js/agentUpgrade.md` — **agentUpgrade**: Configure coding agent upgrades and reminders.
+- `01-app/03-api-reference/05-config/01-next-config-js/allowedDevOrigins.md` — **allowedDevOrigins**: Use `allowedDevOrigins` to configure additional origins that can request the dev server.
+- `01-app/03-api-reference/05-config/01-next-config-js/appDir.md` — **appDir**: Enable the App Router to use layouts, streaming, and more.
+- `01-app/03-api-reference/05-config/01-next-config-js/assetPrefix.md` — **assetPrefix**: Learn how to use the assetPrefix config option to configure your CDN.
+- `01-app/03-api-reference/05-config/01-next-config-js/authInterrupts.md` — **authInterrupts**: Learn how to enable the experimental `authInterrupts` configuration option to use `forbidden` and `unauthorized`.
+- `01-app/03-api-reference/05-config/01-next-config-js/basePath.md` — **basePath**: Use `basePath` to deploy a Next.js application under a sub-path of a domain.
+- `01-app/03-api-reference/05-config/01-next-config-js/cacheComponents.md` — **cacheComponents**: Learn how to enable the cacheComponents flag in Next.js.
+- `01-app/03-api-reference/05-config/01-next-config-js/cacheHandlers.md` — **cacheHandlers**: Configure custom cache handlers for use cache directives in Next.js.
+- `01-app/03-api-reference/05-config/01-next-config-js/cacheLife.md` — **cacheLife**: Learn how to set up cacheLife configurations in Next.js.
+- `01-app/03-api-reference/05-config/01-next-config-js/cacheMaxMemorySize.md` — **cacheMaxMemorySize**: Configure the size of the in-memory cache that Next.js keeps in each server instance.
+- `01-app/03-api-reference/05-config/01-next-config-js/compress.md` — **compress**: Next.js provides gzip compression to compress rendered content and static files, it only works with the server target. L
+- `01-app/03-api-reference/05-config/01-next-config-js/crossOrigin.md` — **crossOrigin**: Use the `crossOrigin` option to add a crossOrigin attribute to the `script` tags generated by `next/script`.
+- `01-app/03-api-reference/05-config/01-next-config-js/cssChunking.md` — **cssChunking**: Use the `cssChunking` option to control how CSS files are chunked in your Next.js application.
+- `01-app/03-api-reference/05-config/01-next-config-js/deploymentId.md` — **deploymentId**: Configure a deployment identifier used for version skew protection and cache busting.
+- `01-app/03-api-reference/05-config/01-next-config-js/devIndicators.md` — **devIndicators**: Configuration options for the on-screen indicator that gives context about the current route you're viewing during devel
+- `01-app/03-api-reference/05-config/01-next-config-js/distDir.md` — **distDir**: Set a custom build directory to use instead of the default .next directory.
+- `01-app/03-api-reference/05-config/01-next-config-js/enablePrerenderSourceMaps.md` — **enablePrerenderSourceMaps**: Enable source maps for errors during prerendering in next build.
+- `01-app/03-api-reference/05-config/01-next-config-js/env.md` — **env**: Learn to add and access environment variables in your Next.js application at build time.
+- `01-app/03-api-reference/05-config/01-next-config-js/expireTime.md` — **expireTime**: Customize stale-while-revalidate expire time for ISR enabled pages.
+- `01-app/03-api-reference/05-config/01-next-config-js/exportPathMap.md` — **exportPathMap**: Customize the pages that will be exported as HTML files when using `next export`.
+- `01-app/03-api-reference/05-config/01-next-config-js/exposeTestingApiInProductionBuild.md` — **exposeTestingApiInProductionBuild**: Expose the Instant Navigation testing API in production builds for end-to-end tests.
+- `01-app/03-api-reference/05-config/01-next-config-js/generateBuildId.md` — **generateBuildId**: Configure the build id, which is used to identify the current build in which your application is being served.
+- `01-app/03-api-reference/05-config/01-next-config-js/generateEtags.md` — **generateEtags**: Next.js will generate etags for every page by default. Learn more about how to disable etag generation here.
+- `01-app/03-api-reference/05-config/01-next-config-js/headers.md` — **headers**: Add custom HTTP headers to your Next.js app.
+- `01-app/03-api-reference/05-config/01-next-config-js/htmlLimitedBots.md` — **htmlLimitedBots**: Specify a list of user agents that should receive blocking metadata.
+- `01-app/03-api-reference/05-config/01-next-config-js/httpAgentOptions.md` — **httpAgentOptions**: Next.js will automatically use HTTP Keep-Alive by default. Learn more about how to disable HTTP Keep-Alive here.
+- `01-app/03-api-reference/05-config/01-next-config-js/images.md` — **images**: Custom configuration for the next/image loader
+- `01-app/03-api-reference/05-config/01-next-config-js/incrementalCacheHandlerPath.md` — **Custom Next.js Cache Handler**: Configure the Next.js cache used for storing and revalidating data to use any external service like Redis, Memcached, or
+- `01-app/03-api-reference/05-config/01-next-config-js/index.md` — **next.config.js**: Learn how to configure your application with next.config.js.
+- `01-app/03-api-reference/05-config/01-next-config-js/inlineCss.md` — **inlineCss**: Enable inline CSS support.
+- `01-app/03-api-reference/05-config/01-next-config-js/instrumentationClientInject.md` — **instrumentationClientInject**: Inject additional client-side instrumentation modules before the user's `instrumentation-client.{js,ts}` file.
+- `01-app/03-api-reference/05-config/01-next-config-js/logging.md` — **logging**: Configure logging behavior in the terminal when running Next.js in development mode, including fetch logging, incoming r
+- `01-app/03-api-reference/05-config/01-next-config-js/mdxRs.md` — **mdxRs**: Use the new Rust compiler to compile MDX files in the App Router.
+- `01-app/03-api-reference/05-config/01-next-config-js/onDemandEntries.md` — **onDemandEntries**: Configure how Next.js will dispose and keep in memory pages created in development.
+- `01-app/03-api-reference/05-config/01-next-config-js/optimizePackageImports.md` — **optimizePackageImports**: API Reference for optimizePackageImports Next.js Config Option
+- `01-app/03-api-reference/05-config/01-next-config-js/output.md` — **output**: Next.js automatically traces which files are needed by each page to allow for easy deployment of your application. Learn
+- `01-app/03-api-reference/05-config/01-next-config-js/outputHashSalt.md` — **outputHashSalt**: Learn how to incorporate a custom salt string into content-addressed output filenames.
+- `01-app/03-api-reference/05-config/01-next-config-js/pageExtensions.md` — **pageExtensions**: Extend the default page extensions used by Next.js when resolving pages in the Pages Router.
+- `01-app/03-api-reference/05-config/01-next-config-js/partialPrefetching.md` — **partialPrefetching**: Configure the default link prefetch behavior to fetch only the static parts of each route.
+- `01-app/03-api-reference/05-config/01-next-config-js/poweredByHeader.md` — **poweredByHeader**: Next.js will add the `x-powered-by` header by default. Learn to opt-out of it here.
+- `01-app/03-api-reference/05-config/01-next-config-js/prefetchInlining.md` — **prefetchInlining**: Override how the App Router bundles small prefetch responses together.
+- `01-app/03-api-reference/05-config/01-next-config-js/productionBrowserSourceMaps.md` — **productionBrowserSourceMaps**: Enables browser source map generation during the production build.
+- `01-app/03-api-reference/05-config/01-next-config-js/proxyClientMaxBodySize.md` — **proxyClientMaxBodySize**: Configure the maximum request body size when using proxy.
+- `01-app/03-api-reference/05-config/01-next-config-js/reactCompiler.md` — **reactCompiler**: Enable the React Compiler to automatically optimize component rendering.
+- `01-app/03-api-reference/05-config/01-next-config-js/reactMaxHeadersLength.md` — **reactMaxHeadersLength**: The maximum length of the headers that are emitted by React and added to the response.
+- `01-app/03-api-reference/05-config/01-next-config-js/reactStrictMode.md` — **reactStrictMode**: The complete Next.js runtime is now Strict Mode-compliant, learn how to opt-in
+- `01-app/03-api-reference/05-config/01-next-config-js/redirects.md` — **redirects**: Add redirects to your Next.js app.
+- `01-app/03-api-reference/05-config/01-next-config-js/rewrites.md` — **rewrites**: Add rewrites to your Next.js app.
+- `01-app/03-api-reference/05-config/01-next-config-js/sassOptions.md` — **sassOptions**: Configure Sass options.
+- `01-app/03-api-reference/05-config/01-next-config-js/serverActions.md` — **serverActions**: Configure Server Actions behavior in your Next.js application.
+- `01-app/03-api-reference/05-config/01-next-config-js/serverComponentsHmrCache.md` — **serverComponentsHmrCache**: Configure whether fetch responses in Server Components are cached across HMR refresh requests.
+- `01-app/03-api-reference/05-config/01-next-config-js/serverExternalPackages.md` — **serverExternalPackages**: Opt-out specific dependencies from the Server Components bundling and use native Node.js `require`.
+- `01-app/03-api-reference/05-config/01-next-config-js/skipProxyUrlNormalize.md` — **skipProxyUrlNormalize**: Let Proxy see the original request instead of Next.js's normalized version. Formerly skipMiddlewareUrlNormalize.
+- `01-app/03-api-reference/05-config/01-next-config-js/skipTrailingSlashRedirect.md` — **skipTrailingSlashRedirect**: Disable the automatic trailing slash redirects so you can handle trailing slashes yourself in Proxy.
+- `01-app/03-api-reference/05-config/01-next-config-js/staleTimes.md` — **staleTimes**: Learn how to override the invalidation time of the client cache.
+- `01-app/03-api-reference/05-config/01-next-config-js/staticGeneration.md` — **staticGeneration***: Learn how to configure static generation in your Next.js application.
+- `01-app/03-api-reference/05-config/01-next-config-js/supportsImmutableAssets.md` — **supportsImmutableAssets**: Configure support for immutable static assets
+- `01-app/03-api-reference/05-config/01-next-config-js/taint.md` — **taint**: Enable tainting Objects and Values.
+- `01-app/03-api-reference/05-config/01-next-config-js/trailingSlash.md` — **trailingSlash**: Configure Next.js pages to resolve with or without a trailing slash.
+- `01-app/03-api-reference/05-config/01-next-config-js/transpilePackages.md` — **transpilePackages**: Transpile and bundle dependencies from monorepo workspace packages or `node_modules` libraries that ship TypeScript, JSX
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopack.md` — **turbopack**: Configure Next.js with Turbopack-specific options
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackChunking.md` — **turbopackChunking**: Configure how Turbopack splits your client-side and server-side JavaScript into chunks in production.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackFileSystemCache.md` — **Turbopack FileSystem Caching**: Learn how to enable and configure FileSystem Caching for Turbopack builds
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackGc.md` — **turbopackGc**: Configure Turbopack to remove unreachable work from memory and the persistent cache.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackIgnoreIssue.md` — **turbopack.ignoreIssue**: Suppress specific Turbopack errors and warnings from the CLI output and error overlay.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackLazyDynamicImports.md` — **turbopackLazyDynamicImports**: Compile client-side dynamic imports when they are first requested during development.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackLazyDynamicImportsSSR.md` — **turbopackLazyDynamicImportsSSR**: Compile dynamic imports when server rendering first reaches them during development.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackLocalPostcssConfig.md` — **turbopackLocalPostcssConfig**: Enable per-directory PostCSS config resolution in Turbopack so that the config closest to each CSS file takes precedence
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackMemoryEviction.md` — **Turbopack Memory Eviction**: Learn how to control Turbopack's memory eviction strategy for the persistent cache.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackPluginRuntimeStrategy.md` — **turbopackPluginRuntimeStrategy**: Choose how Turbopack runs Node.js evaluation for webpack loaders, Babel, and PostCSS.
+- `01-app/03-api-reference/05-config/01-next-config-js/turbopackRustReactCompiler.md` — **turbopackRustReactCompiler**: Use the native Rust port of the React Compiler with Turbopack instead of the Babel transform.
+- `01-app/03-api-reference/05-config/01-next-config-js/typedRoutes.md` — **typedRoutes**: Enable support for statically typed links.
+- `01-app/03-api-reference/05-config/01-next-config-js/typescript.md` — **typescript**: Configure how Next.js handles TypeScript errors during production builds and specify a custom tsconfig file.
+- `01-app/03-api-reference/05-config/01-next-config-js/urlImports.md` — **urlImports**: Configure Next.js to allow importing modules from external URLs.
+- `01-app/03-api-reference/05-config/01-next-config-js/useLightningcss.md` — **useLightningcss**: Enable experimental support for Lightning CSS.
+- `01-app/03-api-reference/05-config/01-next-config-js/useOffline.md` — **useOffline**: Learn how to enable the experimental `useOffline` configuration option to detect connectivity and retry failed requests 
+- `01-app/03-api-reference/05-config/01-next-config-js/useTypeScriptCli.md` — **useTypeScriptCli**: Run the project-local TypeScript CLI for type checking during production builds.
+- `01-app/03-api-reference/05-config/01-next-config-js/webpack.md` — **Custom Webpack Config**: Learn how to customize the webpack config used by Next.js
+- `01-app/03-api-reference/05-config/01-next-config-js/webVitalsAttribution.md` — **webVitalsAttribution**: Learn how to use the webVitalsAttribution option to pinpoint the source of Web Vitals issues.
+- `01-app/03-api-reference/05-config/02-typescript.md` — **TypeScript**: Next.js provides a TypeScript-first development experience for building your React application.
+- `01-app/03-api-reference/05-config/03-eslint.md` — **ESLint Plugin**: Learn how to use and configure the ESLint plugin to catch common issues and problems in a Next.js application.
+- `01-app/03-api-reference/05-config/index.md` — **Configuration**: Learn how to configure Next.js applications.
+- `01-app/03-api-reference/06-cli/create-next-app.md` — **create-next-app**: Create Next.js apps using one command with the create-next-app CLI.
+- `01-app/03-api-reference/06-cli/index.md` — **CLI**: API Reference for the Next.js Command Line Interface (CLI) tools.
+- `01-app/03-api-reference/06-cli/next.md` — **next CLI**: Learn how to run and build your application with the Next.js CLI.
+- `01-app/03-api-reference/07-adapters/01-configuration.md` — **Configuration**: Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter.
+- `01-app/03-api-reference/07-adapters/02-creating-an-adapter.md` — **Creating an Adapter**: Create an adapter module that implements the `NextAdapter` interface.
+- `01-app/03-api-reference/07-adapters/03-api-reference.md` — **API Reference**: Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface.
+- `01-app/03-api-reference/07-adapters/04-testing-adapters.md` — **Testing Adapters**: Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
+- `01-app/03-api-reference/07-adapters/05-routing-with-next-routing.md` — **Routing with @next/routing**: Use `@next/routing` to apply Next.js route matching behavior in adapters.
+- `01-app/03-api-reference/07-adapters/06-implementing-ppr-in-an-adapter.md` — **Implementing PPR in an Adapter**: Implement Partial Prerendering support in an adapter using fallback output and cache hooks.
+- `01-app/03-api-reference/07-adapters/07-runtime-integration.md` — **Runtime Integration**: Understand how build-time adapters and runtime cache interfaces work together.
+- `01-app/03-api-reference/07-adapters/08-invoking-entrypoints.md` — **Invoking Entrypoints**: Invoke JavaScript build handlers and experimental Go HTTP server entrypoints.
+- `01-app/03-api-reference/07-adapters/09-output-types.md` — **Output Types**: Reference for all build output types exposed to adapters.
+- `01-app/03-api-reference/07-adapters/10-routing-information.md` — **Routing Information**: Reference for routing phases and route fields exposed in `onBuildComplete`.
+- `01-app/03-api-reference/07-adapters/11-use-cases.md` — **Use Cases**: Common patterns and examples for deployment adapter implementations.
+- `01-app/03-api-reference/07-adapters/12-immutable-static-assets.md` — **Supporting Immutable Static Assets**: Support immutable static assets in an adapter
+- `01-app/03-api-reference/07-adapters/index.md` — **Adapters**: Build deployment adapters for Next.js platforms and infrastructure.
+- `01-app/03-api-reference/07-edge.md` — **Edge Runtime**: API Reference for the Edge Runtime.
+- `01-app/03-api-reference/08-turbopack.md` — **Turbopack**: Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
+- `01-app/03-api-reference/index.md` — **API Reference**: Next.js API Reference for the App Router.
+- `01-app/04-glossary.md` — **Next.js Glossary**: A glossary of common terms used in Next.js.
+- `01-app/index.md` — **App Router**: The App Router is a file-system based router that uses React's latest features such as Server Components, Suspense, Serv
+
+### `02-pages` (168)
+- `02-pages/01-getting-started/01-installation.md` — **Create a new Next.js application**: How to create a new Next.js application with `create-next-app`. Set up TypeScript, ESLint,and configure your `next.confi
+- `02-pages/01-getting-started/02-project-structure.md` — **Project Structure and Organization**: Learn about the folder and file conventions in a Next.js project, and how to organize your project.
+- `02-pages/01-getting-started/04-images.md` — **Image Optimization**: Optimize your images with the built-in `next/image` component.
+- `02-pages/01-getting-started/05-fonts.md` — **How to use fonts**: Learn how to use fonts in Next.js
+- `02-pages/01-getting-started/06-css.md` — **How to use CSS in your application**: Learn about the different ways to add CSS to your application, including CSS Modules, Global CSS, Tailwind CSS, and more
+- `02-pages/01-getting-started/11-deploying.md` — **How to deploy your Next.js application**: Learn how to deploy your Next.js application.
+- `02-pages/01-getting-started/index.md` — **Getting Started - Pages Router**: Learn how to create full-stack web applications with Next.js with the Pages Router.
+- `02-pages/02-guides/analytics.md` — **How to set up analytics**: Measure and track page performance using Next.js
+- `02-pages/02-guides/authentication.md` — **How to implement authentication in Next.js**: Learn how to implement authentication in Next.js, covering best practices, securing routes, authorization techniques, an
+- `02-pages/02-guides/babel.md` — **How to configure Babel in Next.js**: Extend the babel preset added by Next.js with your own configs.
+- `02-pages/02-guides/ci-build-caching.md` — **How to configure Continuous Integration (CI) build caching**: Learn how to configure CI to cache Next.js builds
+- `02-pages/02-guides/content-security-policy.md` — **How to set a Content Security Policy (CSP) for your Next.js application**: Learn how to set a Content Security Policy (CSP) for your Next.js application.
+- `02-pages/02-guides/css-in-js.md` — **How to use CSS-in-JS libraries**: Use CSS-in-JS libraries with Next.js
+- `02-pages/02-guides/custom-server.md` — **How to set up a custom server in Next.js**: Start a Next.js app programmatically using a custom server.
+- `02-pages/02-guides/custom-webpack.md` — **How to use a custom webpack version in Next.js**: Use your application's webpack installation with Next.js instead of the bundled version.
+- `02-pages/02-guides/debugging.md` — **How to use debugging tools with Next.js**: Learn how to debug your Next.js application with VS Code or Chrome DevTools.
+- `02-pages/02-guides/draft-mode.md` — **How to preview content with Draft Mode in Next.js**: Next.js has draft mode to toggle between static and dynamic pages. You can learn how it works with Pages Router.
+- `02-pages/02-guides/environment-variables.md` — **How to use environment variables in Next.js**: Learn to add and access environment variables in your Next.js application.
+- `02-pages/02-guides/forms.md` — **How to create forms with API Routes**: Learn how to handle form submissions and data mutations with Next.js.
+- `02-pages/02-guides/incremental-static-regeneration.md` — **How to implement Incremental Static Regeneration (ISR)**: Learn how to create or update static pages at runtime with Incremental Static Regeneration.
+- `02-pages/02-guides/index.md` — **Guides**: Learn how to implement common UI patterns and use cases using Next.js
+- `02-pages/02-guides/instrumentation.md` — **How to set up instrumentation**: Learn how to use instrumentation to run code at server startup in your Next.js app
+- `02-pages/02-guides/internationalization.md` — **How to implement internationalization in Next.js**: Next.js has built-in support for internationalized routing and language detection. Learn more here.
+- `02-pages/02-guides/lazy-loading.md` — **How to lazy load Client Components and libraries**: Lazy load imported libraries and React Components to improve your application's overall loading performance.
+- `02-pages/02-guides/mdx.md` — **How to use markdown and MDX in Next.js**: Learn how to configure MDX to write JSX in your markdown files.
+- `02-pages/02-guides/migrating/app-router-migration.md` — **How to migrate from Pages to the App Router**: Learn how to upgrade your existing Next.js application from the Pages Router to the App Router.
+- `02-pages/02-guides/migrating/from-create-react-app.md` — **How to migrate from Create React App to Next.js**: Learn how to migrate your existing React application from Create React App to Next.js.
+- `02-pages/02-guides/migrating/from-vite.md` — **How to migrate from Vite to Next.js**: Learn how to migrate your existing React application from Vite to Next.js.
+- `02-pages/02-guides/migrating/index.md` — **Migrating**: Learn how to migrate from popular frameworks to Next.js
+- `02-pages/02-guides/multi-zones.md` — **How to build micro-frontends using multi-zones and Next.js**: Learn how to build micro-frontends using Next.js Multi-Zones to deploy multiple Next.js apps under a single domain.
+- `02-pages/02-guides/open-telemetry.md` — **How to instrument your Next.js app with OpenTelemetry**: Learn how to instrument your Next.js app with OpenTelemetry.
+- `02-pages/02-guides/package-bundling.md` — **How to optimize package bundling**: Learn how to optimize your application's server and client bundles.
+- `02-pages/02-guides/post-css.md` — **How to configure PostCSS in Next.js**: Extend the PostCSS config and plugins added by Next.js with your own.
+- `02-pages/02-guides/preview-mode.md` — **How to preview content with Preview Mode in Next.js**: Next.js has the preview mode for statically generated pages. You can learn how it works here.
+- `02-pages/02-guides/production-checklist.md` — **How to optimize your Next.js application for production**: Recommendations to ensure the best performance and user experience before taking your Next.js application to production.
+- `02-pages/02-guides/redirecting.md` — **How to handle redirects in Next.js**: Learn the different ways to handle redirects in Next.js.
+- `02-pages/02-guides/sass.md` — **How to use Sass in Next.js**: Learn how to use Sass in your Next.js application.
+- `02-pages/02-guides/scripts.md` — **How to load and optimize scripts**: Optimize 3rd party scripts with the built-in Script component.
+- `02-pages/02-guides/self-hosting.md` — **How to self-host your Next.js application**: Learn how to self-host your Next.js application on a Node.js server, Docker image, or static HTML files (static exports)
+- `02-pages/02-guides/static-exports.md` — **How to create a static export of your Next.js application**: Next.js enables starting as a static site or Single-Page Application (SPA), then later optionally upgrading to use featu
+- `02-pages/02-guides/tailwind-v3-css.md` — **Tailwind CSS**: Style your Next.js Application using Tailwind CSS.
+- `02-pages/02-guides/testing/cypress.md` — **How to set up Cypress with Next.js**: Learn how to set up Next.js with Cypress for End-to-End (E2E) and Component Testing.
+- `02-pages/02-guides/testing/index.md` — **Testing**: Learn how to set up Next.js with three commonly used testing tools — Cypress, Playwright, Vitest, and Jest.
+- `02-pages/02-guides/testing/jest.md` — **How to set up Jest with Next.js**: Learn how to set up Next.js with Jest for Unit Testing.
+- `02-pages/02-guides/testing/playwright.md` — **How to set up Playwright with Next.js**: Learn how to set up Next.js with Playwright for End-to-End (E2E) and Integration testing.
+- `02-pages/02-guides/testing/vitest.md` — **How to set up Vitest with Next.js**: Learn how to set up Next.js with Vitest and React Testing Library - two popular unit testing libraries.
+- `02-pages/02-guides/third-party-libraries.md` — **How to optimize third-party libraries**: Optimize the performance of third-party libraries in your application with the `@next/third-parties` package.
+- `02-pages/02-guides/upgrading/codemods.md` — **Codemods**: Use codemods to upgrade your Next.js codebase when new features are released.
+- `02-pages/02-guides/upgrading/index.md` — **Upgrading**: Learn how to upgrade to the latest versions of Next.js.
+- `02-pages/02-guides/upgrading/version-10.md` — **How to upgrade to version 10**: Upgrade your Next.js Application from Version 9 to Version 10.
+- `02-pages/02-guides/upgrading/version-11.md` — **How to upgrade to version 11**: Upgrade your Next.js Application from Version 10 to Version 11.
+- `02-pages/02-guides/upgrading/version-12.md` — **How to upgrade to version 12**: Upgrade your Next.js Application from Version 11 to Version 12.
+- `02-pages/02-guides/upgrading/version-13.md` — **How to upgrade to version 13**: Upgrade your Next.js Application from Version 12 to 13.
+- `02-pages/02-guides/upgrading/version-14.md` — **How to upgrade to version 14**: Upgrade your Next.js Application from Version 13 to 14.
+- `02-pages/02-guides/upgrading/version-15.md` — **How to upgrade to version 15**: Upgrade your Next.js Application from Version 14 to 15.
+- `02-pages/02-guides/upgrading/version-16.md` — **How to upgrade to version 16**: Upgrade your Next.js Application from Version 15 to 16.
+- `02-pages/02-guides/upgrading/version-9.md` — **How to upgrade to version 9**: Upgrade your Next.js Application from Version 8 to Version 9.
+- `02-pages/03-building-your-application/01-routing/01-pages-and-layouts.md` — **Pages and Layouts**: Create your first page and shared layout with the Pages Router.
+- `02-pages/03-building-your-application/01-routing/02-dynamic-routes.md` — **Dynamic Routes**: Dynamic Routes are pages that allow you to add custom params to your URLs. Start creating Dynamic Routes and learn more 
+- `02-pages/03-building-your-application/01-routing/03-linking-and-navigating.md` — **Linking and Navigating**: Learn how navigation works in Next.js, and how to use the Link Component and `useRouter` hook.
+- `02-pages/03-building-your-application/01-routing/05-custom-app.md` — **Custom App**: Control page initialization and add a layout that persists for all pages by overriding the default App component used by
+- `02-pages/03-building-your-application/01-routing/06-custom-document.md` — **Custom Document**: Extend the default document markup added by Next.js.
+- `02-pages/03-building-your-application/01-routing/07-api-routes.md` — **API Routes**: Next.js supports API Routes, which allow you to build your API without leaving your Next.js app. Learn how it works here
+- `02-pages/03-building-your-application/01-routing/08-custom-error.md` — **Custom Errors**: Override and extend the built-in Error page to handle custom errors.
+- `02-pages/03-building-your-application/01-routing/index.md` — **Routing**: Learn the fundamentals of routing for front-end applications with the Pages Router.
+- `02-pages/03-building-your-application/02-rendering/01-server-side-rendering.md` — **Server-side Rendering (SSR)**: Use Server-side Rendering to render pages on each request.
+- `02-pages/03-building-your-application/02-rendering/02-static-site-generation.md` — **Static Site Generation (SSG)**: Use Static Site Generation (SSG) to prerender pages at build time.
+- `02-pages/03-building-your-application/02-rendering/04-automatic-static-optimization.md` — **Automatic Static Optimization**: Next.js automatically optimizes your app to be static HTML whenever possible. Learn how it works here.
+- `02-pages/03-building-your-application/02-rendering/05-client-side-rendering.md` — **Client-side Rendering (CSR)**: Learn how to implement client-side rendering in the Pages Router.
+- `02-pages/03-building-your-application/02-rendering/index.md` — **Rendering**: Learn the fundamentals of rendering in React and Next.js.
+- `02-pages/03-building-your-application/03-data-fetching/01-get-static-props.md` — **getStaticProps**: Fetch data and generate static pages with `getStaticProps`. Learn more about this API for data fetching in Next.js.
+- `02-pages/03-building-your-application/03-data-fetching/02-get-static-paths.md` — **getStaticPaths**: Fetch data and generate static pages with `getStaticPaths`. Learn more about this API for data fetching in Next.js.
+- `02-pages/03-building-your-application/03-data-fetching/03-get-server-side-props.md` — **getServerSideProps**: Fetch data on each request with `getServerSideProps`.
+- `02-pages/03-building-your-application/03-data-fetching/05-client-side.md` — **Client-side Fetching**: Learn about client-side data fetching, and how to use SWR, a data fetching React Hook library that handles caching, reva
+- `02-pages/03-building-your-application/03-data-fetching/index.md` — **Data Fetching**: Next.js allows you to fetch data in multiple ways, with prerendering, server-side rendering or static-site generation, a
+- `02-pages/03-building-your-application/06-configuring/12-error-handling.md` — **Error Handling**: Handle errors in your Next.js app.
+- `02-pages/03-building-your-application/06-configuring/index.md` — **Configuring**: Learn how to configure your Next.js application.
+- `02-pages/03-building-your-application/index.md` — **Building Your Application**: Learn how to use Next.js features to build your application.
+- `02-pages/04-api-reference/01-components/font.md` — **Font Module**: API Reference for the Font Module
+- `02-pages/04-api-reference/01-components/form.md` — **Form**: Learn how to use the `<Form>` component to handle form submissions and search params updates with client-side navigation
+- `02-pages/04-api-reference/01-components/head.md` — **Head**: Add custom elements to the `head` of your page with the built-in Head component.
+- `02-pages/04-api-reference/01-components/image-legacy.md` — **Image (Legacy)**: Backwards compatible Image Optimization with the Legacy Image component.
+- `02-pages/04-api-reference/01-components/image.md` — **Image**: Optimize Images in your Next.js Application using the built-in `next/image` Component.
+- `02-pages/04-api-reference/01-components/index.md` — **Components**: API Reference for Next.js built-in components in the Pages Router.
+- `02-pages/04-api-reference/01-components/link.md` — **Link**: API reference for the `<Link>` component.
+- `02-pages/04-api-reference/01-components/script.md` — **Script**: Optimize third-party scripts in your Next.js application using the built-in `next/script` Component.
+- `02-pages/04-api-reference/02-file-conventions/index.md` — **File-system conventions**: API Reference for Next.js file-system conventions.
+- `02-pages/04-api-reference/02-file-conventions/instrumentation.md` — **instrumentation.js**: API reference for the instrumentation.js file.
+- `02-pages/04-api-reference/02-file-conventions/proxy.md` — **Proxy**: Learn how to use Proxy to run code before a request is completed.
+- `02-pages/04-api-reference/02-file-conventions/public-folder.md` — **public Folder**: Next.js allows you to serve static files, like images, in the public directory. You can learn how it works here.
+- `02-pages/04-api-reference/02-file-conventions/src-folder.md` — **src Directory**: Save pages under the `src` folder as an alternative to the root `pages` directory.
+- `02-pages/04-api-reference/03-functions/catchError.md` — **catchError**: API Reference for the catchError function.
+- `02-pages/04-api-reference/03-functions/get-initial-props.md` — **getInitialProps**: Fetch dynamic data on the server for your React component with getInitialProps.
+- `02-pages/04-api-reference/03-functions/get-server-side-props.md` — **getServerSideProps**: API reference for `getServerSideProps`. Learn how to fetch data on each request with Next.js.
+- `02-pages/04-api-reference/03-functions/get-static-paths.md` — **getStaticPaths**: API reference for `getStaticPaths`. Learn how to fetch data and generate static pages with `getStaticPaths`.
+- `02-pages/04-api-reference/03-functions/get-static-props.md` — **getStaticProps**: API reference for `getStaticProps`. Learn how to use `getStaticProps` to generate static pages with Next.js.
+- `02-pages/04-api-reference/03-functions/index.md` — **Functions**: API Reference for Functions and Hooks in Pages Router.
+- `02-pages/04-api-reference/03-functions/next-request.md` — **NextRequest**: API Reference for NextRequest.
+- `02-pages/04-api-reference/03-functions/next-response.md` — **NextResponse**: API Reference for NextResponse.
+- `02-pages/04-api-reference/03-functions/use-params.md` — **useParams**: API Reference for the useParams hook in the Pages Router.
+- `02-pages/04-api-reference/03-functions/use-report-web-vitals.md` — **useReportWebVitals**: Send Core Web Vitals to analytics with `useReportWebVitals`, and Next.js custom performance metrics with the `reportWebV
+- `02-pages/04-api-reference/03-functions/use-router.md` — **useRouter**: Learn more about the API of the Next.js Router, and access the router instance in your page with the useRouter hook.
+- `02-pages/04-api-reference/03-functions/use-search-params.md` — **useSearchParams**: API Reference for the useSearchParams hook in the Pages Router.
+- `02-pages/04-api-reference/03-functions/userAgent.md` — **userAgent**: The userAgent helper extends the Web Request API with additional properties and methods to interact with the user agent 
+- `02-pages/04-api-reference/04-config/01-next-config-js/adapterPath.md` — **adapterPath**: Configure a custom adapter for Next.js to hook into the build process.
+- `02-pages/04-api-reference/04-config/01-next-config-js/allowedDevOrigins.md` — **allowedDevOrigins**: Use `allowedDevOrigins` to configure additional origins that can request the dev server.
+- `02-pages/04-api-reference/04-config/01-next-config-js/assetPrefix.md` — **assetPrefix**: Learn how to use the assetPrefix config option to configure your CDN.
+- `02-pages/04-api-reference/04-config/01-next-config-js/basePath.md` — **basePath**: Use `basePath` to deploy a Next.js application under a sub-path of a domain.
+- `02-pages/04-api-reference/04-config/01-next-config-js/bundlePagesRouterDependencies.md` — **bundlePagesRouterDependencies**: Enable automatic dependency bundling for Pages Router
+- `02-pages/04-api-reference/04-config/01-next-config-js/compress.md` — **compress**: Next.js provides gzip compression to compress rendered content and static files, it only works with the server target. L
+- `02-pages/04-api-reference/04-config/01-next-config-js/crossOrigin.md` — **crossOrigin**: Use the `crossOrigin` option to add a crossOrigin tag on the `script` tags generated by `next/script` and `next/head`.
+- `02-pages/04-api-reference/04-config/01-next-config-js/deploymentId.md` — **deploymentId**: Configure a deployment identifier used for version skew protection and cache busting.
+- `02-pages/04-api-reference/04-config/01-next-config-js/devIndicators.md` — **devIndicators**: Optimized pages include an indicator to let you know if it's being statically optimized. You can opt-out of it here.
+- `02-pages/04-api-reference/04-config/01-next-config-js/distDir.md` — **distDir**: Set a custom build directory to use instead of the default .next directory.
+- `02-pages/04-api-reference/04-config/01-next-config-js/enablePrerenderSourceMaps.md` — **enablePrerenderSourceMaps**: Enable source maps for errors during prerendering in next build.
+- `02-pages/04-api-reference/04-config/01-next-config-js/env.md` — **env**: Learn to add and access environment variables in your Next.js application at build time.
+- `02-pages/04-api-reference/04-config/01-next-config-js/exportPathMap.md` — **exportPathMap**: Customize the pages that will be exported as HTML files when using `next export`.
+- `02-pages/04-api-reference/04-config/01-next-config-js/generateBuildId.md` — **generateBuildId**: Configure the build id, which is used to identify the current build in which your application is being served.
+- `02-pages/04-api-reference/04-config/01-next-config-js/generateEtags.md` — **generateEtags**: Next.js will generate etags for every page by default. Learn more about how to disable etag generation here.
+- `02-pages/04-api-reference/04-config/01-next-config-js/headers.md` — **headers**: Add custom HTTP headers to your Next.js app.
+- `02-pages/04-api-reference/04-config/01-next-config-js/httpAgentOptions.md` — **httpAgentOptions**: Next.js will automatically use HTTP Keep-Alive by default. Learn more about how to disable HTTP Keep-Alive here.
+- `02-pages/04-api-reference/04-config/01-next-config-js/images.md` — **images**: Custom configuration for the next/image loader
+- `02-pages/04-api-reference/04-config/01-next-config-js/index.md` — **next.config.js Options**: Learn about the options available in next.config.js for the Pages Router.
+- `02-pages/04-api-reference/04-config/01-next-config-js/logging.md` — **logging**: Configure logging behavior in the terminal when running Next.js in development mode.
+- `02-pages/04-api-reference/04-config/01-next-config-js/onDemandEntries.md` — **onDemandEntries**: Configure how Next.js will dispose and keep in memory pages created in development.
+- `02-pages/04-api-reference/04-config/01-next-config-js/optimizePackageImports.md` — **optimizePackageImports**: API Reference for optimizePackageImports Next.js Config Option
+- `02-pages/04-api-reference/04-config/01-next-config-js/output.md` — **output**: Next.js automatically traces which files are needed by each page to allow for easy deployment of your application. Learn
+- `02-pages/04-api-reference/04-config/01-next-config-js/pageExtensions.md` — **pageExtensions**: Extend the default page extensions used by Next.js when resolving pages in the Pages Router.
+- `02-pages/04-api-reference/04-config/01-next-config-js/poweredByHeader.md` — **poweredByHeader**: Next.js will add the `x-powered-by` header by default. Learn to opt-out of it here.
+- `02-pages/04-api-reference/04-config/01-next-config-js/productionBrowserSourceMaps.md` — **productionBrowserSourceMaps**: Enables browser source map generation during the production build.
+- `02-pages/04-api-reference/04-config/01-next-config-js/proxyClientMaxBodySize.md` — **experimental.proxyClientMaxBodySize**: Configure the maximum request body size when using proxy.
+- `02-pages/04-api-reference/04-config/01-next-config-js/reactStrictMode.md` — **reactStrictMode**: The complete Next.js runtime is now Strict Mode-compliant, learn how to opt-in
+- `02-pages/04-api-reference/04-config/01-next-config-js/redirects.md` — **redirects**: Add redirects to your Next.js app.
+- `02-pages/04-api-reference/04-config/01-next-config-js/rewrites.md` — **rewrites**: Add rewrites to your Next.js app.
+- `02-pages/04-api-reference/04-config/01-next-config-js/serverExternalPackages.md` — **serverExternalPackages**: Opt-out specific dependencies from the dependency bundling enabled by `bundlePagesRouterDependencies`.
+- `02-pages/04-api-reference/04-config/01-next-config-js/skipProxyUrlNormalize.md` — **skipProxyUrlNormalize**: Let Proxy see the original request instead of Next.js's normalized version. Formerly skipMiddlewareUrlNormalize.
+- `02-pages/04-api-reference/04-config/01-next-config-js/skipTrailingSlashRedirect.md` — **skipTrailingSlashRedirect**: Disable the automatic trailing slash redirects so you can handle trailing slashes yourself in Proxy.
+- `02-pages/04-api-reference/04-config/01-next-config-js/trailingSlash.md` — **trailingSlash**: Configure Next.js pages to resolve with or without a trailing slash.
+- `02-pages/04-api-reference/04-config/01-next-config-js/transpilePackages.md` — **transpilePackages**: Automatically transpile and bundle dependencies from local packages (like monorepos) or from external dependencies (`nod
+- `02-pages/04-api-reference/04-config/01-next-config-js/turbopack.md` — **turbopack**: Configure Next.js with Turbopack-specific options
+- `02-pages/04-api-reference/04-config/01-next-config-js/turbopackChunking.md` — **turbopackChunking**: Configure how Turbopack splits your client-side JavaScript into chunks in production.
+- `02-pages/04-api-reference/04-config/01-next-config-js/typescript.md` — **typescript**: Next.js reports TypeScript errors by default. Learn to opt-out of this behavior here.
+- `02-pages/04-api-reference/04-config/01-next-config-js/urlImports.md` — **urlImports**: Configure Next.js to allow importing modules from external URLs.
+- `02-pages/04-api-reference/04-config/01-next-config-js/useLightningcss.md` — **useLightningcss**: Enable experimental support for Lightning CSS.
+- `02-pages/04-api-reference/04-config/01-next-config-js/useTypeScriptCli.md` — **useTypeScriptCli**: Run the project-local TypeScript CLI for type checking during production builds.
+- `02-pages/04-api-reference/04-config/01-next-config-js/webpack.md` — **Custom Webpack Config**: Learn how to customize the webpack config used by Next.js
+- `02-pages/04-api-reference/04-config/01-next-config-js/webVitalsAttribution.md` — **webVitalsAttribution**: Learn how to use the webVitalsAttribution option to pinpoint the source of Web Vitals issues.
+- `02-pages/04-api-reference/04-config/01-typescript.md` — **TypeScript**: Next.js provides a TypeScript-first development experience for building your React application.
+- `02-pages/04-api-reference/04-config/02-eslint.md` — **ESLint**: Next.js reports ESLint errors and warnings during builds by default. Learn how to opt-out of this behavior here.
+- `02-pages/04-api-reference/04-config/index.md` — **Configuration**: Learn how to configure your Next.js application.
+- `02-pages/04-api-reference/05-cli/create-next-app.md` — **create-next-app CLI**: Create Next.js apps using one command with the create-next-app CLI.
+- `02-pages/04-api-reference/05-cli/index.md` — **CLI**: API Reference for the Next.js Command Line Interface (CLI) tools.
+- `02-pages/04-api-reference/05-cli/next.md` — **next CLI**: Learn how to run and build your application with the Next.js CLI.
+- `02-pages/04-api-reference/06-adapters/01-configuration.md` — **Configuration**: Configure `adapterPath` or `NEXT_ADAPTER_PATH` to use a custom deployment adapter.
+- `02-pages/04-api-reference/06-adapters/02-creating-an-adapter.md` — **Creating an Adapter**: Create an adapter module that implements the `NextAdapter` interface.
+- `02-pages/04-api-reference/06-adapters/03-api-reference.md` — **API Reference**: Reference for `modifyConfig` and `onBuildComplete` in the `NextAdapter` interface.
+- `02-pages/04-api-reference/06-adapters/04-testing-adapters.md` — **Testing Adapters**: Validate adapters with the Next.js compatibility test harness and custom lifecycle scripts.
+- `02-pages/04-api-reference/06-adapters/05-routing-with-next-routing.md` — **Routing with @next/routing**: Use `@next/routing` to apply Next.js route matching behavior in adapters.
+- `02-pages/04-api-reference/06-adapters/06-runtime-integration.md` — **Runtime Integration**: Understand how build-time adapters and runtime cache interfaces work together.
+- `02-pages/04-api-reference/06-adapters/07-invoking-entrypoints.md` — **Invoking Entrypoints**: Invoke Node.js and Edge build entrypoints with adapter runtime context.
+- `02-pages/04-api-reference/06-adapters/08-output-types.md` — **Output Types**: Reference for all build output types exposed to adapters.
+- `02-pages/04-api-reference/06-adapters/09-routing-information.md` — **Routing Information**: Reference for routing phases and route fields exposed in `onBuildComplete`.
+- `02-pages/04-api-reference/06-adapters/10-use-cases.md` — **Use Cases**: Common patterns and examples for deployment adapter implementations.
+- `02-pages/04-api-reference/06-adapters/index.md` — **Adapters**: Build deployment adapters for Next.js platforms and infrastructure.
+- `02-pages/04-api-reference/06-edge.md` — **Edge Runtime**: API Reference for the Edge Runtime.
+- `02-pages/04-api-reference/08-turbopack.md` — **Turbopack**: Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js.
+- `02-pages/04-api-reference/index.md` — **API Reference**: Next.js API Reference for the Pages Router.
+- `02-pages/index.md` — **Pages Router**: Before Next.js 13, the Pages Router was the main way to create routes in Next.js with an intuitive file-system router.
+
+### `03-architecture` (5)
+- `03-architecture/accessibility.md` — **Accessibility**: The built-in accessibility features of Next.js.
+- `03-architecture/fast-refresh.md` — **Fast Refresh**: Fast Refresh is a hot module reloading experience that gives you instantaneous feedback on edits made to your React comp
+- `03-architecture/index.md` — **Architecture**: How Next.js Works
+- `03-architecture/nextjs-compiler.md` — **Next.js Compiler**: Next.js Compiler, written in Rust, which transforms and minifies your Next.js application.
+- `03-architecture/supported-browsers.md` — **Supported Browsers**: Browser support and which JavaScript features are supported by Next.js.
+
+### `04-community` (3)
+- `04-community/01-contribution-guide.md` — **Docs Contribution Guide**: Learn how to contribute to Next.js Documentation
+- `04-community/02-rspack.md` — **Rspack Integration**: Use the `next-rspack` plugin to bundle your Next.js with Rspack.
+- `04-community/index.md` — **Next.js Community**: Get involved in the Next.js community.
+
+### `index.md` (1)
+- `index.md` — **Next.js Docs**: Welcome to the Next.js Documentation.

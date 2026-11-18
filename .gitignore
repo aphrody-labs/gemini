@@ -4,6 +4,7 @@
 !/.gitignore
 !/README.md
 !/package.json
+!/unified-manifest.json
 !/tsconfig.json
 !/bunfig.toml
 !/settings.template.json

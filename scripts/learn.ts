@@ -5,10 +5,12 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
+  rmSync,
   statSync,
   writeFileSync,
 } from "node:fs";
 import { spawn } from "node:child_process";
+import { homedir, hostname, platform } from "node:os";
 import { basename, dirname, join } from "node:path";
 import {
   detectHarness,
@@ -19,6 +21,7 @@ import {
   extractSessionId,
   extractToolName,
   GEMINI_ROOT,
+  HOME,
   LEARNING_DIR,
   MEMORY_DIR,
   RawHookEvent,
@@ -103,10 +106,10 @@ function responseText(resp: unknown): string {
 function maybeTriggerDistill(lineCount: number, state: LearnState): void {
   const delta = lineCount - state.lastLineCount;
   const elapsedMs = Date.now() - state.lastDistillAt;
-  if (delta >= 12 && elapsedMs >= 30 * 60 * 1000) {
+  if (delta >= 6 && elapsedMs >= 10 * 60 * 1000) {
     spawn(
       "bun",
-      ["--no-install", "--no-env-file", import.meta.path, "distill"],
+      ["--no-install", "--no-env-file", import.meta.path, "distill-quiet"],
       { detached: true, stdio: "ignore", windowsHide: true },
     ).unref();
   }
@@ -375,6 +378,176 @@ export function searchMemory(
   return [];
 }
 
+export interface CloudSyncState {
+  lastRevision: number;
+  lastPushLine: number;
+  lastCheckAt: number;
+}
+
+const CLOUD_STATE_PATH = join(LEARNING_DIR, "cloud-state.json");
+
+export function loadCloudState(path = CLOUD_STATE_PATH): CloudSyncState {
+  try {
+    return JSON.parse(readFileSync(path, "utf8")) as CloudSyncState;
+  } catch {
+    return { lastRevision: -1, lastPushLine: 0, lastCheckAt: 0 };
+  }
+}
+
+export function autoPromoteDigests(
+  inboxDir = INBOX_DIR,
+  memoryDir = MEMORY_DIR,
+): { promoted: number; filesRemoved: number } {
+  if (!existsSync(inboxDir)) return { promoted: 0, filesRemoved: 0 };
+  const digests = readdirSync(inboxDir).filter((f) => f.endsWith("-digest.md"));
+  if (digests.length === 0) return { promoted: 0, filesRemoved: 0 };
+
+  const targetMem = join(memoryDir, "learned-auto.md");
+  const curBody = existsSync(targetMem)
+    ? readFileSync(targetMem, "utf8")
+    : "# Autonomous Self-Learned Rules & Recoveries\n\nFolded without human intervention from hook telemetry.\n";
+  const seen = new Set(curBody.split(/\r?\n/).map((l) => l.trim()));
+  const additions: string[] = [];
+
+  for (const d of digests) {
+    const p = join(inboxDir, d);
+    const lines = readFileSync(p, "utf8").split(/\r?\n/);
+    for (const line of lines) {
+      const m = /^- \[(correction|recovery|error) x(\d+)\]\s+\([^)]+\)\s+(.+)$/.exec(line.trim());
+      if (!m) continue;
+      const [, kind, countStr, body] = m;
+      const count = Number(countStr);
+      if (kind === "correction" || kind === "recovery" || count >= 2) {
+        const entry = `- [${kind}] ${redactSecrets(body).slice(0, 220)}`;
+        if (!seen.has(entry)) {
+          seen.add(entry);
+          additions.push(entry);
+        }
+      }
+    }
+    rmSync(p, { force: true });
+  }
+
+  if (additions.length > 0) {
+    mkdirSync(memoryDir, { recursive: true });
+    writeFileSync(targetMem, `${curBody.trimEnd()}\n${additions.join("\n")}\n`, "utf8");
+    const indexPath = join(memoryDir, "MEMORY.md");
+    if (existsSync(indexPath)) {
+      const idx = readFileSync(indexPath, "utf8");
+      if (!idx.includes("(learned-auto.md)")) {
+        writeFileSync(
+          indexPath,
+          `${idx.trimEnd()}\n- [learned-auto](learned-auto.md) — Autonomously folded corrections and tool recoveries (zero approval required).\n`,
+          "utf8",
+        );
+      }
+    }
+  }
+  return { promoted: additions.length, filesRemoved: digests.length };
+}
+
+function resolveCloudConfig(): { url: string; token?: string; pcId: string } {
+  const url = (process.env.APHRODY_LEARN_URL?.trim() || "https://learn.aphrody.com").replace(/\/$/, "");
+  const tokenFile = join(homedir(), ".config", "aphrody", "learn.token");
+  const token =
+    process.env.APHRODY_LEARN_TOKEN?.trim() ||
+    process.env.APHRODY_FLEET_TOKEN?.trim() ||
+    (existsSync(tokenFile) ? readFileSync(tokenFile, "utf8").trim() : undefined);
+  const pcId = `${platform()}-${hostname().replace(/[^A-Za-z0-9_.-]/g, "_").slice(0, 32)}`;
+  return { url, token, pcId };
+}
+
+export async function syncCloudLearn(mode: "push" | "pull" | "cycle" = "cycle"): Promise<Record<string, unknown>> {
+  const { url, token, pcId } = resolveCloudConfig();
+  const cs = loadCloudState();
+  const headers: Record<string, string> = {
+    "content-type": "application/json",
+    ...(token ? { authorization: `Bearer ${token}` } : {}),
+  };
+  let pushed = 0;
+  let updatedRev = cs.lastRevision;
+
+  try {
+    if ((mode === "push" || mode === "cycle") && existsSync(JOURNAL_PATH)) {
+      const lines = readFileSync(JOURNAL_PATH, "utf8").split(/\r?\n/).filter(Boolean);
+      const start = Math.min(cs.lastPushLine, lines.length);
+      const batch = lines
+        .slice(start, start + 60)
+        .map((l) => {
+          try {
+            return JSON.parse(l) as JournalEntry;
+          } catch {
+            return null;
+          }
+        })
+        .filter((x): x is JournalEntry => x !== null && !!x.summary);
+      if (batch.length > 0) {
+        const res = await fetch(`${url}/api/learn/events?distill=1`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ harness: "agy", pcId, entries: batch }),
+          signal: AbortSignal.timeout(4000),
+        });
+        if (res.ok) {
+          pushed = batch.length;
+          cs.lastPushLine = Math.min(lines.length, start + 60);
+        }
+      } else {
+        cs.lastPushLine = lines.length;
+      }
+    }
+
+    if (mode === "pull" || mode === "cycle") {
+      const mUrl = cs.lastRevision >= 0 ? `${url}/api/learn/manifest.json?since=${cs.lastRevision}` : `${url}/api/learn/manifest.json`;
+      const man = await fetch(mUrl, { headers, signal: AbortSignal.timeout(3500) });
+      if (man.status === 200) {
+        const bRes = await fetch(`${url}/api/learn/bundle.json`, { headers, signal: AbortSignal.timeout(4500) });
+        if (bRes.ok) {
+          const bundle = (await bRes.json()) as {
+            revision: number;
+            updatedAt?: string;
+            memory?: { topics?: Record<string, { title: string; summary: string; bullets: string[] }> };
+            brain?: { docs?: Record<string, { path: string; content: string }> };
+            skills?: { deltas?: Record<string, { skill: string; notes: string[] }> };
+          };
+          const topicLines = ["# Aphrody Cloud Memory (rev " + bundle.revision + ")", ""];
+          for (const t of Object.values(bundle.memory?.topics ?? {})) {
+            topicLines.push(`## ${t.title}`, t.summary || "", ...t.bullets.slice(0, 10).map((b) => `- ${b}`), "");
+          }
+          mkdirSync(MEMORY_DIR, { recursive: true });
+          writeFileSync(join(MEMORY_DIR, "learned-cloud.md"), `${topicLines.join("\n").trim()}\n`, "utf8");
+          const indexPath = join(MEMORY_DIR, "MEMORY.md");
+          if (existsSync(indexPath)) {
+            const idx = readFileSync(indexPath, "utf8");
+            if (!idx.includes("(learned-cloud.md)")) {
+              writeFileSync(
+                indexPath,
+                `${idx.trimEnd()}\n- [learned-cloud](learned-cloud.md) — Serverless unified memory, brain, and skills synced across Aphrody PCs.\n`,
+                "utf8",
+              );
+            }
+          }
+          for (const doc of Object.values(bundle.brain?.docs ?? {})) {
+            const dst = join(GEMINI_ROOT, "brain", "cloud", doc.path.replace(/^\/+/, ""));
+            mkdirSync(dirname(dst), { recursive: true });
+            writeFileSync(dst, doc.content, "utf8");
+          }
+          updatedRev = bundle.revision;
+          cs.lastRevision = bundle.revision;
+          indexAll();
+        }
+      }
+    }
+  } catch {
+    // Non-blocking offline resilience.
+  }
+
+  cs.lastCheckAt = Date.now();
+  mkdirSync(dirname(CLOUD_STATE_PATH), { recursive: true });
+  writeFileSync(CLOUD_STATE_PATH, `${JSON.stringify(cs, null, 2)}\n`, "utf8");
+  return { ok: true, pushed, revision: updatedRev, home: HOME };
+}
+
 if (import.meta.main) {
   const mode = Bun.argv[2] ?? "status";
   if (mode === "capture") {
@@ -383,25 +556,33 @@ if (import.meta.main) {
     writeEmpty();
   } else if (mode === "distill") {
     const out = distillJournal();
-    console.log(out ? `Distilled -> ${out}` : "Nothing new to distill.");
+    const promoted = autoPromoteDigests();
+    if (promoted.promoted > 0) indexAll();
+    console.log(out ? `Distilled -> ${out} (auto-promoted ${promoted.promoted})` : `Auto-promoted ${promoted.promoted}`);
   } else if (mode === "distill-quiet") {
     await readHookEvent();
-    distillJournal(JOURNAL_PATH, INBOX_DIR, STATE_PATH, 12);
+    distillJournal(JOURNAL_PATH, INBOX_DIR, STATE_PATH, 4);
+    const promoted = autoPromoteDigests();
+    if (promoted.promoted > 0) indexAll();
+    await syncCloudLearn("cycle");
     writeEmpty();
+  } else if (mode === "cloud-sync") {
+    await readHookEvent();
+    const res = await syncCloudLearn("cycle");
+    console.log(JSON.stringify(res));
   } else if (mode === "nudge") {
     await readHookEvent();
-    const digests = existsSync(INBOX_DIR)
-      ? readdirSync(INBOX_DIR).filter((f) => f.endsWith("-digest.md"))
-      : [];
-    if (digests.length === 0) {
-      writeEmpty();
-    } else {
-      emitContext(
-        detectHarness(Bun.argv[3]),
-        "SessionStart",
-        `Learning inbox has ${digests.length} digest(s) in ${INBOX_DIR}. Fold durable rules into ~/.gemini/memory/, run bun ~/.gemini/scripts/sync.ts, and remove processed digests.`,
-      );
+    const promoted = autoPromoteDigests();
+    if (promoted.promoted > 0) indexAll();
+    const cloudState = loadCloudState();
+    if (Date.now() - cloudState.lastCheckAt > 120_000) {
+      spawn(
+        "bun",
+        ["--no-install", "--no-env-file", import.meta.path, "cloud-sync"],
+        { detached: true, stdio: "ignore", windowsHide: true },
+      ).unref();
     }
+    writeEmpty();
   } else if (mode === "index") {
     console.log(JSON.stringify(indexAll()));
   } else if (mode === "search") {

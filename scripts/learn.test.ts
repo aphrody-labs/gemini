@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { chunkMarkdown, distillJournal, openIndex, searchMemory } from "./learn.ts";
+import { autoPromoteDigests, chunkMarkdown, distillJournal, openIndex, searchMemory } from "./learn.ts";
 
 let tmp: string;
 beforeAll(() => {
@@ -67,5 +67,24 @@ describe("learn.ts", () => {
     const hits = searchMemory("double quotes statusLine", 5, dbPath);
     expect(hits.length).toBe(1);
     expect(hits[0]?.title).toBe("Quoting fix");
+  });
+
+  test("autoPromoteDigests folds digests into learned-auto.md and removes digest without approval", () => {
+    const inbox = join(tmp, "auto-inbox");
+    const mem = join(tmp, "auto-mem");
+    const { mkdirSync } = require("node:fs") as typeof import("node:fs");
+    mkdirSync(inbox, { recursive: true });
+    mkdirSync(mem, { recursive: true });
+    writeFileSync(join(mem, "MEMORY.md"), "# Index\n");
+    writeFileSync(
+      join(inbox, "2026-11-18T16-00-00-digest.md"),
+      "# Learning Digest\n\n- [correction x1] (aphrody) Always use bun test ./dotdir/file.test.ts\n",
+    );
+    const res = autoPromoteDigests(inbox, mem);
+    expect(res.promoted).toBe(1);
+    expect(res.filesRemoved).toBe(1);
+    expect(existsSync(join(inbox, "2026-11-18T16-00-00-digest.md"))).toBe(false);
+    expect(readFileSync(join(mem, "learned-auto.md"), "utf8")).toContain("Always use bun test ./dotdir/file.test.ts");
+    expect(readFileSync(join(mem, "MEMORY.md"), "utf8")).toContain("(learned-auto.md)");
   });
 });

@@ -1,9 +1,9 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "aphrody",
-  "displayName": "Aphrody",
-  "version": "1.0.0",
-  "description": "Autonomous generalist engineering skills, fleet orchestration, Rust/Cargo workflows, and self-learning for Antigravity.",
+  "displayName": "Aphrody Unified",
+  "version": "2.0.0",
+  "description": "Single versioned cross-agent, cross-provider, cross-OS plugin unifying all Aphrody, Bun, Cloudflare, Next.js, GPUI, WGPU, and reverse-engineering skills, MCPs, LSPs, and rules.",
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
     "Audit workspace conformance, toolchain health, and open blockers cleanly",

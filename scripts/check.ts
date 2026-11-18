@@ -31,21 +31,22 @@ if (
 
 // 3. Validate materialized Antigravity plugins cleanly.
 if (Bun.which("agy")) {
+  const pluginsSrcDir = join(GEMINI_ROOT, "plugins");
   const pluginsDir = join(CONFIG_DIR, "plugins");
-  if (existsSync(pluginsDir)) {
-    for (const entry of readdirSync(pluginsDir, { withFileTypes: true })) {
-      if (!entry.isDirectory()) {
+  if (existsSync(pluginsSrcDir) && existsSync(pluginsDir)) {
+    for (const entry of readdirSync(pluginsSrcDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const dst = join(pluginsDir, entry.name);
+      if (!existsSync(dst)) {
         failed++;
-        console.error(
-          `FAIL [plugin ${entry.name}]: must be a real directory, not symlink/junction`,
-        );
+        console.error(`FAIL [plugin ${entry.name}]: missing materialized directory`);
         continue;
       }
       step(`agy plugin validate ${entry.name} --strict`, [
         "agy",
         "plugin",
         "validate",
-        join(pluginsDir, entry.name),
+        dst,
         "--strict",
         "--json",
       ]);

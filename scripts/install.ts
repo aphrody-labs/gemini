@@ -15,6 +15,7 @@ import {
   writeIfChanged,
 } from "./lib.ts";
 import { syncAll } from "./sync.ts";
+import { exportCrossAgentConfigs } from "./unify-plugins.ts";
 
 const dry = Bun.argv.includes("--dry-run");
 const vars = templateVars();
@@ -87,18 +88,35 @@ if (existsSync(agySrc)) {
 // Materialize plugins as real directories (Go os.ReadDir skips NTFS junctions on Windows).
 const pluginsSrcRoot = join(GEMINI_ROOT, "plugins");
 const pluginsDstRoot = join(CONFIG_DIR, "plugins");
+const activePlugins = new Set<string>();
 if (existsSync(pluginsSrcRoot)) {
   for (const entry of readdirSync(pluginsSrcRoot, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
+    activePlugins.add(entry.name);
     const src = join(pluginsSrcRoot, entry.name);
     const dst = join(pluginsDstRoot, entry.name);
     console.log(`${dry ? "would sync" : "sync"} config/plugins/${entry.name}`);
     if (!dry) syncRealDir(src, dst);
   }
 }
+if (existsSync(pluginsDstRoot) && !dry) {
+  for (const entry of readdirSync(pluginsDstRoot, { withFileTypes: true })) {
+    if (!activePlugins.has(entry.name)) {
+      try {
+        rmSync(join(pluginsDstRoot, entry.name), { recursive: true, force: true });
+      } catch {
+        // Locked by an active MCP process on Windows; will be removed on next install.
+      }
+    }
+  }
+}
 
-// Re-point Gemini CLI extension install metadata away from any legacy .claude directories.
-for (const name of ["aphrody", "bun", "cloudflare"]) {
+// Re-point Gemini CLI extension install metadata to unified plugin and clean stale extensions.
+for (const name of ["bun", "cloudflare", "nextjs"]) {
+  const staleExt = join(GEMINI_ROOT, "extensions", name);
+  if (existsSync(staleExt) && !dry) rmSync(staleExt, { recursive: true, force: true });
+}
+for (const name of activePlugins) {
   const extDir = join(GEMINI_ROOT, "extensions", name);
   const manifest = join(extDir, ".gemini-extension-install.json");
   const target = join(pluginsSrcRoot, name);
@@ -150,8 +168,9 @@ if (aphrodyRoot && existsSync(join(GEMINI_ROOT, "dashboard", "Cargo.toml"))) {
 }
 
 if (!dry) {
+  const exp = exportCrossAgentConfigs();
   const syncRes = syncAll();
   console.log(
-    `Install complete (GEMINI.md ${syncRes.changed ? "updated" : "current"}, indexed ${syncRes.indexedFiles} file(s)).`,
+    `Install complete (GEMINI.md ${syncRes.changed ? "updated" : "current"}, indexed ${syncRes.indexedFiles} file(s), exported ${exp.targets.length} cross-agent targets).`,
   );
 }

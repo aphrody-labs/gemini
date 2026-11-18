@@ -4,3 +4,8 @@
 - [gemini-isolation](gemini-isolation.md) — `~/.gemini` owns its own templates, hooks, scripts, plugins, autonomous learning, and GPUI dashboard (`bun ~/.gemini/scripts/install.ts` + `check.ts`).
 - [bun-brain](~/.gemini/brain/bun/INDEX.md) — Compacted Bun 1.4+ APIs, types, CLI, guides, and legacy replacement matrix (indexed in `learning/memory.db`; query via `bun ~/.gemini/scripts/learn.ts search` or `bun-brain` MCP).
 - [edit-and-sqlite-hygiene](edit-and-sqlite-hygiene.md) — Read exact lines before `edit_file`, finalize `bun:sqlite` statements before `db.close()` on Windows, and guard `SRC_ROOT` with per-repo marker files.
+- [gpui-brain](~/.gemini/brain/gpui/INDEX.md) — Compacted GPUI Core, GPUI Kit 0.10, GPUI Fast 0.1.17 retained-mode/scroll-layers architecture, and unification matrix (indexed in `learning/memory.db`; query via `bun ~/.gemini/scripts/learn.ts search` or refresh with `bun ~/.gemini/scripts/import-gpui-brain.ts`).
+- [nextjs-brain](~/.gemini/brain/nextjs/INDEX.md) — Compacted Next.js 16.5+ types, `NextConfig` schema, bundled docs, and `next-devtools-mcp` / workflow skills digest (indexed in `learning/memory.db`; query via `bun ~/.gemini/scripts/learn.ts search` or `nextjs-brain` MCP).
+- [cross-session-coordination](cross-session-coordination.md) — Register in `relay` (`session_register`/`session_list`), respect sibling `agy` session ownership of `/srv/xbuild`, forks, and repos, and drain `session_inbox` on every `swarm_wait` wakeup.
+- [learned-auto](learned-auto.md) — Autonomously folded corrections and tool recoveries (zero approval required).
+- [learned-cloud](learned-cloud.md) — Autonomous serverless shared memory, skills, and lean MCP convergence across Aphrody PCs and agents.
