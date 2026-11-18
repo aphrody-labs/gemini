@@ -47,6 +47,10 @@ Authoritative baseline distilled from `cloudflare/skills` (`rules/workers.mdc`, 
 
 - Keep account IDs, zone IDs, tunnel UUIDs, host IPs, API tokens, and emails out of tracked git files (`.private/`, `*.local.toml`, `wrangler` secret bindings only).
 - Audit any Cloudflare Worker or API change with `skills/cloudflare-security-audit/SKILL.md`.
+- **Single-level hostnames only**: Never create proxied two-level subdomains (`*.*.domain.tld`) under Cloudflare Universal SSL; use hyphenated single-level names (`api-achillea.domain.tld`, `api-azalee.domain.tld`).
+- **Loopback Real-IP behind `cloudflared`**: Include `set_real_ip_from 127.0.0.1;` and `set_real_ip_from ::1;` in host nginx server snippets receiving local `cloudflared` tunnel traffic so `CF-Connecting-IP` is restored without touching sibling host configs.
+- **R2 CORS & Edge Redirects**: Configure read-only CORS (`GET, HEAD`, `ExposeHeaders: ETag/Content-Length/Content-Range`) on public R2 buckets serving fonts/media, and enforce canonical `www.` -> apex redirects via Zone Dynamic Redirect Rulesets (`http_request_dynamic_redirect`) rather than origin hops.
+- **Wrangler types & dry-run**: After any `wrangler.jsonc` binding/var edit, run `wrangler types`, format generated `worker-configuration.d.ts` if covered by repo formatting, and validate with `wrangler deploy --dry-run` before deploying.
 
 
 <!-- merged-rules:nextjs -->
