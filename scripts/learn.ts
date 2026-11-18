@@ -66,6 +66,11 @@ const MAX_CHUNK = 1500;
 const CORRECTION_RE =
   /\b(always|never|stop doing|do not|don't|instead|remember|toujours|jamais|retiens|arrête|arrete|fais plutot|corrige|evite|évite)\b/i;
 
+/** Raw tool recoveries replayed from other harnesses are not durable rules and leak their paths: keep rules only. */
+export function isDurableCloudBullet(b: string): boolean {
+  return !/^\[recovery\] Recovered from \[/.test(b) && !/[\\/]\.claude[\\/]/.test(b);
+}
+
 export function loadState(path = STATE_PATH): LearnState {
   try {
     return JSON.parse(readFileSync(path, "utf8")) as LearnState;
@@ -512,7 +517,7 @@ export async function syncCloudLearn(mode: "push" | "pull" | "cycle" = "cycle"):
           };
           const topicLines = ["# Aphrody Cloud Memory (rev " + bundle.revision + ")", ""];
           for (const t of Object.values(bundle.memory?.topics ?? {})) {
-            topicLines.push(`## ${t.title}`, t.summary || "", ...t.bullets.slice(0, 10).map((b) => `- ${b}`), "");
+            topicLines.push(`## ${t.title}`, t.summary || "", ...t.bullets.filter(isDurableCloudBullet).slice(0, 10).map((b) => `- ${b}`), "");
           }
           mkdirSync(MEMORY_DIR, { recursive: true });
           writeFileSync(join(MEMORY_DIR, "learned-cloud.md"), `${topicLines.join("\n").trim()}\n`, "utf8");
