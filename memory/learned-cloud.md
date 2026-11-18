@@ -1,4 +1,4 @@
-# Aphrody Cloud Memory (rev 7)
+# Aphrody Cloud Memory (rev 8)
 
 ## antigravity-plugins
 name: Antigravity plugin discovery and strict schema
@@ -101,13 +101,28 @@ Autonomous learnings for Git & Submodule Hygiene.
 - [recovery] Recovered from [gh api repos/aphrody-labs/hyperfine/commits/v1.19.0 --jq '.sha+" "+.commit.message' | head -2; gh api repos/aphrody-labs/hyperfine/commits/v1.0.0 --jq '.sha' 2>&1 | head -1; gh api] via [gh api repos/shar
 - [recovery] Recovered from [cd /c/src/aphrody/tooling/kernel-watch && sed -i 's/kselftest_targets = \[.*\]/kselftest_targets = ["exec", "membarrier", "clone3", "kcmp", "mincore", "sigaltstack", "mqueue"]/' la] via [which rg; rg --ve
 - [recovery] Recovered from [cd /c/src/aphrody-labs-github && sed -i 's#/c/src/aphrody-labs-github/tools/check-commit.ts#C:/src/aphrody-labs-github/tools/check-commit.ts#; s#loadConfig("/c/src/aphrody-labs-git] via [cd /c/src/aphrody
+- [recovery] Recovered from [git fetch -q origin && git rev-parse --short HEAD origin/main && git log --oneline -1 origin/main] via [git rev-parse --short HEAD; git rev-parse --short origin/main; git status -sb | head -2]
+- [recovery] Recovered from [cd C:/src/shenron; tail -3 "C:/Users/aphro/AppData/Local/Temp/claude/24efa98171efcd26/aae12588-4a11-4aae-b28f-f3d886683cbb/tasks/bjjsz9fy6.output"; for i in 1 2 3 4 5 6 7; do echo ] via [cd /c/src/rosegri
+- [recovery] Recovered from [cd /c/src/aysh 2>/dev/null && pwd && ls -la && git log --oneline -15 2>/dev/null && git status --short | head -30 && cat .gitmodules 2>/dev/null] via [ls -la /c/Users/aphro/.claude/projects/C--src-aysh/me
+- [recovery] Recovered from [for b in master devel bash-5.3-testing; do gh api repos/aphrody-labs/bash/commits/$b --jq '"'$b' \(.sha[:10]) \(.commit.committer.date) \(.commit.message|split("\n")[0]|.[:70])"'; ] via [echo "--- psmux";
+- [correction] <cross-session-message from-name="anu-monorepo-plan"> Sync from session anu-monorepo-plan (2026-11-17), owner decisions now in force: 1. Rust is allowed everywhere again, ay included (ay commit de35a84 withdrew the no-Ru
 
 ## MCP Budget & Context Hygiene
 Autonomous learnings for MCP Budget & Context Hygiene.
 - [correction] optimise mieux ton setup claude versionné de ce prrojet ❯ ◯ claude.ai Claude Docs ✔ claude.ai Figma 44 tools ◯ claude.ai Gmail ◯ claude.ai Google Calendar ◯ claude.ai Google Docs ✔ claude.ai Google Drive 14 tools ◯ claud
 - [recovery] Recovered from [edit_file] via [rg -n -C 5 "TOOLS =|AVAILABLE COMMANDS|Unknown command|rg_search" apps/cli/src/index.ts apps/mcp/src/index.ts]
+- [correction] disclade all claude.ai ❯ ✔ claude.ai Claude Docs 8 tools ✔ claude.ai Figma 44 tools ✔ claude.ai Gmail 24 tools ✔ claude.ai Google Calendar 9 tools ✔ claude.ai Google Docs 2 tools ✔ claude.ai Google Drive 14 tools ✔ claud
 
 ## Rust, GPUI & WGPU Build Pipeline
 Autonomous learnings for Rust, GPUI & WGPU Build Pipeline.
 - [recovery] Recovered from [edit_file] via [@' import { readFileSync } from "node:fs"; for (const [p, needle] of [ ["crates/gpui-base/src/scroll_bounce.rs", "#[cfg(not(feature = \"gpui-fast"))]"], ["crates/gpui-base/src/scro]
 - [recovery] Recovered from [edit_file] via [rg -n "seed_hex" assets/os/ product.toml rg -n "fn contrast_ratio" crates/nsh-core/src crates/gpui/src rg -n "#[cfg.*gpui-fast" crates/]
+
+## Cloudflare Workers & Wrangler Edge
+Autonomous learnings for Cloudflare Workers & Wrangler Edge.
+- [recovery] Recovered from [cd /c/src/ay && cat > /tmp/edit_ay.ts <<'EOF' import { readFileSync, writeFileSync } from "node:fs"; const p = process.argv[2]!; let t = readFileSync(p, "utf8"); const rep = (a: st] via [A=$CLOUDFLARE_ACC
+
+## Cross-Session & Relay Coordination
+Autonomous learnings for Cross-Session & Relay Coordination.
+- [recovery] Recovered from [cd ~/.claude; bun fmt scripts/lib.ts packages/aphrody/hooks-handlers/relay-stdio.ts scripts/check.ts 2>&1 | tail -2; d=$(mktemp -d); mkdir -p $d/ai-os/frameworks/ai-os/src/relay; e] via [cd /c/src/rosegri
+- [recovery] Recovered from [cd /c/Users/aphro/.claude/projects/C--src/memory/; cat MEMORY.md git-and-workspace-map.md repo-ownership-2026-11-16.md assemble-and-reuse.md; ls ../../C--src-aysh/memory; ls -d /c/] via [cd /c/Users/aphro
