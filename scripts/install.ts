@@ -16,6 +16,7 @@ import {
 } from "./lib.ts";
 import { syncAll } from "./sync.ts";
 import { exportCrossAgentConfigs } from "./unify-plugins.ts";
+import { updateVendoredSkills } from "./vendor-skills.ts";
 
 const dry = Bun.argv.includes("--dry-run");
 const vars = templateVars();
@@ -84,6 +85,9 @@ if (existsSync(agySrc)) {
     writeIfChanged(agyDst, `${JSON.stringify(merged, null, 2)}\n`);
   }
 }
+
+// Refresh vendored upstream skills (docker/skills, ...) to their head commit and drop superseded duplicates.
+if (!dry) console.log(`vendored skills: ${JSON.stringify(await updateVendoredSkills())}`);
 
 // Materialize plugins as real directories (Go os.ReadDir skips NTFS junctions on Windows).
 const pluginsSrcRoot = join(GEMINI_ROOT, "plugins");

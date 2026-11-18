@@ -35,7 +35,7 @@
   "lspServers": [
     "bun-lsp"
   ],
-  "skillCount": 200,
+  "skillCount": 199,
   "skills": [
     "3ds-reverse",
     "agent-browser",
@@ -219,7 +219,6 @@
     "upgrade-stripe",
     "uv-project",
     "vendor-ecosystem",
-    "vercel-react-best-practices",
     "vulkan",
     "wasm-bindgen",
     "web-perf",

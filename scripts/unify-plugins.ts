@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 // Unify all skills, MCP servers, LSPs, rules, and plugins into a single versioned
 // cross-agent / cross-provider / cross-OS plugin at ~/.gemini/plugins/aphrody.
+import { SUPERSEDED } from "./vendor-skills.ts";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { CONFIG_DIR, discoverAphrodyRoot, GEMINI_ROOT, writeIfChanged } from "./lib.ts";
@@ -15,7 +16,7 @@ function copyMissingSkills(srcSkillsDir: string, dstSkillsDir: string): number {
   mkdirSync(dstSkillsDir, { recursive: true });
   let copied = 0;
   for (const entry of readdirSync(srcSkillsDir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
+    if (!entry.isDirectory() || entry.name in SUPERSEDED) continue;
     const src = join(srcSkillsDir, entry.name);
     const dst = join(dstSkillsDir, entry.name);
     if (!existsSync(dst)) {

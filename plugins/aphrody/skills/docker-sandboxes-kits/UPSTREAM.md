@@ -1,0 +1,1 @@
+Vendored from https://github.com/docker/skills/tree/a65ae5b65d22f0613375d6c3e5ea8bb287698cc0/skills/docker-sandboxes-kits (Apache-2.0). Refreshed by scripts/vendor-skills.ts; edit upstream, not here.

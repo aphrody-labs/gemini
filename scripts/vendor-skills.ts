@@ -24,7 +24,7 @@ export const SUPERSEDED: Record<string, string> = {
 
 const ROOT = join(import.meta.dir, "..");
 export const SKILLS_DIR = join(ROOT, "plugins", "aphrody", "skills");
-const LOCK = join(ROOT, "vendor-skills.lock.json");
+const LOCK = join(import.meta.dir, "vendor-skills.lock.json");
 
 async function gh(args: string[]): Promise<{ ok: boolean; out: Uint8Array }> {
   if (!Bun.which("gh")) return { ok: false, out: new Uint8Array() };
