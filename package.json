@@ -11,6 +11,6 @@
     "learn": "bun --no-install --no-env-file scripts/learn.ts status"
   },
   "devDependencies": {
-    "@types/bun": "1.3.10"
+    "@types/bun": "1.4.4"
   }
 }
