@@ -9,7 +9,7 @@ import { CONFIG_DIR, discoverAphrodyRoot, GEMINI_ROOT, writeIfChanged } from "./
 const UNIFIED_VERSION = "2.0.0";
 const PLUGINS_DIR = join(GEMINI_ROOT, "plugins");
 const TARGET_PLUGIN = join(PLUGINS_DIR, "aphrody");
-const LEGACY_PLUGINS = ["bun", "cloudflare", "nextjs"] as const;
+const LEGACY_PLUGINS = ["bun", "nextjs"] as const;
 
 function copyMissingSkills(srcSkillsDir: string, dstSkillsDir: string): number {
   if (!existsSync(srcSkillsDir)) return 0;
@@ -54,7 +54,7 @@ export function unifyPlugins(): {
 
   let skillsMerged = 0;
 
-  // 1. Merge skills from legacy plugins (bun, cloudflare, nextjs) and repo .agents/plugins/aphrody.
+  // 1. Merge skills from legacy plugins (bun, nextjs) and repo .agents/plugins/aphrody.
   for (const name of LEGACY_PLUGINS) {
     skillsMerged += copyMissingSkills(join(PLUGINS_DIR, name, "skills"), dstSkills);
   }

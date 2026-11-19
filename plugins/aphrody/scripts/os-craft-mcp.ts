@@ -2,7 +2,12 @@
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-const repoRoot = resolve(import.meta.dir, "../../../..");
+// The plugin lives under ~/.gemini, not in the checkout: find the aphrody checkout from SRC_ROOT / WORKSPACE_ROOT.
+const workspaceRoots = [process.env.SRC_ROOT, process.env.WORKSPACE_ROOT].filter((d): d is string => Boolean(d));
+const repoRoot =
+  [...workspaceRoots.map((d) => join(d, "aphrody")), ...workspaceRoots, resolve(import.meta.dir, "../../../..")].find((d) =>
+    existsSync(join(d, "crates", "aphrody_desktop", "Cargo.toml")),
+  ) ?? resolve(import.meta.dir, "../../../..");
 const exe = process.platform === "win32" ? "aphrody-os.exe" : "aphrody-os";
 const candidates = [
   join(repoRoot, "target", "release", exe),

@@ -116,7 +116,7 @@ if (existsSync(pluginsDstRoot) && !dry) {
 }
 
 // Re-point Gemini CLI extension install metadata to unified plugin and clean stale extensions.
-for (const name of ["bun", "cloudflare", "nextjs"]) {
+for (const name of ["bun", "nextjs"]) {
   const staleExt = join(GEMINI_ROOT, "extensions", name);
   if (existsSync(staleExt) && !dry) rmSync(staleExt, { recursive: true, force: true });
 }

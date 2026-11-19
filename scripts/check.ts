@@ -5,6 +5,9 @@ import { CLI_DIR, CONFIG_DIR, GEMINI_ROOT, runCmd } from "./lib.ts";
 
 let failed = 0;
 
+// Plugins installed unmodified from their upstream (`agy plugin install`): validated without --strict and skipped by the coupling scan.
+const UPSTREAM_PLUGINS = new Set(["cloudflare"]);
+
 function step(label: string, cmd: string[]): void {
   const res = runCmd(cmd);
   if (!res.ok) {
@@ -42,12 +45,12 @@ if (Bun.which("agy")) {
         console.error(`FAIL [plugin ${entry.name}]: missing materialized directory`);
         continue;
       }
-      step(`agy plugin validate ${entry.name} --strict`, [
+      step(`agy plugin validate ${entry.name}${UPSTREAM_PLUGINS.has(entry.name) ? "" : " --strict"}`, [
         "agy",
         "plugin",
         "validate",
         dst,
-        "--strict",
+        ...(UPSTREAM_PLUGINS.has(entry.name) ? [] : ["--strict"]),
         "--json",
       ]);
     }
@@ -92,6 +95,7 @@ let couplingHits = 0;
 for (const f of files) {
   const rel = relative(GEMINI_ROOT, f).replaceAll("\\", "/");
   if (rel === "scripts/check.ts") continue;
+  if ([...UPSTREAM_PLUGINS].some((n) => rel.startsWith(`plugins/${n}/`))) continue;
   const text = readFileSync(f, "utf8");
   if (/(?:~|HOME|\$HOME|%USERPROFILE%)[/\\]\.claude\b|Users[/\\][^/\\]+[/\\]\.claude\b|CLAUDE_HOME|CLAUDE_PLUGIN_ROOT/i.test(text)) {
     couplingHits++;

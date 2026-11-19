@@ -1,15 +1,6 @@
 ---
 name: rust-gpui-worker
 description: Autonomous Rust, GPUI, WGPU/Naga, WebAssembly, and aphrody_desktop implementation worker aligned with Aphrody coding standards and zero-unwrap discipline.
-tools:
-  - read_file
-  - edit_file
-  - write_file
-  - run_command
-  - manage_task
-  - search_web
-subagent: true
-mainAgent: false
 model: inherit
 ---
 

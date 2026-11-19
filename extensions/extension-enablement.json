@@ -1,15 +1,15 @@
 {
-  "aphrody-skills": {
-    "overrides": [
-      "/C:/Users/aphro/*"
-    ]
-  },
   "aphrody": {
     "overrides": [
       "/C:/Users/aphro/*"
     ]
   },
-  "bun": {
+  "cloudflare": {
+    "overrides": [
+      "/C:/Users/aphro/*"
+    ]
+  },
+  "vercel": {
     "overrides": [
       "/C:/Users/aphro/*"
     ]

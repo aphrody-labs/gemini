@@ -1,0 +1,19 @@
+{
+  "name": "vercel",
+  "version": "0.56.0",
+  "description": "Official Vercel ecosystem plugin with skills from vercel/vercel-plugin and vercel-labs/agent-skills, specialist agents, local vercel-brain MCP, and https://mcp.vercel.com.",
+  "contextFileName": "rules/AGENTS.md",
+  "mcpServers": {
+    "vercel-brain": {
+      "command": "bun",
+      "args": [
+        "--no-install",
+        "--no-env-file",
+        "${extensionPath}/mcp/vercel-mcp.ts"
+      ]
+    },
+    "vercel": {
+      "httpUrl": "https://mcp.vercel.com"
+    }
+  }
+}

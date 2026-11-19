@@ -1,0 +1,33 @@
+{
+  "name": "aphrody",
+  "version": "2.0.0",
+  "description": "Single versioned cross-agent, cross-provider, cross-OS plugin unifying all Aphrody, Bun, Cloudflare, Next.js, GPUI, WGPU, and reverse-engineering skills, MCPs, LSPs, and rules.",
+  "contextFileName": "rules/AGENTS.md",
+  "mcpServers": {
+    "os-craft": {
+      "command": "bun",
+      "args": [
+        "${extensionPath}/scripts/os-craft-mcp.ts"
+      ]
+    },
+    "bun-brain": {
+      "command": "bun",
+      "args": [
+        "--no-install",
+        "--no-env-file",
+        "${extensionPath}/mcp/bun-mcp.ts"
+      ]
+    },
+    "nextjs-brain": {
+      "command": "bun",
+      "args": [
+        "--no-install",
+        "--no-env-file",
+        "${extensionPath}/mcp/nextjs-mcp.ts"
+      ]
+    },
+    "docker-docs": {
+      "httpUrl": "https://ai-backend-service.docker.com/mcp"
+    }
+  }
+}
