@@ -23,7 +23,22 @@
       ]
     },
     "docker-docs": {
-      "url": "https://ai-backend-service.docker.com/mcp"
+      "serverUrl": "https://ai-backend-service.docker.com/mcp"
+    },
+    "ovh-domain": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_domain"
+    },
+    "ovh-vps": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_vps"
+    },
+    "ovh-ip": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_ip"
+    },
+    "ovh-cloud": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud"
+    },
+    "ovh-cloud-instance": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud_instance"
     }
   }
 }
