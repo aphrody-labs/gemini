@@ -1,40 +1,61 @@
 ---
 name: ie-game-formats
-description: Inspect and extract Inazuma Eleven / Level-5 / Criware assets with the native Rust decoders exposed through REA and MCP.
+description: Read, decode, serve and reverse Inazuma Eleven Victory Road through its two real artifacts only - the game binary nie.exe and its data VFS (CPK) - with the nie CLI, nie mcp and nie serve.
 ---
 
-# Inazuma Eleven and Criware format analysis
+# Inazuma Eleven Victory Road: nie.exe and the VFS
 
-The Rust `nie-formats` crate provides the shared parsers. REA forwards these operations to `bunre`; MCP exposes the same native operations. These commands analyze local files and do not execute game code.
+Two artifacts of the installation the user owns are the only sources of truth:
 
-## Build the native tool
+- **`nie.exe`**: the game executable (`nie_eacpatched.exe` once EAC is patched). Reverse engineering
+  works on it: `nie index`, `rtti`, `pdata`, `disasm`, `rebuild`, `recover`, `strings`, `coverage`,
+  `mem` (live memory), `live` (launch under Proton).
+- **The VFS**: `data/cpk_list.cfg.bin` and 936 CRI CPK archives, 255 628 files under
+  `data/common/{action, camera, chr, craft, effect, event, event_cfg, font, gamedata, input, map,
+  menu, movie, property, script, sound, sound_asset, system, text}` and
+  `data/dx11/{chr, effect, event, font, map, menu, movie, shader, text}`.
+
+Everything else (docs, typed JSON, PNG/GLB/WAV/MP4 exports, wiki rows, HTTP routes, MCP tools) is
+derived from those two, never authored beside them. Repository: `aphrody-labs/nie` (`C:\src\nie`);
+iecode (`iecode/dotnet`, `iecode/cpp` submodules) consumes nie's VFS through the C ABI. Never copy
+or commit a game file.
+
+## Pointing at the game
+
+`NIE_GAME_SOURCE` (or `--game-dir`) accepts a local path, `ssh://host/path`, `r2://`, `gdrive://`,
+`rclone://` or `https://`; only the CPK tables and the requested byte ranges move. Production
+install: `ssh://prd/srv/rosegriffon/game/ievr`. Heavy builds and runs go to `ssh fr1`
+(`/srv/xbuild/nie`, binaries in `target/release`).
+
+## Commands (`nie --help` is authoritative)
 
 ```sh
-cargo build -p yolo-re-core --bin bunre --features game-formats
+nie info                          # what this installation is: binary, VFS, coverage
+nie vfs ls data/common/menu       # folder view of the VFS
+nie vfs find --ext g4tx dx11/menu # search internal paths
+nie vfs stat <path>               # size, container CPK, detected format
+nie vfs cat <path>                # structured decode by format, hexdump fallback
+nie vfs extract --out <dir> <path|prefix>
+nie vfs stats                     # extension histogram of the whole VFS
+nie vfs formats                   # decoder coverage of the VFS
+nie vfs chara <name|hash|code>    # characters straight from the VFS (vfs waza: skills)
+nie format <file|dir>             # detect, write nothing
+nie decode <file|dir>             # cfg.bin and data -> JSON, G4TX -> PNG
+nie convert <asset>               # exchange formats
 ```
 
-Set `BUNRE_BIN` if the binary is outside `target/debug`.
+`nie vfs formats` reports which of the VFS formats nie decodes today; read it instead of assuming.
 
-## REA commands
+## Services
 
-```sh
-bun run re ie-format inspect path/to/asset.bin
-bun run re ie-format cpk-list path/to/archive.cpk
-bun run re ie-format cpk-extract path/to/archive.cpk path/inside/archive.bin output.bin
-bun run re ie-format cpk-extract-all path/to/archive.cpk output/directory
-bun run re ie-format cpk-pack input/directory output.cpk
-bun run re ie-format cri-audio path/to/cue-or-bank.acb output.wav
-```
+- `nie mcp` (stdio, bin `nie-mcp`): one `cli_*` tool per CLI command plus `vfs_*`, `asset_get`,
+  `re_*`, `explorer_*`. Configured in `C:\src\nie\.mcp.json`.
+- `nie serve` and `nie-model-serve` on port 8790, images `ghcr.io/aphrody-labs/nie` and
+  `ghcr.io/aphrody-labs/nie-model-serve` (private), routes in `docs/serve.md`. `/health` is JSON
+  with `vfsReady`. The CDN origin for `cdn.rosegriffon.fr/dx11/**` is nie-model-serve `/tex/dx11/**`.
+- C ABI: `crates/nie-ffi` (`libiecode.so` / `iecode.dll`), plan in `docs/ffi-unification.md`.
 
-`inspect` auto-detects supported Level-5 / Criware structures and emits JSON. `cpk-list` reports the archive encryption state, entry offsets, stored and extracted sizes. Extraction requires an explicit output location and rejects archive paths that escape it. `cpk-pack` emits a plain, uncompressed CPK; it does not preserve an input archive's compression or encryption profile. `cri-audio` decodes supported HCA, ADX, AWB, and ACB payloads to PCM WAV.
+## Known gaps
 
-## MCP tools
-
-- `ie_format_inspect(path)`
-- `ie_cpk_list(path)`
-- `ie_cpk_extract(path, member, output)`
-- `ie_cpk_extract_all(path, outputDir)`
-- `ie_cpk_pack(inputDir, output)`
-- `ie_cri_audio_decode(path, output)`
-
-CriWare HCA/ADX and additional Level-5 formats share the crate decoder dispatcher. Unsupported or malformed files fail with an error; no format is guessed from its filename alone.
+The iecode .NET and C++ decoders fail on this game build's `data/cpk_list.cfg.bin`; nie reads it.
+Route iecode through nie's VFS, do not fix the duplicate decoders in place.
