@@ -24,7 +24,7 @@ or commit a game file.
 
 `NIE_GAME_SOURCE` (or `--game-dir`) accepts a local path, `ssh://host/path`, `r2://`, `gdrive://`,
 `rclone://` or `https://`; only the CPK tables and the requested byte ranges move. Production
-install: `ssh://prd/srv/rosegriffon/game/ievr`. Heavy builds and runs go to `ssh fr1`
+install: `ssh://prd/srv/nie/steam/steamapps/common/INAZUMA ELEVEN Victory Road` (a Steam library: Proton prefix in `steamapps/compatdata/2799860/pfx`; quote the path, do not percent-encode the spaces). Heavy builds and runs go to `ssh fr1`
 (`/srv/xbuild/nie`, binaries in `target/release`).
 
 ## Commands (`nie --help` is authoritative)
@@ -51,7 +51,7 @@ nie convert <asset>               # exchange formats
 - `nie mcp` (stdio, bin `nie-mcp`): one `cli_*` tool per CLI command plus `vfs_*`, `asset_get`,
   `re_*`, `explorer_*`. Configured in `C:\src\nie\.mcp.json`.
 - `nie serve` and `nie-model-serve` on port 8790, images `ghcr.io/aphrody-labs/nie` and
-  `ghcr.io/aphrody-labs/nie-model-serve` (private), routes in `docs/serve.md`. `/health` is JSON
+  `ghcr.io/aphrody-labs/nie-model-serve` (public), built from the root `Dockerfile` and `compose.yaml`, deployed on prd as compose project `nie` and public at https://nie.aphrody.app; routes in `docs/serve.md`. `/health` is JSON
   with `vfsReady`. The CDN origin for `cdn.rosegriffon.fr/dx11/**` is nie-model-serve `/tex/dx11/**`.
 - C ABI: `crates/nie-ffi` (`libiecode.so` / `iecode.dll`), plan in `docs/ffi-unification.md`.
 
