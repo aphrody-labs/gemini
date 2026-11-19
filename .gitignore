@@ -3,6 +3,15 @@
 /*
 !/.gitignore
 !/README.md
+!/LICENSE
+!/REVIEW.md
+!/.gitmessage
+!/.editorconfig
+!/.gitattributes
+!/.markdownlint-cli2.jsonc
+!/.github/
+!/MAP.tsv
+!/map.toml
 !/package.json
 !/unified-manifest.json
 !/tsconfig.json

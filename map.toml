@@ -1,0 +1,28 @@
+# Tier and gate of each top-level directory (MAP.tsv is rendered by aphrody-labs/.github tools/map.ts from the tracked files and this table).
+[default]
+tier = "misc"
+gate = "bun scripts/check.ts"
+
+["(root)"]
+tier = "config"
+gate = "bun scripts/check.ts"
+
+[plugins]
+tier = "plugin"
+gate = "agy plugin validate --strict"
+
+[scripts]
+tier = "typed-bun"
+gate = "bun test scripts"
+
+[memory]
+tier = "memory"
+gate = "bun scripts/learn.ts search"
+
+[rules]
+tier = "rules"
+gate = "bun scripts/sync.ts"
+
+[brain]
+tier = "brain"
+gate = "bun scripts/learn.ts search"

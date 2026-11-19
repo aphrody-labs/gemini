@@ -1,0 +1,13 @@
+dir	tier	files	bytes	gate
+(root)	config	14	24797	bun scripts/check.ts
+.github	misc	3	1653	bun scripts/check.ts
+antigravity-cli	misc	2	1297	bun scripts/check.ts
+brain	brain	29	1237756	bun scripts/learn.ts search
+config	misc	4	3737	bun scripts/check.ts
+dashboard	misc	5	57094	bun scripts/check.ts
+extensions	misc	1	218	bun scripts/check.ts
+memory	memory	42	83855	bun scripts/learn.ts search
+plugins	plugin	1230	8641925	agy plugin validate --strict
+rules	rules	2	5657	bun scripts/sync.ts
+scripts	typed-bun	36	329890	bun test scripts
+upstream	misc	1575	7547772	bun scripts/check.ts

@@ -1,0 +1,37 @@
+# Copy to .github/dependabot.yml, keep one `updates` entry per manifest directory found in the repository.
+# Grouped updates keep PR volume low; cooldown delays brand-new releases (supply-chain guard);
+# exclude-paths skips vendored trees. Security updates are grouped separately and never delayed.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [dependencies, github_actions]
+    cooldown:
+      default-days: 3
+    groups:
+      actions:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: bun
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels: [dependencies, bun]
+    exclude-paths: ["third_party/**", "vendor/**", "vendored/**", "upstream/**", "fixtures/**", "testdata/**"]
+    cooldown:
+      default-days: 3
+      semver-major-days: 7
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types: [minor, patch]
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
