@@ -7,6 +7,7 @@ import {
   CLI_DIR,
   CONFIG_DIR,
   discoverAphrodyRoot,
+  discoverWorkspaceRoot,
   discoverWorkspaces,
   GEMINI_ROOT,
   syncRealDir,
@@ -17,6 +18,7 @@ import {
 import { syncAll } from "./sync.ts";
 import { exportCrossAgentConfigs } from "./unify-plugins.ts";
 import { updateVendoredSkills } from "./vendor-skills.ts";
+import { syncGoogleGuidance } from "./sync-google-guidance.ts";
 
 const dry = Bun.argv.includes("--dry-run");
 const vars = templateVars();
@@ -88,6 +90,15 @@ if (existsSync(agySrc)) {
 
 // Refresh vendored upstream skills (docker/skills, ...) to their head commit and drop superseded duplicates.
 if (!dry) console.log(`vendored skills: ${JSON.stringify(await updateVendoredSkills())}`);
+if (!dry) console.log(`google guidance: ${JSON.stringify(syncGoogleGuidance())}`);
+
+// Sync the canonical fw plugin from <fw checkout>/plugin when present (single source of truth).
+const fwPluginSrc = join(process.env.FW_ROOT || process.env.FAIRWIND_ROOT || join(discoverWorkspaceRoot(), "fw"), "plugin");
+if (existsSync(join(fwPluginSrc, "plugin.json"))) {
+  const fwTrackedDst = join(GEMINI_ROOT, "plugins", "fw");
+  console.log(`${dry ? "would sync" : "sync"} plugins/fw <- ${fwPluginSrc}`);
+  if (!dry) syncRealDir(fwPluginSrc, fwTrackedDst);
+}
 
 // Materialize plugins as real directories (Go os.ReadDir skips NTFS junctions on Windows).
 const pluginsSrcRoot = join(GEMINI_ROOT, "plugins");

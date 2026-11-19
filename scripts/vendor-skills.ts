@@ -7,6 +7,7 @@
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import merged from "./merged-skills.json" with { type: "json" };
 
 export interface VendorSource {
   repo: string;
@@ -19,6 +20,7 @@ export const SOURCES: VendorSource[] = [{ repo: "docker/skills", dir: "skills", 
 
 /** Skills removed as duplicates of another skill; unify-plugins.ts never copies them back. */
 export const SUPERSEDED: Record<string, string> = {
+  ...Object.fromEntries(Object.entries(merged).map(([c, p]) => [c, `merged into the ${p} skill (references/${c}.md)`])),
   "vercel-react-best-practices": "react-best-practices (now provided by official plugins/vercel/skills)",
   "ai-sdk": "provided by official ~/.gemini/plugins/vercel/skills/ai-sdk",
   auth: "provided by official ~/.gemini/plugins/vercel/skills/auth",
@@ -53,6 +55,13 @@ export const SUPERSEDED: Record<string, string> = {
   "cloudflare-platform": "invented Aphrody skill; replaced by the official cloudflare/skills plugin",
   "cloudflare-security-audit": "invented Aphrody skill; replaced by the official cloudflare/skills plugin",
   "ay-cf-finops-infra": "invented Aphrody skill; replaced by the official cloudflare/skills plugin",
+  "agy-knlogie": "migrated and renamed to unified ~/.gemini/plugins/fw/skills/agy-knowledge",
+  "agy-knowledge": "migrated to unified ~/.gemini/plugins/fw/skills/agy-knowledge",
+  learn: "migrated to unified ~/.gemini/plugins/fw/skills/learn",
+  "reverse-engineer-anything": "migrated to unified ~/.gemini/plugins/fw/skills/reverse-engineer-anything",
+  "binary-analysis": "migrated to unified ~/.gemini/plugins/fw/skills/binary-analysis",
+  "tree-sitter": "migrated to unified ~/.gemini/plugins/fw/skills/tree-sitter",
+  "static-recompile": "migrated to unified ~/.gemini/plugins/fw/skills/static-recompile",
 };
 
 const ROOT = join(import.meta.dir, "..");
