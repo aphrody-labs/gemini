@@ -16,7 +16,7 @@ Two artifacts of the installation the user owns are the only sources of truth:
   `data/dx11/{chr, effect, event, font, map, menu, movie, shader, text}`.
 
 Everything else (docs, typed JSON, PNG/GLB/WAV/MP4 exports, wiki rows, HTTP routes, MCP tools) is
-derived from those two, never authored beside them. Repository: `aphrody-labs/nie` (`C:\src\nie`);
+derived from those two. Repository: `aphrody-labs/nie` (`C:\src\nie`);
 iecode (`iecode/dotnet`, `iecode/cpp` submodules) consumes nie's VFS through the C ABI. Never copy
 or commit a game file.
 
@@ -44,7 +44,7 @@ nie decode <file|dir>             # cfg.bin and data -> JSON, G4TX -> PNG
 nie convert <asset>               # exchange formats
 ```
 
-`nie vfs formats` reports which of the VFS formats nie decodes today; read it instead of assuming.
+`nie vfs formats` lists which VFS formats nie decodes today.
 
 ## Services
 
